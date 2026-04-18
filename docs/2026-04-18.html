@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Serials — 18 Apr 2026</title>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #0f0f0f; color: #e8e8e8; min-height: 100vh;
+  }
+  header {
+    background: #1a1a2e; padding: 16px 24px;
+    display: flex; align-items: center; gap: 16px;
+    border-bottom: 2px solid #e94560;
+  }
+  header a { color: #e94560; text-decoration: none; font-size: 1.4rem; }
+  header h1 { font-size: 1.2rem; color: #e8e8e8; }
+  .container { max-width: 960px; margin: 0 auto; padding: 24px 16px; }
+  .date-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px; margin-top: 16px;
+  }
+  .date-card {
+    background: #1a1a2e; border: 1px solid #2a2a4a;
+    border-radius: 10px; padding: 16px; text-align: center;
+    text-decoration: none; color: #e8e8e8;
+    transition: border-color .2s, transform .2s;
+  }
+  .date-card:hover { border-color: #e94560; transform: translateY(-2px); }
+  .date-card .date-label { font-size: 1rem; font-weight: 600; }
+  .date-card .date-meta  { font-size: 0.78rem; color: #888; margin-top: 4px; }
+  .date-card.today { border-color: #e94560; }
+
+  .serial-list { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .serial-card {
+    background: #1a1a2e; border: 1px solid #2a2a4a;
+    border-radius: 10px; padding: 16px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px;
+  }
+  .serial-name { font-size: 0.98rem; font-weight: 500; flex: 1; }
+  .serial-name.no-link { color: #555; }
+  .btn {
+    padding: 8px 18px; border-radius: 6px; border: none;
+    cursor: pointer; font-size: 0.85rem; font-weight: 600;
+    text-decoration: none; white-space: nowrap;
+  }
+  .btn-play { background: #e94560; color: #fff; }
+  .btn-play:hover { background: #c73652; }
+  .btn-copy { background: #2a2a4a; color: #aaa; margin-left: 6px; }
+  .btn-copy:hover { background: #3a3a6a; color: #fff; }
+  .no-link-tag { color: #555; font-size: 0.8rem; }
+
+  /* Modal player */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,.85); z-index: 1000;
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal {
+    background: #1a1a2e; border-radius: 12px;
+    width: 90%; max-width: 860px; padding: 20px;
+    position: relative;
+  }
+  .modal-title {
+    font-size: 1rem; font-weight: 600; margin-bottom: 12px;
+    color: #e94560;
+  }
+  .modal video { width: 100%; border-radius: 8px; background: #000; }
+  .modal-close {
+    position: absolute; top: 12px; right: 16px;
+    background: none; border: none; color: #aaa;
+    font-size: 1.4rem; cursor: pointer;
+  }
+  .modal-close:hover { color: #fff; }
+  .modal-fallback {
+    margin-top: 10px; font-size: 0.82rem; color: #666; word-break: break-all;
+  }
+  .modal-fallback a { color: #e94560; }
+
+  .back-link { display: inline-block; margin-bottom: 20px; color: #e94560; text-decoration: none; }
+  .back-link:hover { text-decoration: underline; }
+  .summary { color: #666; font-size: 0.85rem; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html">⬅</a>
+  <h1>📺 Serials — 18 Apr 2026</h1>
+</header>
+<div class="container">
+  <p class="summary">32 of 34 links found</p>
+  <div class="serial-list">
+        <div class="serial-card">
+          <span class="serial-name">>>Super കൺമണിതീയതി:17 ഏപ്രിൽചാനൽ:മഴവിൽ മനോരമ</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>Super \u0d15\u0d7a\u0d2e\u0d23\u0d3f\u0d24\u0d40\u0d2f\u0d24\u0d3f:17 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d2e\u0d34\u0d35\u0d3f\u0d7d \u0d2e\u0d28\u0d4b\u0d30\u0d2e", "https://hugh.cdn.rumble.cloud/video/fww1/7b/s8/2/C/N/2/f/CN2fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=106294784-106307088")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fww1/7b/s8/2/C/N/2/f/CN2fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=106294784-106307088")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>അകലെതീയതി:17 ഏപ്രിൽചാനൽ:സീ കേരളം</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d05\u0d15\u0d32\u0d46\u0d24\u0d40\u0d2f\u0d24\u0d3f:17 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d38\u0d40 \u0d15\u0d47\u0d30\u0d33\u0d02", "https://hugh.cdn.rumble.cloud/video/fwe2/af/s8/2/Y/9/6/f/Y96fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=111371264-111384244")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fwe2/af/s8/2/Y/9/6/f/Y96fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=111371264-111384244")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>അഞ്ചു സുന്ദരികൾതീയതി:17 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d05\u0d1e\u0d4d\u0d1a\u0d41 \u0d38\u0d41\u0d28\u0d4d\u0d26\u0d30\u0d3f\u0d15\u0d7e\u0d24\u0d40\u0d2f\u0d24\u0d3f:17 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d38\u0d42\u0d30\u0d4d\u0d2f \u0d1f\u0d3f.\u0d35\u0d3f", "https://hugh.cdn.rumble.cloud/video/fww1/72/s8/2/-/N/2/f/-N2fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=112770560-112783761")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fww1/72/s8/2/-/N/2/f/-N2fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=112770560-112783761")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>അഡ്വ: അഞ്ജലിതീയതി:17 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d05\u0d21\u0d4d\u0d35: \u0d05\u0d1e\u0d4d\u0d1c\u0d32\u0d3f\u0d24\u0d40\u0d2f\u0d24\u0d3f:17 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d0f\u0d37\u0d4d\u0d2f\u0d3e\u0d28\u0d46\u0d31\u0d4d\u0d31\u0d4d", "https://hugh.cdn.rumble.cloud/video/fwe2/5d/s8/2/U/2/Y/f/U2YfA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=109526528-109539327")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fwe2/5d/s8/2/U/2/Y/f/U2YfA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=109526528-109539327")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name no-link">>>അമ്മമനസ്സ്തീയതി:17 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്.</span>
+          <span class="no-link-tag">❌ ; video URL not found</span>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>അമ്മേ മൂകാംബികേതീയതി:17 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d05\u0d2e\u0d4d\u0d2e\u0d47 \u0d2e\u0d42\u0d15\u0d3e\u0d02\u0d2c\u0d3f\u0d15\u0d47\u0d24\u0d40\u0d2f\u0d24\u0d3f:17 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d38\u0d42\u0d30\u0d4d\u0d2f \u0d1f\u0d3f.\u0d35\u0d3f", "https://hugh.cdn.rumble.cloud/video/fww1/3b/s8/2/4/y/9/f/4y9fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=109054976-109067670")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fww1/3b/s8/2/4/y/9/f/4y9fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=109054976-109067670")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>അർച്ചന ചേച്ചി LLBതീയതി:17 ഏപ്രിൽചാനൽ:മഴവിൽ മനോരമ</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d05\u0d7c\u0d1a\u0d4d\u0d1a\u0d28 \u0d1a\u0d47\u0d1a\u0d4d\u0d1a\u0d3f LLB\u0d24\u0d40\u0d2f\u0d24\u0d3f:17 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d2e\u0d34\u0d35\u0d3f\u0d7d \u0d2e\u0d28\u0d4b\u0d30\u0d2e", "https://hugh.cdn.rumble.cloud/video/fww1/fe/s8/2/u/L/2/f/uL2fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=106626048-106638446")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fww1/fe/s8/2/u/L/2/f/uL2fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=106626048-106638446")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>ഇഷ്ടം മാത്രംതീയതി:17 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d07\u0d37\u0d4d\u0d1f\u0d02 \u0d2e\u0d3e\u0d24\u0d4d\u0d30\u0d02\u0d24\u0d40\u0d2f\u0d24\u0d3f:17 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d0f\u0d37\u0d4d\u0d2f\u0d3e\u0d28\u0d46\u0d31\u0d4d\u0d31\u0d4d", "https://hugh.cdn.rumble.cloud/video/fww1/9c/s8/2/0/0/Y/f/00YfA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=107202560-107215059")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fww1/9c/s8/2/0/0/Y/f/00YfA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=107202560-107215059")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>ഈ പുഴയും കടന്ന്തീയതി:17 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d08 \u0d2a\u0d41\u0d34\u0d2f\u0d41\u0d02 \u0d15\u0d1f\u0d28\u0d4d\u0d28\u0d4d\u0d24\u0d40\u0d2f\u0d24\u0d3f:17 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d0f\u0d37\u0d4d\u0d2f\u0d3e\u0d28\u0d46\u0d31\u0d4d\u0d31\u0d4d", "https://hugh.cdn.rumble.cloud/video/fww1/44/s8/2/6/W/Y/f/6WYfA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=109508096-109520887")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fww1/44/s8/2/6/W/Y/f/6WYfA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=109508096-109520887")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>ഒത്തിരി ഒത്തിരി സ്വപ്‌നങ്ങൾതീയതി:17 ഏപ്രിൽചാനൽ:മഴവിൽ മനോരമ</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d12\u0d24\u0d4d\u0d24\u0d3f\u0d30\u0d3f \u0d12\u0d24\u0d4d\u0d24\u0d3f\u0d30\u0d3f \u0d38\u0d4d\u0d35\u0d2a\u0d4d\u200c\u0d28\u0d19\u0d4d\u0d19\u0d7e\u0d24\u0d40\u0d2f\u0d24\u0d3f:17 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d2e\u0d34\u0d35\u0d3f\u0d7d \u0d2e\u0d28\u0d4b\u0d30\u0d2e", "https://hugh.cdn.rumble.cloud/video/fwe2/cb/s8/2/A/L/2/f/AL2fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=115518464-115531967")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fwe2/cb/s8/2/A/L/2/f/AL2fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=115518464-115531967")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>ഒറ്റശിഖരംതീയതി:17 ഏപ്രിൽചാനൽ:മഴവിൽ മനോരമ</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d12\u0d31\u0d4d\u0d31\u0d36\u0d3f\u0d16\u0d30\u0d02\u0d24\u0d40\u0d2f\u0d24\u0d3f:17 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d2e\u0d34\u0d35\u0d3f\u0d7d \u0d2e\u0d28\u0d4b\u0d30\u0d2e", "https://hugh.cdn.rumble.cloud/video/fwe2/d9/s8/2/W/O/2/f/WO2fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=108723712-108736322")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fwe2/d9/s8/2/W/O/2/f/WO2fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=108723712-108736322")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>കന്യാദാനംതീയതി:17 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d15\u0d28\u0d4d\u0d2f\u0d3e\u0d26\u0d3e\u0d28\u0d02\u0d24\u0d40\u0d2f\u0d24\u0d3f:17 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d38\u0d42\u0d30\u0d4d\u0d2f \u0d1f\u0d3f.\u0d35\u0d3f", "https://hugh.cdn.rumble.cloud/video/fwe2/23/s8/2/g/M/2/f/gM2fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=112157184-112170269")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fwe2/23/s8/2/g/M/2/f/gM2fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=112157184-112170269")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>കാറ്റത്തെ കിളിക്കൂട്തീയതി:17 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d15\u0d3e\u0d31\u0d4d\u0d31\u0d24\u0d4d\u0d24\u0d46 \u0d15\u0d3f\u0d33\u0d3f\u0d15\u0d4d\u0d15\u0d42\u0d1f\u0d4d\u0d24\u0d40\u0d2f\u0d24\u0d3f:17 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d0f\u0d37\u0d4d\u0d2f\u0d3e\u0d28\u0d46\u0d31\u0d4d\u0d31\u0d4d", "https://hugh.cdn.rumble.cloud/video/fww1/02/s8/2/6/U/Y/f/6UYfA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=109427200-109440003")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fww1/02/s8/2/6/U/Y/f/6UYfA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=109427200-109440003")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>കുടുംബശ്രീ ശാരദതീയതി:17 ഏപ്രിൽചാനൽ:സീ കേരളം</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d15\u0d41\u0d1f\u0d41\u0d02\u0d2c\u0d36\u0d4d\u0d30\u0d40 \u0d36\u0d3e\u0d30\u0d26\u0d24\u0d40\u0d2f\u0d24\u0d3f:17 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d38\u0d40 \u0d15\u0d47\u0d30\u0d33\u0d02", "https://hugh.cdn.rumble.cloud/video/fwe2/18/s8/2/2/E/7/f/2E7fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=110642688-110655582")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fwe2/18/s8/2/2/E/7/f/2E7fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=110642688-110655582")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>കൃഷ്ണഗാഥതീയതി:17 ഏപ്രിൽചാനൽ:സീ കേരളം</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d15\u0d43\u0d37\u0d4d\u0d23\u0d17\u0d3e\u0d25\u0d24\u0d40\u0d2f\u0d24\u0d3f:17 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d38\u0d40 \u0d15\u0d47\u0d30\u0d33\u0d02", "https://hugh.cdn.rumble.cloud/video/fww1/f0/s8/2/2/3/9/f/239fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=109171200-109183906")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fww1/f0/s8/2/2/3/9/f/239fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=109171200-109183906")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>ചട്ടമ്പിപാറുതീയതി:17 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d1a\u0d1f\u0d4d\u0d1f\u0d2e\u0d4d\u0d2a\u0d3f\u0d2a\u0d3e\u0d31\u0d41\u0d24\u0d40\u0d2f\u0d24\u0d3f:17 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d38\u0d42\u0d30\u0d4d\u0d2f \u0d1f\u0d3f.\u0d35\u0d3f", "https://hugh.cdn.rumble.cloud/video/fwe2/18/s8/2/2/E/7/f/2E7fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=110642688-110655582")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fwe2/18/s8/2/2/E/7/f/2E7fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=110642688-110655582")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>ചെമ്പനീർ പൂവ്തീയതി:17 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d1a\u0d46\u0d2e\u0d4d\u0d2a\u0d28\u0d40\u0d7c \u0d2a\u0d42\u0d35\u0d4d\u0d24\u0d40\u0d2f\u0d24\u0d3f:17 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d0f\u0d37\u0d4d\u0d2f\u0d3e\u0d28\u0d46\u0d31\u0d4d\u0d31\u0d4d", "https://hugh.cdn.rumble.cloud/video/fwe2/9e/s8/2/m/T/Y/f/mTYfA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=107457024-107469626")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fwe2/9e/s8/2/m/T/Y/f/mTYfA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=107457024-107469626")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>ചെമ്പരത്തിതീയതി:17 ഏപ്രിൽചാനൽ:സീ കേരളം</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d1a\u0d46\u0d2e\u0d4d\u0d2a\u0d30\u0d24\u0d4d\u0d24\u0d3f\u0d24\u0d40\u0d2f\u0d24\u0d3f:17 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d38\u0d40 \u0d15\u0d47\u0d30\u0d33\u0d02", "https://hugh.cdn.rumble.cloud/video/fwe2/43/s8/2/g/A/8/f/gA8fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=115929600-115943105")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fwe2/43/s8/2/g/A/8/f/gA8fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=115929600-115943105")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>ടീച്ചറമ്മതീയതി:17 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്.</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d1f\u0d40\u0d1a\u0d4d\u0d1a\u0d31\u0d2e\u0d4d\u0d2e\u0d24\u0d40\u0d2f\u0d24\u0d3f:17 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d0f\u0d37\u0d4d\u0d2f\u0d3e\u0d28\u0d46\u0d31\u0d4d\u0d31\u0d4d.", "https://hugh.cdn.rumble.cloud/video/fwe2/16/s8/2/4/2/Y/f/42YfA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=105065472-105077761")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fwe2/16/s8/2/4/2/Y/f/42YfA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=105065472-105077761")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>ദുർഗതീയതി:17 ഏപ്രിൽചാനൽ:സീ കേരളം</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d26\u0d41\u0d7c\u0d17\u0d24\u0d40\u0d2f\u0d24\u0d3f:17 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d38\u0d40 \u0d15\u0d47\u0d30\u0d33\u0d02", "https://hugh.cdn.rumble.cloud/video/fww1/68/s8/2/A/F/8/f/AF8fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=113936384-113949696")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fww1/68/s8/2/A/F/8/f/AF8fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=113936384-113949696")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>പത്തരമാറ്റുതീയതി:17 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d2a\u0d24\u0d4d\u0d24\u0d30\u0d2e\u0d3e\u0d31\u0d4d\u0d31\u0d41\u0d24\u0d40\u0d2f\u0d24\u0d3f:17 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d0f\u0d37\u0d4d\u0d2f\u0d3e\u0d28\u0d46\u0d31\u0d4d\u0d31\u0d4d", "https://hugh.cdn.rumble.cloud/video/fwe2/87/s8/2/k/U/Y/f/kUYfA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=107906560-107919146")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fwe2/87/s8/2/k/U/Y/f/kUYfA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=107906560-107919146")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>പവിത്രംതീയതി:17 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d2a\u0d35\u0d3f\u0d24\u0d4d\u0d30\u0d02\u0d24\u0d40\u0d2f\u0d24\u0d3f:17 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d0f\u0d37\u0d4d\u0d2f\u0d3e\u0d28\u0d46\u0d31\u0d4d\u0d31\u0d4d", "https://hugh.cdn.rumble.cloud/video/fww1/7e/s8/2/g/l/7/f/gl7fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=113590272-113603572")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fww1/7e/s8/2/g/l/7/f/gl7fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=113590272-113603572")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>പെയ്തൊഴിയാതെതീയതി:17 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d2a\u0d46\u0d2f\u0d4d\u0d24\u0d4a\u0d34\u0d3f\u0d2f\u0d3e\u0d24\u0d46\u0d24\u0d40\u0d2f\u0d24\u0d3f:17 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d38\u0d42\u0d30\u0d4d\u0d2f \u0d1f\u0d3f.\u0d35\u0d3f", "https://hugh.cdn.rumble.cloud/video/fww1/b9/s8/2/o/J/7/f/oJ7fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=110764032-110777019")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fww1/b9/s8/2/o/J/7/f/oJ7fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=110764032-110777019")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>മംഗല്യം തന്തുനാനേന്നതീയതി:17 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d2e\u0d02\u0d17\u0d32\u0d4d\u0d2f\u0d02 \u0d24\u0d28\u0d4d\u0d24\u0d41\u0d28\u0d3e\u0d28\u0d47\u0d28\u0d4d\u0d28\u0d24\u0d40\u0d2f\u0d24\u0d3f:17 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d38\u0d42\u0d30\u0d4d\u0d2f \u0d1f\u0d3f.\u0d35\u0d3f", "https://hugh.cdn.rumble.cloud/video/fww1/27/s8/2/I/M/2/f/IM2fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=110322176-110335069")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fww1/27/s8/2/I/M/2/f/IM2fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=110322176-110335069")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>മംഗല്യംതീയതി:17 ഏപ്രിൽചാനൽ:സീ കേരളം</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d2e\u0d02\u0d17\u0d32\u0d4d\u0d2f\u0d02\u0d24\u0d40\u0d2f\u0d24\u0d3f:17 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d38\u0d40 \u0d15\u0d47\u0d30\u0d33\u0d02", "https://hugh.cdn.rumble.cloud/video/fww1/83/s8/2/-/u/9/f/-u9fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=112562688-112575903")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fww1/83/s8/2/-/u/9/f/-u9fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=112562688-112575903")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>മഴ തോരും മുൻപേതീയതി:18 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d2e\u0d34 \u0d24\u0d4b\u0d30\u0d41\u0d02 \u0d2e\u0d41\u0d7b\u0d2a\u0d47\u0d24\u0d40\u0d2f\u0d24\u0d3f:18 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d0f\u0d37\u0d4d\u0d2f\u0d3e\u0d28\u0d46\u0d31\u0d4d\u0d31\u0d4d", "https://hugh.cdn.rumble.cloud/video/fwe2/01/s8/2/O/j/f/g/OjfgA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=110473728-110486615")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fwe2/01/s8/2/O/j/f/g/OjfgA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=110473728-110486615")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>മാനത്തെ കൊട്ടാരംതീയതി:17 ഏപ്രിൽചാനൽ:സീ കേരളം</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d2e\u0d3e\u0d28\u0d24\u0d4d\u0d24\u0d46 \u0d15\u0d4a\u0d1f\u0d4d\u0d1f\u0d3e\u0d30\u0d02\u0d24\u0d40\u0d2f\u0d24\u0d3f:17 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d38\u0d40 \u0d15\u0d47\u0d30\u0d33\u0d02", "https://hugh.cdn.rumble.cloud/video/fwe2/7c/s8/2/o/9/6/f/o96fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=115755520-115769013")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fwe2/7c/s8/2/o/9/6/f/o96fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=115755520-115769013")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>മൗനരാഗംതീയതി:17 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d2e\u0d57\u0d28\u0d30\u0d3e\u0d17\u0d02\u0d24\u0d40\u0d2f\u0d24\u0d3f:17 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d0f\u0d37\u0d4d\u0d2f\u0d3e\u0d28\u0d46\u0d31\u0d4d\u0d31\u0d4d", "https://hugh.cdn.rumble.cloud/video/fww1/ff/s8/2/y/W/Y/f/yWYfA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=110124544-110137440")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fww1/ff/s8/2/y/W/Y/f/yWYfA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=110124544-110137440")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>സാന്ത്വനം 2തീയതി:18 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d38\u0d3e\u0d28\u0d4d\u0d24\u0d4d\u0d35\u0d28\u0d02 2\u0d24\u0d40\u0d2f\u0d24\u0d3f:18 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d0f\u0d37\u0d4d\u0d2f\u0d3e\u0d28\u0d46\u0d31\u0d4d\u0d31\u0d4d", "https://hugh.cdn.rumble.cloud/video/fwe2/51/s8/2/G/l/f/g/GlfgA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=106105344-106117732")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fwe2/51/s8/2/G/l/f/g/GlfgA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=106105344-106117732")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name no-link">>>സിന്ദൂരപൊട്ടുതീയതി:17 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്.</span>
+          <span class="no-link-tag">❌ ; video URL not found</span>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>സ്നേഹക്കൂട്ട്തീയതി:17 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്.</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d38\u0d4d\u0d28\u0d47\u0d39\u0d15\u0d4d\u0d15\u0d42\u0d1f\u0d4d\u0d1f\u0d4d\u0d24\u0d40\u0d2f\u0d24\u0d3f:17 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d0f\u0d37\u0d4d\u0d2f\u0d3e\u0d28\u0d46\u0d31\u0d4d\u0d31\u0d4d.", "https://hugh.cdn.rumble.cloud/video/fww1/94/s8/2/G/1/Y/f/G1YfA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=102012928-102024810")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fww1/94/s8/2/G/1/Y/f/G1YfA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=102012928-102024810")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>സ്നേഹപൂർവ്വം ശ്യാമതീയതി:17 ഏപ്രിൽചാനൽ:സീ കേരളം</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d38\u0d4d\u0d28\u0d47\u0d39\u0d2a\u0d42\u0d7c\u0d35\u0d4d\u0d35\u0d02 \u0d36\u0d4d\u0d2f\u0d3e\u0d2e\u0d24\u0d40\u0d2f\u0d24\u0d3f:17 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d38\u0d40 \u0d15\u0d47\u0d30\u0d33\u0d02", "https://hugh.cdn.rumble.cloud/video/fwe2/4d/s8/2/6/5/8/f/658fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=125083648-125098244")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fwe2/4d/s8/2/6/5/8/f/658fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=125083648-125098244")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>സ്വയംവരപന്തൽതീയതി:17 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d38\u0d4d\u0d35\u0d2f\u0d02\u0d35\u0d30\u0d2a\u0d28\u0d4d\u0d24\u0d7d\u0d24\u0d40\u0d2f\u0d24\u0d3f:17 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d38\u0d42\u0d30\u0d4d\u0d2f \u0d1f\u0d3f.\u0d35\u0d3f", "https://hugh.cdn.rumble.cloud/video/fwe2/ef/s8/2/U/L/2/f/UL2fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=111127040-111140038")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fwe2/ef/s8/2/U/L/2/f/UL2fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=111127040-111140038")">Copy URL</button>
+          </div>
+        </div>
+        <div class="serial-card">
+          <span class="serial-name">>>ഹൃദയംതീയതി:17 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി</span>
+          <div>
+            <button class="btn btn-play" onclick="playSerial(">>\u0d39\u0d43\u0d26\u0d2f\u0d02\u0d24\u0d40\u0d2f\u0d24\u0d3f:17 \u0d0f\u0d2a\u0d4d\u0d30\u0d3f\u0d7d\u0d1a\u0d3e\u0d28\u0d7d:\u0d38\u0d42\u0d30\u0d4d\u0d2f \u0d1f\u0d3f.\u0d35\u0d3f", "https://hugh.cdn.rumble.cloud/video/fww1/f9/s8/2/O/N/2/f/ON2fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=109625856-109638649")">▶ Play</button>
+            <button class="btn btn-copy" onclick="copyUrl("https://hugh.cdn.rumble.cloud/video/fww1/f9/s8/2/O/N/2/f/ON2fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=109625856-109638649")">Copy URL</button>
+          </div>
+        </div>
+  </div>
+</div>
+
+<!-- Modal player -->
+<div class="modal-overlay" id="playerModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closePlayer()">✕</button>
+    <div class="modal-title" id="modalTitle"></div>
+    <video id="modalVideo" controls autoplay playsinline></video>
+    <div class="modal-fallback">
+      Can't play inline?
+      <a id="modalVlcLink" href="#">Open in VLC</a> &nbsp;|&nbsp;
+      <span id="modalUrlText" style="color:#888"></span>
+    </div>
+  </div>
+</div>
+
+<script>
+var hls = null;
+
+function playSerial(name, url) {
+  document.getElementById('modalTitle').textContent = name;
+  document.getElementById('modalUrlText').textContent = url;
+  document.getElementById('modalVlcLink').href = 'vlc://' + url;
+  var video = document.getElementById('modalVideo');
+
+  if (hls) { hls.destroy(); hls = null; }
+
+  if (url.endsWith('.m3u8') || url.includes('.m3u8')) {
+    if (Hls.isSupported()) {
+      hls = new Hls();
+      hls.loadSource(url);
+      hls.attachMedia(video);
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      // Safari native HLS
+      video.src = url;
+    }
+  } else {
+    video.src = url;
+  }
+
+  document.getElementById('playerModal').classList.add('active');
+}
+
+function closePlayer() {
+  var video = document.getElementById('modalVideo');
+  video.pause();
+  video.src = '';
+  if (hls) { hls.destroy(); hls = null; }
+  document.getElementById('playerModal').classList.remove('active');
+}
+
+function copyUrl(url) {
+  navigator.clipboard.writeText(url).then(function() {
+    alert('Copied!');
+  });
+}
+
+// Close on overlay click
+document.getElementById('playerModal').addEventListener('click', function(e) {
+  if (e.target === this) closePlayer();
+});
+</script>
+</body></html>
