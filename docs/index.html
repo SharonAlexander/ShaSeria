@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Serials Archive</title>
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<title>DDMalar Serials Archive</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -15,152 +14,108 @@
     background: #1a1a2e; padding: 16px 24px;
     display: flex; align-items: center; gap: 16px;
     border-bottom: 2px solid #e94560;
+    position: sticky; top: 0; z-index: 50;
   }
-  header a { color: #e94560; text-decoration: none; font-size: 1.4rem; }
-  header h1 { font-size: 1.2rem; color: #e8e8e8; }
+  header a.back { color: #e94560; text-decoration: none; font-size: 1.4rem; }
+  header h1 { font-size: 1.1rem; color: #e8e8e8; }
   .container { max-width: 960px; margin: 0 auto; padding: 24px 16px; }
+  .summary { color: #777; font-size: 0.85rem; margin-bottom: 12px; }
+
+  /* Index grid */
   .date-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
     gap: 12px; margin-top: 16px;
   }
   .date-card {
     background: #1a1a2e; border: 1px solid #2a2a4a;
     border-radius: 10px; padding: 16px; text-align: center;
     text-decoration: none; color: #e8e8e8;
-    transition: border-color .2s, transform .2s;
+    transition: border-color .2s, transform .15s;
   }
   .date-card:hover { border-color: #e94560; transform: translateY(-2px); }
+  .date-card.today { border-color: #e94560; }
   .date-card .date-label { font-size: 1rem; font-weight: 600; }
   .date-card .date-meta  { font-size: 0.78rem; color: #888; margin-top: 4px; }
-  .date-card.today { border-color: #e94560; }
 
-  .serial-list { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+  /* Serial list */
+  .serial-list { display: flex; flex-direction: column; gap: 8px; }
   .serial-card {
     background: #1a1a2e; border: 1px solid #2a2a4a;
-    border-radius: 10px; padding: 16px;
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 12px;
+    border-radius: 10px; padding: 14px 16px;
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
   }
-  .serial-name { font-size: 0.98rem; font-weight: 500; flex: 1; }
+  .serial-name { font-size: 0.95rem; font-weight: 500; flex: 1; min-width: 120px; }
   .serial-name.no-link { color: #555; }
+  .btn-row { display: flex; gap: 6px; flex-wrap: wrap; }
   .btn {
-    padding: 8px 18px; border-radius: 6px; border: none;
-    cursor: pointer; font-size: 0.85rem; font-weight: 600;
-    text-decoration: none; white-space: nowrap;
+    padding: 7px 14px; border-radius: 6px; border: none;
+    cursor: pointer; font-size: 0.82rem; font-weight: 600;
+    white-space: nowrap; display: inline-block; text-decoration: none;
   }
   .btn-play { background: #e94560; color: #fff; }
   .btn-play:hover { background: #c73652; }
-  .btn-copy { background: #2a2a4a; color: #aaa; margin-left: 6px; }
+  .btn-copy { background: #2a2a4a; color: #ccc; }
   .btn-copy:hover { background: #3a3a6a; color: #fff; }
+  .btn-vlc  { background: #ff6600; color: #fff; }
+  .btn-vlc:hover  { background: #cc5200; }
   .no-link-tag { color: #555; font-size: 0.8rem; }
 
-  /* Modal player */
+  /* Toast */
+  #toast {
+    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+    background: #222; color: #fff; padding: 10px 22px;
+    border-radius: 8px; font-size: 0.85rem;
+    opacity: 0; transition: opacity .3s;
+    pointer-events: none; z-index: 9999; white-space: nowrap;
+  }
+  #toast.show { opacity: 1; }
+
+  /* Modal */
   .modal-overlay {
     display: none; position: fixed; inset: 0;
-    background: rgba(0,0,0,.85); z-index: 1000;
+    background: rgba(0,0,0,.88); z-index: 1000;
     align-items: center; justify-content: center;
   }
   .modal-overlay.active { display: flex; }
   .modal {
     background: #1a1a2e; border-radius: 12px;
-    width: 90%; max-width: 860px; padding: 20px;
+    width: 92%; max-width: 880px; padding: 20px;
     position: relative;
   }
   .modal-title {
-    font-size: 1rem; font-weight: 600; margin-bottom: 12px;
-    color: #e94560;
+    font-size: 1rem; font-weight: 600;
+    color: #e94560; padding-right: 36px; margin-bottom: 12px;
   }
-  .modal video { width: 100%; border-radius: 8px; background: #000; }
+  .modal video {
+    width: 100%; border-radius: 8px;
+    background: #000; max-height: 68vh;
+  }
   .modal-close {
     position: absolute; top: 12px; right: 16px;
-    background: none; border: none; color: #aaa;
-    font-size: 1.4rem; cursor: pointer;
+    background: none; border: none;
+    color: #aaa; font-size: 1.5rem; cursor: pointer;
   }
   .modal-close:hover { color: #fff; }
-  .modal-fallback {
-    margin-top: 10px; font-size: 0.82rem; color: #666; word-break: break-all;
+  .modal-actions { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .modal-url {
+    margin-top: 8px; font-size: 0.72rem; color: #444;
+    word-break: break-all;
   }
-  .modal-fallback a { color: #e94560; }
-
-  .back-link { display: inline-block; margin-bottom: 20px; color: #e94560; text-decoration: none; }
-  .back-link:hover { text-decoration: underline; }
-  .summary { color: #666; font-size: 0.85rem; margin-bottom: 4px; }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>📺 ShaSeria Archive</h1>
+  <h1>&#x1F4FA; DDMalar Serials Archive</h1>
 </header>
 <div class="container">
   <p class="summary">1 days archived</p>
   <div class="date-grid">
     <a href="2026-04-18.html" class="date-card today">
-      <div class="date-label">18 Apr 2026 🔴 Today</div>
+      <div class="date-label">18 Apr 2026 &#x1F534; Today</div>
       <div class="date-meta">32/34 links</div>
     </a>
   </div>
 </div>
-
-<!-- Modal player -->
-<div class="modal-overlay" id="playerModal">
-  <div class="modal">
-    <button class="modal-close" onclick="closePlayer()">✕</button>
-    <div class="modal-title" id="modalTitle"></div>
-    <video id="modalVideo" controls autoplay playsinline></video>
-    <div class="modal-fallback">
-      Can't play inline?
-      <a id="modalVlcLink" href="#">Open in VLC</a> &nbsp;|&nbsp;
-      <span id="modalUrlText" style="color:#888"></span>
-    </div>
-  </div>
-</div>
-
-<script>
-var hls = null;
-
-function playSerial(name, url) {
-  document.getElementById('modalTitle').textContent = name;
-  document.getElementById('modalUrlText').textContent = url;
-  document.getElementById('modalVlcLink').href = 'vlc://' + url;
-  var video = document.getElementById('modalVideo');
-
-  if (hls) { hls.destroy(); hls = null; }
-
-  if (url.endsWith('.m3u8') || url.includes('.m3u8')) {
-    if (Hls.isSupported()) {
-      hls = new Hls();
-      hls.loadSource(url);
-      hls.attachMedia(video);
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      // Safari native HLS
-      video.src = url;
-    }
-  } else {
-    video.src = url;
-  }
-
-  document.getElementById('playerModal').classList.add('active');
-}
-
-function closePlayer() {
-  var video = document.getElementById('modalVideo');
-  video.pause();
-  video.src = '';
-  if (hls) { hls.destroy(); hls = null; }
-  document.getElementById('playerModal').classList.remove('active');
-}
-
-function copyUrl(url) {
-  navigator.clipboard.writeText(url).then(function() {
-    alert('Copied!');
-  });
-}
-
-// Close on overlay click
-document.getElementById('playerModal').addEventListener('click', function(e) {
-  if (e.target === this) closePlayer();
-});
-</script>
 </body></html>
