@@ -1,7 +1,7 @@
 {
   "date": "2026-04-18",
   "total": 34,
-  "found": 32,
+  "found": 33,
   "serials": [
     {
       "name": ">>കുടുംബശ്രീ ശാരദതീയതി:17 ഏപ്രിൽചാനൽ:സീ കേരളം",
@@ -32,17 +32,17 @@
       "error": null
     },
     {
-      "name": ">>പവിത്രംതീയതി:17 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്",
-      "serial_page": "https://www.pakkitv.website/page-36/34.html",
-      "watch_page": "https://www.pakkitv.website/page-34/34/Pavithram-Serial.html",
-      "video_url": "https://hugh.cdn.rumble.cloud/video/fww1/7e/s8/2/g/l/7/f/gl7fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=113590272-113603572",
-      "error": null
-    },
-    {
       "name": ">>മൗനരാഗംതീയതി:17 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്",
       "serial_page": "https://www.pakkitv.website/page-36/31.html",
       "watch_page": "https://www.pakkitv.website/page-34/31/Mounaragam-Serial.html",
       "video_url": "https://hugh.cdn.rumble.cloud/video/fww1/ff/s8/2/y/W/Y/f/yWYfA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=110124544-110137440",
+      "error": null
+    },
+    {
+      "name": ">>പവിത്രംതീയതി:17 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്",
+      "serial_page": "https://www.pakkitv.website/page-36/34.html",
+      "watch_page": "https://www.pakkitv.website/page-34/34/Pavithram-Serial.html",
+      "video_url": "https://hugh.cdn.rumble.cloud/video/fww1/7e/s8/2/g/l/7/f/gl7fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=113590272-113603572",
       "error": null
     },
     {
@@ -67,17 +67,17 @@
       "error": null
     },
     {
-      "name": ">>അഞ്ചു സുന്ദരികൾതീയതി:17 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി",
-      "serial_page": "https://www.pakkitv.website/page-36/59.html",
-      "watch_page": "https://www.pakkitv.website/page-34/59/Serial.html",
-      "video_url": "https://hugh.cdn.rumble.cloud/video/fww1/72/s8/2/-/N/2/f/-N2fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=112770560-112783761",
-      "error": null
-    },
-    {
       "name": ">>ഹൃദയംതീയതി:17 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി",
       "serial_page": "https://www.pakkitv.website/page-36/58.html",
       "watch_page": "https://www.pakkitv.website/page-34/58/Serial.html",
       "video_url": "https://hugh.cdn.rumble.cloud/video/fww1/f9/s8/2/O/N/2/f/ON2fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=109625856-109638649",
+      "error": null
+    },
+    {
+      "name": ">>അഞ്ചു സുന്ദരികൾതീയതി:17 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി",
+      "serial_page": "https://www.pakkitv.website/page-36/59.html",
+      "watch_page": "https://www.pakkitv.website/page-34/59/Serial.html",
+      "video_url": "https://hugh.cdn.rumble.cloud/video/fww1/72/s8/2/-/N/2/f/-N2fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=112770560-112783761",
       "error": null
     },
     {
@@ -88,17 +88,17 @@
       "error": null
     },
     {
-      "name": ">>സ്വയംവരപന്തൽതീയതി:17 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി",
-      "serial_page": "https://www.pakkitv.website/page-36/17.html",
-      "watch_page": "https://www.pakkitv.website/page-34/17/Serial.html",
-      "video_url": "https://hugh.cdn.rumble.cloud/video/fwe2/ef/s8/2/U/L/2/f/UL2fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=111127040-111140038",
-      "error": null
-    },
-    {
       "name": ">>ചട്ടമ്പിപാറുതീയതി:17 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി",
       "serial_page": "https://www.pakkitv.website/page-36/38.html",
       "watch_page": "https://www.pakkitv.website/page-34/38/Serial.html",
       "video_url": "https://hugh.cdn.rumble.cloud/video/fwe2/18/s8/2/2/E/7/f/2E7fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=110642688-110655582",
+      "error": null
+    },
+    {
+      "name": ">>സ്വയംവരപന്തൽതീയതി:17 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി",
+      "serial_page": "https://www.pakkitv.website/page-36/17.html",
+      "watch_page": "https://www.pakkitv.website/page-34/17/Serial.html",
+      "video_url": "https://hugh.cdn.rumble.cloud/video/fwe2/ef/s8/2/U/L/2/f/UL2fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=111127040-111140038",
       "error": null
     },
     {
@@ -151,17 +151,17 @@
       "error": null
     },
     {
-      "name": ">>ഒത്തിരി ഒത്തിരി സ്വപ്‌നങ്ങൾതീയതി:17 ഏപ്രിൽചാനൽ:മഴവിൽ മനോരമ",
-      "serial_page": "https://www.pakkitv.website/page-36/26.html",
-      "watch_page": "https://www.pakkitv.website/page-34/26/Serial.html",
-      "video_url": "https://hugh.cdn.rumble.cloud/video/fwe2/cb/s8/2/A/L/2/f/AL2fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=115518464-115531967",
-      "error": null
-    },
-    {
       "name": ">>അഡ്വ: അഞ്ജലിതീയതി:17 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്",
       "serial_page": "https://www.pakkitv.website/page-36/71.html",
       "watch_page": "https://www.pakkitv.website/page-34/71/Adv-Anjali-Serial.html",
       "video_url": "https://hugh.cdn.rumble.cloud/video/fwe2/5d/s8/2/U/2/Y/f/U2YfA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=109526528-109539327",
+      "error": null
+    },
+    {
+      "name": ">>ഒത്തിരി ഒത്തിരി സ്വപ്‌നങ്ങൾതീയതി:17 ഏപ്രിൽചാനൽ:മഴവിൽ മനോരമ",
+      "serial_page": "https://www.pakkitv.website/page-36/26.html",
+      "watch_page": "https://www.pakkitv.website/page-34/26/Serial.html",
+      "video_url": "https://hugh.cdn.rumble.cloud/video/fwe2/cb/s8/2/A/L/2/f/AL2fA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=115518464-115531967",
       "error": null
     },
     {
@@ -228,18 +228,18 @@
       "error": null
     },
     {
+      "name": ">>അമ്മമനസ്സ്തീയതി:17 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്.",
+      "serial_page": "https://www.pakkitv.website/page-36/8.html",
+      "watch_page": "https://www.pakkitv.website/page-34/8/Amma-Manassu-Serial.html",
+      "video_url": "https://hugh.cdn.rumble.cloud/video/fww1/92/s8/2/A/d/1/f/Ad1fA.Faa.mp4",
+      "error": "; video URL not found"
+    },
+    {
       "name": ">>സിന്ദൂരപൊട്ടുതീയതി:17 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്.",
       "serial_page": "https://www.pakkitv.website/page-36/43.html",
       "watch_page": "https://www.pakkitv.website/page-34/43/Sindoorapottu-Serial.html",
       "video_url": null,
-      "error": "; video URL not found"
-    },
-    {
-      "name": ">>അമ്മമനസ്സ്തീയതി:17 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്.",
-      "serial_page": "https://www.pakkitv.website/page-36/8.html",
-      "watch_page": "https://www.pakkitv.website/page-34/8/Amma-Manassu-Serial.html",
-      "video_url": null,
-      "error": "; video URL not found"
+      "error": "browser error: Page.goto: Timeout 30000ms exceeded.\nCall log:\n  - navigating to \"https://www.pakkitv.website/page-34/43/Sindoorapottu-Serial.html\", waiting until \"networkidle\"\n"
     }
   ]
 }

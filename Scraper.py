@@ -135,6 +135,42 @@ def fetch_watch_page_url(serial: Serial) -> None:
         serial.error = "watch link not found"
 
 
+def fetch_video_url_browser(serial: Serial) -> None:
+    """Fallback for serials where video URL is inside obfuscated JS."""
+    try:
+        from playwright.sync_api import sync_playwright
+    except ImportError:
+        log.error("Playwright not installed — run: pip install playwright && playwright install chromium")
+        return
+
+    log.info(f"  [{serial.name}] Trying browser fallback (obfuscated JS detected) …")
+    try:
+        with sync_playwright() as p:
+            browser = p.chromium.launch(headless=True)
+            page    = browser.new_page()
+            found   = []
+
+            def on_request(req):
+                url = req.url
+                if ".m3u8" in url or (".mp4" in url and "cdn" in url):
+                    found.append(url)
+
+            page.on("request", on_request)
+            page.goto(serial.watch_page, wait_until="networkidle", timeout=30000)
+            browser.close()
+
+        if found:
+            serial.video_url = found[0]
+            log.info(f"  [{serial.name}] Video URL (browser) → {serial.video_url}")
+        else:
+            serial.error = (serial.error or "") + "; browser fallback also found nothing"
+            log.warning(f"  [{serial.name}] Browser fallback found no video URL")
+
+    except Exception as e:
+        serial.error = f"browser error: {e}"
+        log.error(f"  [{serial.name}] Browser fallback error: {e}")
+
+
 def fetch_video_url(serial: Serial) -> None:
     if not serial.watch_page:
         return
@@ -146,6 +182,7 @@ def fetch_video_url(serial: Serial) -> None:
         return
 
     text = r.text
+
     patterns = [
         r'["\']file["\']\s*:\s*["\'](https?://[^"\']+\.(?:m3u8|mp4|ts)[^"\']*)["\']',
         r'sources\s*:\s*\[\s*\{[^}]*["\']file["\']\s*:\s*["\'](https?://[^"\']+)["\']',
@@ -173,6 +210,7 @@ def fetch_video_url(serial: Serial) -> None:
 
     serial.error = (serial.error or "") + "; video URL not found"
     log.warning(f"  [{serial.name}] No video URL extracted")
+    fetch_video_url_browser(serial) 
 
 
 def process_serial(serial: Serial) -> Serial:
