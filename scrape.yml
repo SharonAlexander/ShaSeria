@@ -26,6 +26,8 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run scraper
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
         run: python scraper.py --workers 3
 
       - name: Generate HTML page
