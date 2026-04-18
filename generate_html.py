@@ -381,7 +381,7 @@ for entry in all_dates:
 
 index_body = f"""
 <header>
-  <h1>&#x1F4FA; DDMalar Serials Archive</h1>
+  <h1>&#x1F4FA; ShaSeria Serials Archive</h1>
 </header>
 <div class="container">
   <p class="summary">{len(all_dates)} days archived</p>
@@ -395,7 +395,7 @@ index_html = f"""<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DDMalar Serials Archive</title>
+<title>ShaSeria Serials Archive</title>
 <style>{CSS}</style>
 </head>
 <body>

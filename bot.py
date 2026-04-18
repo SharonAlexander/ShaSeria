@@ -254,15 +254,23 @@ def main():
     app.post_init = post_init
 
     # Daily push scheduler — fires after GitHub Actions finishes
-    scheduler = AsyncIOScheduler(timezone=config.TIMEZONE)
-    scheduler.add_job(
-        scheduled_push,
-        trigger="cron",
-        hour=config.PUSH_HOUR,
-        minute=config.PUSH_MINUTE,
-        args=[app],
-    )
-    scheduler.start()
+    # Scheduler — start inside post_init so the event loop is already running
+    async def post_init(application):
+        await application.bot.set_my_commands([
+            BotCommand("start", "Open main menu"),
+        ])
+        scheduler = AsyncIOScheduler(timezone=config.TIMEZONE)
+        scheduler.add_job(
+            scheduled_push,
+            trigger="cron",
+            hour=config.PUSH_HOUR,
+            minute=config.PUSH_MINUTE,
+            args=[application],
+        )
+        scheduler.start()
+        log.info(f"Scheduler set — daily push at {config.PUSH_HOUR:02d}:{config.PUSH_MINUTE:02d} {config.TIMEZONE}")
+
+    app.post_init = post_init
     log.info(f"Bot started — daily push at {config.PUSH_HOUR:02d}:{config.PUSH_MINUTE:02d} {config.TIMEZONE}")
 
     app.run_polling(drop_pending_updates=True)
