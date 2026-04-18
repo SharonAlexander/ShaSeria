@@ -14,7 +14,8 @@ import os
 from dataclasses import dataclass, asdict
 from typing import Optional
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import date
+from datetime import date, timedelta
+import glob
 
 import requests
 from bs4 import BeautifulSoup
@@ -258,6 +259,23 @@ def save_json(results: list[Serial], output_dir: str = "data") -> str:
     return filepath
 
 
+def cleanup_old_files(output_dir: str = "data", keep_days: int = 30):
+    """Delete JSON files older than keep_days days."""
+    cutoff = date.today() - timedelta(days=keep_days)
+    deleted = 0
+    for jf in glob.glob(os.path.join(output_dir, "serials_*.json")):
+        fname = os.path.basename(jf)  # serials_2026-01-01.json
+        try:
+            file_date = date.fromisoformat(fname.replace("serials_", "").replace(".json", ""))
+            if file_date < cutoff:
+                os.remove(jf)
+                log.info(f"Deleted old file: {fname}")
+                deleted += 1
+        except ValueError:
+            pass
+    log.info(f"Cleanup done — {deleted} files deleted")
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--workers", type=int, default=3)
@@ -267,6 +285,7 @@ if __name__ == "__main__":
 
     results = run_scraper(workers=args.workers, limit=args.limit)
     save_json(results, output_dir=args.output)
+    cleanup_old_files(output_dir=args.output)
 
     found = sum(1 for s in results if s.video_url)
     print(f"\n✓ {found}/{len(results)} video URLs extracted\n")

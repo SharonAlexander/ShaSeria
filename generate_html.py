@@ -405,4 +405,16 @@ index_html = f"""<!DOCTYPE html>
 with open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8") as f:
     f.write(index_html)
 
+from datetime import date, timedelta
+
+cutoff = dt_date.today() - timedelta(days=30)
+for html_file in glob.glob(os.path.join(OUT_DIR, "????-??-??.html")):
+    fname = os.path.basename(html_file).replace(".html", "")
+    try:
+        if dt_date.fromisoformat(fname) < cutoff:
+            os.remove(html_file)
+            print(f"  🗑 Deleted old page: {fname}.html")
+    except ValueError:
+        pass
+
 print(f"\n✓ index.html + {len(all_dates)} day pages built in docs/")
