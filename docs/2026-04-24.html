@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Serials — 24 Apr 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #0f0f0f; color: #e8e8e8; min-height: 100vh;
+  }
+  header {
+    background: #1a1a2e; padding: 16px 24px;
+    display: flex; align-items: center; gap: 16px;
+    border-bottom: 2px solid #e94560;
+    position: sticky; top: 0; z-index: 50;
+  }
+  header a.back { color: #e94560; text-decoration: none; font-size: 1.4rem; }
+  header h1 { font-size: 1.1rem; color: #e8e8e8; }
+  .container { max-width: 960px; margin: 0 auto; padding: 24px 16px; }
+  .summary { color: #777; font-size: 0.85rem; margin-bottom: 12px; }
+
+  /* Index grid */
+  .date-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 12px; margin-top: 16px;
+  }
+  .date-card {
+    background: #1a1a2e; border: 1px solid #2a2a4a;
+    border-radius: 10px; padding: 16px; text-align: center;
+    text-decoration: none; color: #e8e8e8;
+    transition: border-color .2s, transform .15s;
+  }
+  .date-card:hover { border-color: #e94560; transform: translateY(-2px); }
+  .date-card.today { border-color: #e94560; }
+  .date-card .date-label { font-size: 1rem; font-weight: 600; }
+  .date-card .date-meta  { font-size: 0.78rem; color: #888; margin-top: 4px; }
+
+  /* Serial list */
+  .serial-list { display: flex; flex-direction: column; gap: 8px; }
+  .serial-card {
+    background: #1a1a2e; border: 1px solid #2a2a4a;
+    border-radius: 10px; padding: 14px 16px;
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  }
+  .serial-name { font-size: 0.95rem; font-weight: 500; flex: 1; min-width: 120px; }
+  .serial-name.no-link { color: #555; }
+  .btn-row { display: flex; gap: 6px; flex-wrap: wrap; }
+  .btn {
+    padding: 7px 14px; border-radius: 6px; border: none;
+    cursor: pointer; font-size: 0.82rem; font-weight: 600;
+    white-space: nowrap; display: inline-block; text-decoration: none;
+  }
+  .btn-play { background: #e94560; color: #fff; }
+  .btn-play:hover { background: #c73652; }
+  .btn-copy { background: #2a2a4a; color: #ccc; }
+  .btn-copy:hover { background: #3a3a6a; color: #fff; }
+  .btn-vlc  { background: #ff6600; color: #fff; }
+  .btn-vlc:hover  { background: #cc5200; }
+  .no-link-tag { color: #555; font-size: 0.8rem; }
+
+  /* Toast */
+  #toast {
+    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+    background: #222; color: #fff; padding: 10px 22px;
+    border-radius: 8px; font-size: 0.85rem;
+    opacity: 0; transition: opacity .3s;
+    pointer-events: none; z-index: 9999; white-space: nowrap;
+  }
+  #toast.show { opacity: 1; }
+
+  /* Modal */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,.88); z-index: 1000;
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal {
+    background: #1a1a2e; border-radius: 12px;
+    width: 92%; max-width: 880px; padding: 20px;
+    position: relative;
+  }
+  .modal-title {
+    font-size: 1rem; font-weight: 600;
+    color: #e94560; padding-right: 36px; margin-bottom: 12px;
+  }
+  .modal video {
+    width: 100%; border-radius: 8px;
+    background: #000; max-height: 68vh;
+  }
+  .modal-close {
+    position: absolute; top: 12px; right: 16px;
+    background: none; border: none;
+    color: #aaa; font-size: 1.5rem; cursor: pointer;
+  }
+  .modal-close:hover { color: #fff; }
+  .modal-actions { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .modal-url {
+    margin-top: 8px; font-size: 0.72rem; color: #444;
+    word-break: break-all;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="back" href="index.html">&#x2B05;</a>
+  <h1>&#x1F4FA; Serials &mdash; 24 Apr 2026</h1>
+</header>
+<div class="container">
+  <p class="summary">30 of 36 links found</p>
+  <div class="serial-list">
+      <div class="serial-card">
+        <span class="serial-name">>>Super കൺമണിതീയതി:23 ഏപ്രിൽചാനൽ:മഴവിൽ മനോരമ</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial(0)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl(0)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc"  onclick="openVlc(0)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>അകലെതീയതി:23 ഏപ്രിൽചാനൽ:സീ കേരളം</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial(1)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl(1)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc"  onclick="openVlc(1)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>അഞ്ചു സുന്ദരികൾതീയതി:23 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial(2)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl(2)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc"  onclick="openVlc(2)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>അഡ്വ: അഞ്ജലിതീയതി:24 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial(3)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl(3)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc"  onclick="openVlc(3)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name no-link">>>അമ്മമനസ്സ്തീയതി:24 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്.</span>
+        <span class="no-link-tag">&#x274C; ; video URL not found</span>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>അമ്മേ മൂകാംബികേതീയതി:23 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial(5)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl(5)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc"  onclick="openVlc(5)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>അർച്ചന ചേച്ചി LLBതീയതി:23 ഏപ്രിൽചാനൽ:മഴവിൽ മനോരമ</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial(6)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl(6)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc"  onclick="openVlc(6)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>ഇഷ്ടം മാത്രംതീയതി:24 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial(7)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl(7)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc"  onclick="openVlc(7)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>ഈ പുഴയും കടന്ന്തീയതി:24 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial(8)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl(8)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc"  onclick="openVlc(8)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>ഒത്തിരി ഒത്തിരി സ്വപ്‌നങ്ങൾതീയതി:23 ഏപ്രിൽചാനൽ:മഴവിൽ മനോരമ</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial(9)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl(9)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc"  onclick="openVlc(9)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>ഒറ്റശിഖരംതീയതി:23 ഏപ്രിൽചാനൽ:മഴവിൽ മനോരമ</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial(10)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl(10)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc"  onclick="openVlc(10)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>കന്യാദാനംതീയതി:23 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial(11)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl(11)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc"  onclick="openVlc(11)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>കാറ്റത്തെ കിളിക്കൂട്തീയതി:24 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial(12)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl(12)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc"  onclick="openVlc(12)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>കുടുംബശ്രീ ശാരദതീയതി:23 ഏപ്രിൽചാനൽ:സീ കേരളം</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial(13)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl(13)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc"  onclick="openVlc(13)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>കൃഷ്ണഗാഥതീയതി:23 ഏപ്രിൽചാനൽ:സീ കേരളം</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial(14)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl(14)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc"  onclick="openVlc(14)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name no-link">>>ചട്ടമ്പിപാറുതീയതി:23 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി</span>
+        <span class="no-link-tag">&#x274C; ; video URL not found</span>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>ചെമ്പനീർ പൂവ്തീയതി:24 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial(16)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl(16)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc"  onclick="openVlc(16)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>ചെമ്പരത്തിതീയതി:23 ഏപ്രിൽചാനൽ:സീ കേരളം</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial(17)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl(17)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc"  onclick="openVlc(17)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>ടീച്ചറമ്മതീയതി:24 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്.</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial(18)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl(18)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc"  onclick="openVlc(18)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>ദുർഗതീയതി:23 ഏപ്രിൽചാനൽ:സീ കേരളം</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial(19)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl(19)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc"  onclick="openVlc(19)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>പത്തരമാറ്റുതീയതി:24 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial(20)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl(20)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc"  onclick="openVlc(20)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>പവിത്രംതീയതി:23 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial(21)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl(21)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc"  onclick="openVlc(21)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name no-link">>>പുന്നാരംതീയതി:23 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി</span>
+        <span class="no-link-tag">&#x274C; ; video URL not found</span>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>പെയ്തൊഴിയാതെതീയതി:23 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial(23)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl(23)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc"  onclick="openVlc(23)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>മംഗല്യം തന്തുനാനേന്നതീയതി:23 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial(24)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl(24)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc"  onclick="openVlc(24)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>മംഗല്യംതീയതി:23 ഏപ്രിൽചാനൽ:സീ കേരളം</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial(25)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl(25)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc"  onclick="openVlc(25)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>മഴ തോരും മുൻപേതീയതി:23 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial(26)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl(26)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc"  onclick="openVlc(26)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name no-link">>>മാനത്തെ കൊട്ടാരംതീയതി:23 ഏപ്രിൽചാനൽ:സീ കേരളം</span>
+        <span class="no-link-tag">&#x274C; ; video URL not found</span>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>മൗനരാഗംതീയതി:24 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial(28)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl(28)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc"  onclick="openVlc(28)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name no-link">>>വല്യേട്ടൻതീയതി:23 ഏപ്രിൽചാനൽ:സീ കേരളം</span>
+        <span class="no-link-tag">&#x274C; ; video URL not found</span>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>സാന്ത്വനം 2തീയതി:24 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial(30)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl(30)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc"  onclick="openVlc(30)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name no-link">>>സിന്ദൂരപൊട്ടുതീയതി:24 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്.</span>
+        <span class="no-link-tag">&#x274C; ; video URL not found</span>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>സ്നേഹക്കൂട്ട്തീയതി:24 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്.</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial(32)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl(32)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc"  onclick="openVlc(32)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>സ്നേഹപൂർവ്വം ശ്യാമതീയതി:23 ഏപ്രിൽചാനൽ:സീ കേരളം</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial(33)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl(33)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc"  onclick="openVlc(33)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>സ്വയംവരപന്തൽതീയതി:23 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial(34)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl(34)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc"  onclick="openVlc(34)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>ഹൃദയംതീയതി:23 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial(35)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl(35)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc"  onclick="openVlc(35)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+<div class="modal-overlay" id="playerModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closePlayer()">&#x2715;</button>
+    <div class="modal-title" id="modalTitle"></div>
+    <video id="modalVideo" controls autoplay playsinline></video>
+    <div class="modal-actions">
+      <button class="btn btn-copy" onclick="doCopy(currentUrl)">&#x1F4CB; Copy URL</button>
+      <button class="btn btn-vlc" onclick="(function(){
+        var ua=navigator.userAgent||'';
+        var ios=/iPad|iPhone|iPod/.test(ua)&&!window.MSStream;
+        window.location.href = ios
+          ? 'vlc-x-callback://x-callback-url/stream?url='+encodeURIComponent(currentUrl)
+          : 'vlc://'+currentUrl.replace(/^https?:\/\//,'');
+        setTimeout(function(){showToast('VLC not opening? Install VLC or copy URL.');},1800);
+      })()">&#x1F4FA; Open in VLC</button>
+    </div>
+    <div class="modal-url" id="modalUrlDisplay"></div>
+  </div>
+</div>
+
+<script>window.SERIALS = [{"name": ">>Super കൺമണിതീയതി:23 ഏപ്രിൽചാനൽ:മഴവിൽ മനോരമ", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/ad/s8/2/Q/n/K/h/QnKhA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=106180608-106192910"}, {"name": ">>അകലെതീയതി:23 ഏപ്രിൽചാനൽ:സീ കേരളം", "url": "https://hugh.cdn.rumble.cloud/video/fww1/59/s8/2/Q/v/N/h/QvNhA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=107444736-107457241"}, {"name": ">>അഞ്ചു സുന്ദരികൾതീയതി:23 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fww1/d8/s8/2/8/o/N/h/8oNhA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=110212096-110224990"}, {"name": ">>അഡ്വ: അഞ്ജലിതീയതി:24 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fww1/5a/s8/2/M/k/Y/h/MkYhA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=105693184-105705480"}, {"name": ">>അമ്മമനസ്സ്തീയതി:24 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്.", "url": ""}, {"name": ">>അമ്മേ മൂകാംബികേതീയതി:23 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/95/s8/2/w/W/P/h/wWPhA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=107944960-107957554"}, {"name": ">>അർച്ചന ചേച്ചി LLBതീയതി:23 ഏപ്രിൽചാനൽ:മഴവിൽ മനോരമ", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/84/s8/2/m/J/K/h/mJKhA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=107947520-107960022"}, {"name": ">>ഇഷ്ടം മാത്രംതീയതി:24 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/04/s8/2/-/j/Y/h/-jYhA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=109821440-109834239"}, {"name": ">>ഈ പുഴയും കടന്ന്തീയതി:24 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/d8/s8/2/a/g/Y/h/agYhA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=112338944-112352044"}, {"name": ">>ഒത്തിരി ഒത്തിരി സ്വപ്‌നങ്ങൾതീയതി:23 ഏപ്രിൽചാനൽ:മഴവിൽ മനോരമ", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/58/s8/2/s/I/K/h/sIKhA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=117561344-117574957"}, {"name": ">>ഒറ്റശിഖരംതീയതി:23 ഏപ്രിൽചാനൽ:മഴവിൽ മനോരമ", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/0a/s8/2/G/x/K/h/GxKhA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=108762624-108775234"}, {"name": ">>കന്യാദാനംതീയതി:23 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fww1/37/s8/2/w/o/N/h/woNhA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=109235712-109248479"}, {"name": ">>കാറ്റത്തെ കിളിക്കൂട്തീയതി:24 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fww1/06/s8/2/k/f/Y/h/kfYhA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=109208576-109221378"}, {"name": ">>കുടുംബശ്രീ ശാരദതീയതി:23 ഏപ്രിൽചാനൽ:സീ കേരളം", "url": "https://hugh.cdn.rumble.cloud/video/fww1/17/s8/2/u/w/N/h/uwNhA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=120374272-120388382"}, {"name": ">>കൃഷ്ണഗാഥതീയതി:23 ഏപ്രിൽചാനൽ:സീ കേരളം", "url": "https://hugh.cdn.rumble.cloud/video/fww1/35/s8/2/2/1/Q/h/21QhA.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=180406272-180419875"}, {"name": ">>ചട്ടമ്പിപാറുതീയതി:23 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി", "url": ""}, {"name": ">>ചെമ്പനീർ പൂവ്തീയതി:24 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/4c/s8/2/q/e/Y/h/qeYhA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=104761856-104774062"}, {"name": ">>ചെമ്പരത്തിതീയതി:23 ഏപ്രിൽചാനൽ:സീ കേരളം", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/e5/s8/2/k/x/O/h/kxOhA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=114972160-114985656"}, {"name": ">>ടീച്ചറമ്മതീയതി:24 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്.", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/2b/s8/2/o/j/Y/h/ojYhA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=103089664-103101656"}, {"name": ">>ദുർഗതീയതി:23 ഏപ്രിൽചാനൽ:സീ കേരളം", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/47/s8/2/A/e/P/h/AePhA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=124422144-124436758"}, {"name": ">>പത്തരമാറ്റുതീയതി:24 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fww1/4e/s8/2/0/b/Y/h/0bYhA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=105946624-105959018"}, {"name": ">>പവിത്രംതീയതി:23 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fww1/55/s8/2/o/O/N/h/oONhA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=111657984-111670987"}, {"name": ">>പുന്നാരംതീയതി:23 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി", "url": ""}, {"name": ">>പെയ്തൊഴിയാതെതീയതി:23 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fww1/0f/s8/2/k/x/N/h/kxNhA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=111424000-111437098"}, {"name": ">>മംഗല്യം തന്തുനാനേന്നതീയതി:23 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fww1/68/s8/2/K/o/N/h/KoNhA.baa.1.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=111043584-111056843"}, {"name": ">>മംഗല്യംതീയതി:23 ഏപ്രിൽചാനൽ:സീ കേരളം", "url": "https://hugh.cdn.rumble.cloud/video/fww1/c0/s8/2/-/Z/P/h/-ZPhA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=111780352-111793451"}, {"name": ">>മഴ തോരും മുൻപേതീയതി:23 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/2c/s8/2/K/S/F/h/KSFhA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=113497088-113510385"}, {"name": ">>മാനത്തെ കൊട്ടാരംതീയതി:23 ഏപ്രിൽചാനൽ:സീ കേരളം", "url": ""}, {"name": ">>മൗനരാഗംതീയതി:24 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/1c/s8/2/k/g/Y/h/kgYhA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=104662528-104674718"}, {"name": ">>വല്യേട്ടൻതീയതി:23 ഏപ്രിൽചാനൽ:സീ കേരളം", "url": ""}, {"name": ">>സാന്ത്വനം 2തീയതി:24 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/c7/s8/2/2/g/Y/h/2gYhA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=113304576-113317864"}, {"name": ">>സിന്ദൂരപൊട്ടുതീയതി:24 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്.", "url": ""}, {"name": ">>സ്നേഹക്കൂട്ട്തീയതി:24 ഏപ്രിൽചാനൽ:ഏഷ്യാനെറ്റ്.", "url": "https://hugh.cdn.rumble.cloud/video/fww1/dd/s8/2/O/i/Y/h/OiYhA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=101102080-101113871"}, {"name": ">>സ്നേഹപൂർവ്വം ശ്യാമതീയതി:23 ഏപ്രിൽചാനൽ:സീ കേരളം", "url": "https://hugh.cdn.rumble.cloud/video/fww1/c2/s8/2/S/A/P/h/SAPhA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=122506240-122520548"}, {"name": ">>സ്വയംവരപന്തൽതീയതി:23 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/f6/s8/2/i/q/N/h/iqNhA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=111993344-112006445"}, {"name": ">>ഹൃദയംതീയതി:23 ഏപ്രിൽചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fww1/20/s8/2/u/q/N/h/uqNhA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=109683200-109696004"}];</script>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script>
+var hlsPlayer = null;
+var currentUrl = '';
+
+/* ── Toast ── */
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function() { t.classList.remove('show'); }, 2200);
+}
+
+/* ── Play in modal ── */
+function playSerial(idx) {
+  var s = window.SERIALS[idx];
+  if (!s || !s.url) return;
+  currentUrl = s.url;
+  document.getElementById('modalTitle').textContent = s.name;
+  document.getElementById('modalUrlDisplay').textContent = s.url;
+
+  var video = document.getElementById('modalVideo');
+  if (hlsPlayer) { hlsPlayer.destroy(); hlsPlayer = null; }
+
+  if (s.url.indexOf('.m3u8') !== -1) {
+    if (typeof Hls !== 'undefined' && Hls.isSupported()) {
+      hlsPlayer = new Hls();
+      hlsPlayer.loadSource(s.url);
+      hlsPlayer.attachMedia(video);
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = s.url;   // Safari native HLS
+    }
+  } else {
+    video.src = s.url;
+  }
+  document.getElementById('playerModal').classList.add('active');
+}
+
+function closePlayer() {
+  var video = document.getElementById('modalVideo');
+  video.pause(); video.src = '';
+  if (hlsPlayer) { hlsPlayer.destroy(); hlsPlayer = null; }
+  document.getElementById('playerModal').classList.remove('active');
+  currentUrl = '';
+}
+
+/* ── Copy URL ── */
+function copyUrl(idx) {
+  var s = window.SERIALS[idx];
+  if (!s || !s.url) return;
+  doCopy(s.url);
+}
+
+function copyModalUrl() { if (currentUrl) docopy(currentUrl); }
+
+function doCopy(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text)
+      .then(function() { showToast('URL copied!'); })
+      .catch(function() { legacyCopy(text); });
+  } else {
+    legacyCopy(text);
+  }
+}
+
+function legacyCopy(text) {
+  var ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0';
+  document.body.appendChild(ta);
+  ta.focus(); ta.select();
+  try {
+    document.execCommand('copy');
+    showToast('URL copied!');
+  } catch(e) {
+    showToast('Long-press the URL below to copy');
+  }
+  document.body.removeChild(ta);
+}
+
+/* ── VLC ──
+   Desktop (Win/Mac/Linux): vlc:// opens VLC media player directly.
+   Android: vlc:// opens VLC for Android if installed.
+   iOS: vlc-x-callback://x-callback-url/stream?url=<encoded> for VLC iOS app.
+*/
+function openVlc(idx) {
+  var s = window.SERIALS[idx];
+  if (!s || !s.url) return;
+  var ua = navigator.userAgent || '';
+  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  if (isIOS) {
+    // VLC iOS uses its own scheme
+    window.location.href = 'vlc-x-callback://x-callback-url/stream?url=' + encodeURIComponent(s.url);
+  } else {
+    // Windows / Mac / Linux / Android VLC
+    window.location.href = 'vlc://' + s.url.replace(/^https?:\/\//, '');
+  }
+  setTimeout(function() {
+    showToast("VLC not opening? Install VLC or copy the URL and open it manually.");
+  }, 1800);
+}
+
+/* Close modal on backdrop click */
+document.addEventListener('DOMContentLoaded', function() {
+  var overlay = document.getElementById('playerModal');
+  if (overlay) {
+    overlay.addEventListener('click', function(e) {
+      if (e.target === this) closePlayer();
+    });
+  }
+});
+</script>
+
+</body></html>
