@@ -242,7 +242,7 @@ def run_scraper(workers: int = 3, limit: int = 0) -> list[Serial]:
 def save_json(results: list[Serial], output_dir: str = "data") -> str:
     os.makedirs(output_dir, exist_ok=True)
     today     = date.today().isoformat()
-    filename  = f"serials_{today}.json"
+    filename  = f"serials_malayalam_{today}.json"
     filepath  = os.path.join(output_dir, filename)
 
     payload = {
