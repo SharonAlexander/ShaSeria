@@ -305,7 +305,7 @@ def fmt_date(d: str) -> str:
 
 
 # ── Per-day pages ──────────────────────────────────────────────────────────────
-json_files = sorted(glob.glob(os.path.join(DATA_DIR, "serials_*.json")), reverse=True)
+json_files = sorted(glob.glob(os.path.join(DATA_DIR, "serials_malayalam_*.json")), reverse=True)
 all_dates  = []
 
 for jf in json_files:
