@@ -37,6 +37,7 @@ CHANNELS = {
         "pages": [
             "https://www.tamildhool.tech/sun-tv/sun-tv-serial/",
             "https://www.tamildhool.tech/sun-tv/sun-tv-serial/page/2/",
+            "https://www.tamildhool.tech/sun-tv/sun-tv-serial/page/3/",
         ],
         "filename": "serials_tamil_suntv_{date}.json",
     },
@@ -45,6 +46,7 @@ CHANNELS = {
         "pages": [
             "https://www.tamildhool.tech/vijay-tv/vijay-tv-serial/",
             "https://www.tamildhool.tech/vijay-tv/vijay-tv-serial/page/2/",
+            "https://www.tamildhool.tech/vijay-tv/vijay-tv-serial/page/3/",
         ],
         "filename": "serials_tamil_vijaytv_{date}.json",
     },
@@ -53,6 +55,7 @@ CHANNELS = {
         "pages": [
             "https://www.tamildhool.tech/zee-tamil/zee-tamil-serial/",
             "https://www.tamildhool.tech/zee-tamil/zee-tamil-serial/page/2/",
+            "https://www.tamildhool.tech/zee-tamil/zee-tamil-serial/page/3/",
         ],
         "filename": "serials_tamil_zeetamil_{date}.json",
     },
@@ -377,4 +380,4 @@ if __name__ == "__main__":
                 print(f"        {s.dailymotion_url}")
             if s.error:
                 print(f"        ERR: {s.error}")
-    print()
+    print() 
