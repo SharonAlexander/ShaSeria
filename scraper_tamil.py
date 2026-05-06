@@ -326,6 +326,7 @@ def cleanup_old_files(output_dir: str = "data", keep_days: int = 30):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="TamilDhool multi-channel serial scraper")
+    parser.add_argument("--workers", type=int, default=3)
     parser.add_argument(
         "--channels",
         nargs="+",
