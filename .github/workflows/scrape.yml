@@ -25,10 +25,15 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run scraper
+      - name: Run Malayalam scraper
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-        run: python scraper.py --workers 3
+        run: python scraper_malayalam.py --workers 3
+
+      - name: Run Tamil scraper
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+        run: python scraper_tamil.py --workers 3
 
       - name: Generate HTML page
         run: python generate_html.py
