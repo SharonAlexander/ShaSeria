@@ -24,6 +24,12 @@ Tamil serial cards:
   - Two separate Play buttons: one for Dailymotion, one for JW Player (HLS)
   - No Copy URL button on Tamil cards
   - Malayalam cards retain: Play + Copy URL + VLC
+
+Visit counter:
+  - Powered by a Cloudflare Worker + KV store (visit_counter_worker.js)
+  - Set COUNTER_WORKER below to your deployed worker URL
+  - Each day page tracks independently; index page tracks as "index"
+  - Daily count auto-resets (KV TTL 48h); total count is permanent
 """
 
 import json
@@ -36,15 +42,60 @@ OUT_DIR  = "docs"
 
 os.makedirs(OUT_DIR, exist_ok=True)
 
-COUNTER_NS = "shaseria-serials"
-
 # ── Cloudflare Worker proxy URL ───────────────────────────────────────────────
 # Deploy cloudflare_worker.js to Cloudflare Workers (free tier) and paste
 # your worker URL here.  Tamil JW Player HLS URLs are routed through it
 # so hls.js can fetch them without CORS errors.
-# Example: "https://hls-proxy.YOUR-NAME.workers.dev"
-# Leave empty to use the raw URL (will fail CORS in browser).
-PROXY_BASE = "https://shiny-butterfly-e7d0.sharoncheers.workers.dev"
+PROXY_BASE = "https://empty-thunder-a07a.sharoncheers.workers.dev"
+
+# ── Cloudflare Worker visit counter URL ──────────────────────────────────────
+# Deploy visit_counter_worker.js to Cloudflare Workers and paste the URL here.
+# The worker needs a KV namespace bound as VISITS.
+# Example: "https://visit-counter.YOUR-NAME.workers.dev"
+COUNTER_WORKER = "silent-snow-b30b.sharoncheers.workers.dev"
+
+# ── Visit counter JS ──────────────────────────────────────────────────────────
+def counter_js(page_id: str, hit: bool = True) -> str:
+    """
+    Returns a <script> block that calls the Cloudflare Worker visit counter.
+    page_id : stable identifier for this page, e.g. "index" or "2025-05-10"
+    hit     : True  → increment counters on load (normal visit)
+              False → read-only (for a future stats page)
+    Fills:
+      #visits-day   → today's visit count  (day pages only)
+      #visits-total → all-time visit count (all pages)
+    """
+    action = "hit" if hit else "get"
+    return f"""<script>
+(function () {{
+  var WORKER = {repr(COUNTER_WORKER)};
+  var PAGE   = {repr(page_id)};
+  function fmt(n) {{
+    if (n === undefined || n === null) return '\u2026';
+    if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
+    if (n >= 1000)    return (n / 1000).toFixed(1) + 'k';
+    return String(n);
+  }}
+  function setEl(id, val) {{
+    var el = document.getElementById(id);
+    if (el) el.textContent = fmt(val);
+  }}
+  fetch(WORKER + '?action={action}&page=' + encodeURIComponent(PAGE), {{
+    method: 'GET',
+    cache:  'no-store'
+  }})
+  .then(function(r) {{ return r.ok ? r.json() : Promise.reject(r.status); }})
+  .then(function(data) {{
+    setEl('visits-day',   data.day);
+    setEl('visits-total', data.total);
+  }})
+  .catch(function(err) {{
+    setEl('visits-day',   '\u2014');
+    setEl('visits-total', '\u2014');
+    console.warn('Visit counter error:', err);
+  }});
+}})();
+</script>"""
 
 # ── Shared CSS ─────────────────────────────────────────────────────────────────
 CSS = r"""
@@ -326,7 +377,7 @@ function playDailymotion(ns, idx) {
 function playJw(ns, idx) {
   var arr = window.SERIALS[ns]; if (!arr) return;
   var s = arr[idx];             if (!s || !s.jw_url) return;
-  _openHlsPlayer(s.name, s.jw_url);
+  _openHlsPlayer(s.name, s.jw_url, true, true);
 }
 
 /* ── Malayalam unified play: prefers DM, falls back to video_url ── */
@@ -334,26 +385,45 @@ function playSerial(ns, idx) {
   var arr = window.SERIALS[ns]; if (!arr) return;
   var s = arr[idx];             if (!s) return;
   if (s.dm_id) { _openDailymotionEmbed(s.name, s.dm_id, s.dm_url); return; }
-  if (s.url)   { _openHlsPlayer(s.name, s.url); }
+  if (s.url)   { _openHlsPlayer(s.name, s.url, false, false); }
 }
 
-function _openHlsPlayer(name, url) {
+function _openHlsPlayer(name, url, useCredentials, forceHls) {
   currentUrl = url;
   document.getElementById('modalTitle').textContent = name;
   document.getElementById('modalUrlDisplay').textContent = url;
   var c = document.getElementById('modalVideoContainer');
   c.innerHTML = '<video id="modalVideo" controls autoplay playsinline></video>';
   var video = document.getElementById('modalVideo');
+
   if (hlsPlayer) { hlsPlayer.destroy(); hlsPlayer = null; }
-  if (url.indexOf('.m3u8') !== -1) {
+
+  var isHls = forceHls
+    || url.indexOf('.m3u8') !== -1
+    || url.indexOf('m3u8')  !== -1;
+
+  if (isHls) {
     if (typeof Hls !== 'undefined' && Hls.isSupported()) {
-      hlsPlayer = new Hls();
+      hlsPlayer = new Hls({
+        xhrSetup: function(xhr, xhrUrl) {
+          if (useCredentials) { xhr.withCredentials = true; }
+        }
+      });
       hlsPlayer.loadSource(url);
       hlsPlayer.attachMedia(video);
+      hlsPlayer.on(Hls.Events.ERROR, function(event, data) {
+        if (data.fatal) {
+          showToast('Stream error: ' + data.type);
+          console.error('HLS fatal error', data);
+        }
+      });
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
       video.src = url;
     }
-  } else { video.src = url; }
+  } else {
+    video.src = url;
+  }
+
   document.getElementById('modalHlsActions').style.display = '';
   document.getElementById('playerModal').classList.add('active');
 }
@@ -445,60 +515,26 @@ MODAL_HTML = """
 </div>
 """
 
-# ── Visit counter JS ───────────────────────────────────────────────────────────
-def counter_js_day(date_str: str, ns: str) -> str:
-    return f"""
-<script>
-(function() {{
-  var BASE = 'https://api.countapi.xyz';
-  var NS   = '{ns}';
-  var DAY  = '{date_str}';
-  function setEl(id, val) {{
-    var el = document.getElementById(id);
-    if (el) el.textContent = Number(val).toLocaleString();
-  }}
-  fetch(BASE + '/hit/' + NS + '/' + DAY)
-    .then(function(r){{ return r.json(); }})
-    .then(function(d){{ setEl('visits-day', d.value); }})
-    .catch(function(){{ setEl('visits-day', '—'); }});
-  fetch(BASE + '/hit/' + NS + '/total')
-    .then(function(r){{ return r.json(); }})
-    .then(function(d){{ setEl('visits-total', d.value); }})
-    .catch(function(){{ setEl('visits-total', '—'); }});
-}})();
-</script>"""
-
-def counter_js_index(ns: str) -> str:
-    return f"""
-<script>
-(function() {{
-  var BASE = 'https://api.countapi.xyz';
-  fetch(BASE + '/hit/{ns}/total')
-    .then(function(r){{ return r.json(); }})
-    .then(function(d){{
-      var el = document.getElementById('visits-total');
-      if (el) el.textContent = Number(d.value || 0).toLocaleString();
-    }})
-    .catch(function(){{
-      var el = document.getElementById('visits-total');
-      if (el) el.textContent = '—';
-    }});
-}})();
-</script>"""
-
+# ── Visit badge HTML ───────────────────────────────────────────────────────────
 def visit_badge_day() -> str:
+    """Badge showing today's visits + total visits (for day pages)."""
     return """<div class="visit-badge">
-    <span class="visit-pill">&#x1F4C5;&nbsp;Today&nbsp;<span class="vnum" id="visits-day">…</span></span>
-    <span class="visit-pill vtotal">&#x1F310;&nbsp;Total&nbsp;<span class="vnum" id="visits-total">…</span></span>
+    <span class="visit-pill">&#x1F4C5;&nbsp;Today&nbsp;<span class="vnum" id="visits-day">\u2026</span></span>
+    <span class="visit-pill vtotal">&#x1F310;&nbsp;Total&nbsp;<span class="vnum" id="visits-total">\u2026</span></span>
   </div>"""
 
 def visit_badge_index() -> str:
+    """Badge showing only total visits (for the index page)."""
     return """<div class="visit-badge">
-    <span class="visit-pill vtotal">&#x1F310;&nbsp;Total visits&nbsp;<span class="vnum" id="visits-total">…</span></span>
+    <span class="visit-pill vtotal">&#x1F310;&nbsp;Total visits&nbsp;<span class="vnum" id="visits-total">\u2026</span></span>
   </div>"""
 
 # ── Page builder ───────────────────────────────────────────────────────────────
-def build_page(title: str, body: str, serials_js: str, counter_snippet: str) -> str:
+def build_page(title: str, body: str, serials_js: str, page_id: str = "unknown") -> str:
+    """
+    Assembles a complete HTML page.
+    page_id is passed to counter_js() so each page tracks independently.
+    """
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -513,7 +549,7 @@ def build_page(title: str, body: str, serials_js: str, counter_snippet: str) -> 
 <script>window.SERIALS = {serials_js};</script>
 {JS}
 {TAB_JS}
-{counter_snippet}
+{counter_js(page_id)}
 </body></html>"""
 
 # ── Data helpers ───────────────────────────────────────────────────────────────
@@ -564,7 +600,7 @@ def build_js_data_malayalam(serials: list) -> list:
 def build_js_data_tamil(serials: list) -> list:
     """Tamil: dailymotion_url + jwplayer_url (both independent).
     jw_url is routed through the Cloudflare proxy so hls.js can fetch it
-    without CORS errors (coke.infamous.network blocks cross-origin requests).
+    without CORS errors.
     """
     from urllib.parse import quote as _quote
     out = []
@@ -576,7 +612,8 @@ def build_js_data_tamil(serials: list) -> list:
         if dm_id:  entry["dm_id"] = dm_id; entry["dm_url"] = dm_url
         if jw_url:
             if PROXY_BASE:
-                entry["jw_url"] = f"{PROXY_BASE}/proxy?url={_quote(jw_url, safe='')}"
+                connector = "&url=" if "?" in PROXY_BASE else "?url="
+                entry["jw_url"] = f"{PROXY_BASE.rstrip('/')}{connector}{_quote(jw_url, safe='')}"
             else:
                 entry["jw_url"] = jw_url
         out.append(entry)
@@ -585,10 +622,7 @@ def build_js_data_tamil(serials: list) -> list:
 # ── HTML row builders ─────────────────────────────────────────────────────────
 
 def build_serial_rows_malayalam(serials: list, namespace: str) -> str:
-    """
-    Malayalam cards: Play + Copy URL + VLC.
-    Single Play button (prefers DM, falls back to video_url).
-    """
+    """Malayalam cards: Play + Copy URL + VLC."""
     rows = ""
     for idx, s in enumerate(_sort_serials(serials)):
         name   = serial_name(s)
@@ -615,14 +649,8 @@ def build_serial_rows_malayalam(serials: list, namespace: str) -> str:
     return rows
 
 def build_serial_rows_tamil(serials: list, namespace: str) -> str:
-    """
-    Tamil cards: separate Play buttons for Dailymotion and JW Player.
+    """Tamil cards: separate Play buttons for Dailymotion and JW Player.
     No Copy URL button.
-
-    Button layout:
-      ▶ Dailymotion   (red)   — only shown when dm_id present
-      ▶ JW Player     (amber) — only shown when jwplayer_url present
-    If neither is present the card shows the error tag instead.
     """
     rows = ""
     for idx, s in enumerate(_sort_serials(serials)):
@@ -637,10 +665,10 @@ def build_serial_rows_tamil(serials: list, namespace: str) -> str:
         <div class="btn-row">"""
             if dm_id:
                 rows += f"""
-          <button class="btn btn-play" onclick="playDailymotion('{namespace}',{idx})">&#x25B6; Dailymotion</button>"""
+          <button class="btn btn-play" onclick="playDailymotion('{namespace}',{idx})">&#x25B6; Player1</button>"""
             if jw_url:
                 rows += f"""
-          <button class="btn btn-play-jw" onclick="playJw('{namespace}',{idx})">&#x25B6; JW Player</button>"""
+          <button class="btn btn-play-jw" onclick="playJw('{namespace}',{idx})">&#x25B6; Player2</button>"""
             rows += "\n        </div>\n      </div>"
         else:
             err = s.get("error") or "no link"
@@ -716,7 +744,6 @@ for d in all_dates_sorted:
     for ch_key, ch_label in TAMIL_CHANNELS.items():
         ch_data    = tamil_by_channel[ch_key].get(d)
         ch_serials = ch_data["serials"] if ch_data else []
-        # Count a serial as found if it has either DM or JW link
         found = sum(1 for s in ch_serials if serial_dm_id(s) or serial_jw_url(s))
         total = len(ch_serials)
         tamil_stats[ch_key] = (found, total)
@@ -782,7 +809,7 @@ for d in all_dates_sorted:
             f"Serials — {fmt_date(d)}",
             body,
             js_data,
-            counter_js_day(d, COUNTER_NS),
+            page_id=d,          # e.g. "2025-05-10" — each day tracked independently
         ))
     print(f"  ✓ {out_path}")
 
@@ -859,6 +886,9 @@ index_body = f"""
   </div>
 </div>"""
 
+# ── Index page HTML ────────────────────────────────────────────────────────────
+# Note: index page does not use build_page() because it has no SERIALS data
+# or player modal. Counter is injected manually before </body>.
 index_html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -870,7 +900,7 @@ index_html = f"""<!DOCTYPE html>
 <body>
 {index_body}
 {TAB_JS}
-{counter_js_index(COUNTER_NS)}
+{counter_js("index")}
 </body></html>"""
 
 with open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8") as f:
