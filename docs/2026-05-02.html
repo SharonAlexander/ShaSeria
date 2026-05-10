@@ -10,83 +10,71 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     background: #0f0f0f; color: #e8e8e8; min-height: 100vh;
   }
+
+  /* ── Header ── */
   header {
-    background: #1a1a2e; padding: 16px 24px;
-    display: flex; align-items: center; gap: 16px;
+    background: #1a1a2e; padding: 14px 20px;
+    display: flex; align-items: center; gap: 12px;
     border-bottom: 2px solid #e94560;
-    position: sticky; top: 0; z-index: 50;
+    position: sticky; top: 0; z-index: 50; min-height: 56px;
   }
-  header a.back { color: #e94560; text-decoration: none; font-size: 1.4rem; }
-  header h1 { font-size: 1.1rem; color: #e8e8e8; }
+  header a.back { color: #e94560; text-decoration: none; font-size: 1.3rem; flex-shrink: 0; }
+  header h1 { font-size: 1rem; color: #e8e8e8; flex: 1; }
+
+  /* visit counter badge */
+  .visit-badge { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
+  .visit-pill {
+    background: #12122a; border: 1px solid #2a2a4a;
+    border-radius: 20px; padding: 4px 10px;
+    font-size: 0.72rem; color: #aaa; white-space: nowrap;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .visit-pill .vnum { color: #e94560; font-weight: 700; font-size: 0.82rem; }
+  .visit-pill.vtotal .vnum { color: #f0a500; }
+
   .container { max-width: 960px; margin: 0 auto; padding: 24px 16px; }
   .summary { color: #777; font-size: 0.85rem; margin-bottom: 12px; }
 
-  /* ── Tab bar ── */
+  /* ── Main tab bar ── */
   .tab-bar {
-    background: #12122a;
-    border-bottom: 1px solid #2a2a4a;
+    background: #12122a; border-bottom: 1px solid #2a2a4a;
     padding: 0 16px;
-    display: flex;
-    align-items: stretch;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    gap: 0;
-    position: sticky;
-    top: 60px;   /* below header */
-    z-index: 40;
+    display: flex; align-items: stretch; flex-wrap: nowrap;
+    overflow-x: auto; gap: 0;
+    position: sticky; top: 56px; z-index: 40; min-height: 48px;
   }
   .tab-bar::-webkit-scrollbar { height: 3px; }
   .tab-bar::-webkit-scrollbar-thumb { background: #e94560; border-radius: 2px; }
 
-  /* Primary language tabs */
-  .lang-tab {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    flex-shrink: 0;
-  }
-
   .lang-tab-btn {
-    background: none;
-    border: none;
-    color: #888;
-    font-size: 0.88rem;
-    font-weight: 600;
-    padding: 12px 18px;
-    cursor: pointer;
-    white-space: nowrap;
+    background: none; border: none; color: #888;
+    font-size: 0.88rem; font-weight: 600;
+    padding: 0 20px; cursor: pointer; white-space: nowrap;
     border-bottom: 3px solid transparent;
     transition: color .2s, border-color .2s;
-    letter-spacing: .3px;
+    letter-spacing: .3px; flex-shrink: 0;
   }
   .lang-tab-btn:hover { color: #ccc; }
   .lang-tab-btn.active { color: #e94560; border-bottom-color: #e94560; }
 
-  /* Divider between lang label and subtabs */
-  .tab-divider {
-    width: 1px;
-    background: #2a2a4a;
-    margin: 8px 0;
-    flex-shrink: 0;
+  /* ── Subtab row ── */
+  .subtab-row {
+    background: #0d0d20; border-bottom: 1px solid #1e1e3a;
+    padding: 0 16px;
+    display: none;
+    align-items: stretch; flex-wrap: nowrap; overflow-x: auto;
+    position: sticky; top: 104px; z-index: 39; min-height: 40px;
   }
+  .subtab-row.visible { display: flex; }
+  .subtab-row::-webkit-scrollbar { height: 3px; }
+  .subtab-row::-webkit-scrollbar-thumb { background: #f0a500; border-radius: 2px; }
 
-  /* Tamil subtabs — always visible inline */
-  .subtab-group {
-    display: flex;
-    align-items: stretch;
-    flex-shrink: 0;
-  }
   .subtab-btn {
-    background: none;
-    border: none;
-    color: #666;
-    font-size: 0.80rem;
-    font-weight: 500;
-    padding: 12px 13px;
-    cursor: pointer;
-    white-space: nowrap;
+    background: none; border: none; color: #666;
+    font-size: 0.80rem; font-weight: 500;
+    padding: 0 16px; cursor: pointer; white-space: nowrap;
     border-bottom: 3px solid transparent;
-    transition: color .2s, border-color .2s;
+    transition: color .2s, border-color .2s; flex-shrink: 0;
   }
   .subtab-btn:hover { color: #aaa; }
   .subtab-btn.active { color: #f0a500; border-bottom-color: #f0a500; }
@@ -95,7 +83,15 @@
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
 
-  /* Index grid */
+  .channel-block { margin-bottom: 36px; }
+  .channel-heading {
+    font-size: 0.75rem; font-weight: 700;
+    letter-spacing: 1.2px; text-transform: uppercase;
+    color: #f0a500; padding: 10px 0 8px;
+    border-bottom: 1px solid #2a2a4a; margin-bottom: 10px;
+  }
+
+  /* ── Index date grid ── */
   .date-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
@@ -112,7 +108,7 @@
   .date-card .date-label { font-size: 1rem; font-weight: 600; }
   .date-card .date-meta  { font-size: 0.78rem; color: #888; margin-top: 4px; }
 
-  /* Serial list */
+  /* ── Serial list ── */
   .serial-list { display: flex; flex-direction: column; gap: 8px; }
   .serial-card {
     background: #1a1a2e; border: 1px solid #2a2a4a;
@@ -127,8 +123,11 @@
     cursor: pointer; font-size: 0.82rem; font-weight: 600;
     white-space: nowrap; display: inline-block; text-decoration: none;
   }
-  .btn-play { background: #e94560; color: #fff; }
+  .btn-play    { background: #e94560; color: #fff; }
   .btn-play:hover { background: #c73652; }
+  /* JW Player button — distinct amber colour so it's clearly different from DM */
+  .btn-play-jw { background: #b86e00; color: #fff; }
+  .btn-play-jw:hover { background: #8f5500; }
   .btn-copy { background: #2a2a4a; color: #ccc; }
   .btn-copy:hover { background: #3a3a6a; color: #fff; }
   .btn-vlc  { background: #ff6600; color: #fff; }
@@ -136,16 +135,9 @@
   .no-link-tag { color: #555; font-size: 0.8rem; }
 
   /* Dailymotion embed */
-  .dm-embed {
-    width: 100%; aspect-ratio: 16/9;
-    border: none; border-radius: 8px;
-    background: #000;
-  }
-  .embed-wrapper {
-    width: 100%; margin-top: 12px;
-  }
+  .dm-embed { width: 100%; aspect-ratio: 16/9; border: none; border-radius: 8px; background: #000; }
 
-  /* Toast */
+  /* ── Toast ── */
   #toast {
     position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
     background: #222; color: #fff; padding: 10px 22px;
@@ -155,7 +147,7 @@
   }
   #toast.show { opacity: 1; }
 
-  /* Modal */
+  /* ── Modal ── */
   .modal-overlay {
     display: none; position: fixed; inset: 0;
     background: rgba(0,0,0,.88); z-index: 1000;
@@ -164,33 +156,27 @@
   .modal-overlay.active { display: flex; }
   .modal {
     background: #1a1a2e; border-radius: 12px;
-    width: 92%; max-width: 880px; padding: 20px;
-    position: relative;
+    width: 92%; max-width: 880px; padding: 20px; position: relative;
   }
-  .modal-title {
-    font-size: 1rem; font-weight: 600;
-    color: #e94560; padding-right: 36px; margin-bottom: 12px;
-  }
-  .modal video {
-    width: 100%; border-radius: 8px;
-    background: #000; max-height: 68vh;
-  }
+  .modal-title { font-size: 1rem; font-weight: 600; color: #e94560; padding-right: 36px; margin-bottom: 12px; }
+  .modal video { width: 100%; border-radius: 8px; background: #000; max-height: 68vh; }
   .modal-close {
     position: absolute; top: 12px; right: 16px;
-    background: none; border: none;
-    color: #aaa; font-size: 1.5rem; cursor: pointer;
+    background: none; border: none; color: #aaa; font-size: 1.5rem; cursor: pointer;
   }
   .modal-close:hover { color: #fff; }
   .modal-actions { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
-  .modal-url {
-    margin-top: 8px; font-size: 0.72rem; color: #444;
-    word-break: break-all;
-  }
+  .modal-url { margin-top: 8px; font-size: 0.72rem; color: #444; word-break: break-all; }
 
-  /* Mobile tweaks */
+  /* ── Mobile tweaks ── */
   @media (max-width: 500px) {
-    .lang-tab-btn { padding: 12px 12px; font-size: 0.83rem; }
-    .subtab-btn   { padding: 12px 9px;  font-size: 0.75rem; }
+    header { padding: 10px 14px; min-height: 50px; }
+    .tab-bar { top: 50px; min-height: 44px; }
+    .subtab-row { top: 94px; }
+    .lang-tab-btn { padding: 0 14px; font-size: 0.82rem; }
+    .subtab-btn   { padding: 0 11px; font-size: 0.75rem; }
+    .visit-pill   { font-size: 0.68rem; padding: 3px 8px; }
+    .visit-pill .vnum { font-size: 0.76rem; }
   }
 </style>
 </head>
@@ -199,37 +185,29 @@
 <header>
   <a class="back" href="index.html">&#x2B05;</a>
   <h1>&#x1F4FA; Serials &mdash; 02 May 2026</h1>
+  <div class="visit-badge">
+    <span class="visit-pill">&#x1F4C5;&nbsp;Today&nbsp;<span class="vnum" id="visits-day">…</span></span>
+    <span class="visit-pill vtotal">&#x1F310;&nbsp;Total&nbsp;<span class="vnum" id="visits-total">…</span></span>
+  </div>
 </header>
 
 <div class="tab-bar">
-  <!-- Malayalam primary tab -->
-  <div class="lang-tab">
-    <button class="lang-tab-btn" data-lang="malayalam"
-            onclick="switchLang('malayalam')">&#x1F3AC; Malayalam</button>
-  </div>
-
-  <div class="tab-divider"></div>
-
-  <!-- Tamil primary tab label -->
-  <div class="lang-tab">
-    <button class="lang-tab-btn" data-lang="tamil"
-            onclick="switchLang('tamil')">&#x1F3AC; Tamil</button>
-  </div>
-
-  <!-- Tamil subtabs — always visible -->
-  <div class="tab-divider"></div>
-  <div class="subtab-group">
-    <button class="subtab-btn" data-channel="suntv"
-            onclick="switchSubtab('suntv')">Sun TV</button>
-    <button class="subtab-btn" data-channel="vijaytv"
-            onclick="switchSubtab('vijaytv')">Vijay TV</button>
-    <button class="subtab-btn" data-channel="zeetamil"
-            onclick="switchSubtab('zeetamil')">Zee Tamil</button>
-  </div>
+  <button class="lang-tab-btn" data-lang="malayalam"
+          onclick="switchLang('malayalam')">&#x1F3AC; Malayalam</button>
+  <button class="lang-tab-btn" data-lang="tamil"
+          onclick="switchLang('tamil')">&#x1F3AC; Tamil</button>
+</div>
+<div class="subtab-row" id="subtabRow">
+  <button class="subtab-btn" data-channel="suntv"
+          onclick="switchSubtab('suntv')">Sun TV</button>
+  <button class="subtab-btn" data-channel="vijaytv"
+          onclick="switchSubtab('vijaytv')">Vijay TV</button>
+  <button class="subtab-btn" data-channel="zeetamil"
+          onclick="switchSubtab('zeetamil')">Zee Tamil</button>
 </div>
 
 
-<div class="tab-panel" data-lang="malayalam" id="panel-malayalam">
+<div class="tab-panel" id="panel-malayalam">
   <div class="container">
     <p class="summary">30 of 33 links found</p>
     <div class="serial-list">
@@ -238,7 +216,7 @@
         <div class="btn-row">
           <button class="btn btn-play" onclick="playSerial('malayalam',0)">&#x25B6; Play</button>
           <button class="btn btn-copy" onclick="copyUrl('malayalam',0)">&#x1F4CB; Copy</button>
-          <button class="btn btn-vlc"  onclick="openVlc('malayalam',0)">&#x1F4FA; VLC</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',0)">&#x1F4FA; VLC</button>
         </div>
       </div>
       <div class="serial-card">
@@ -246,7 +224,7 @@
         <div class="btn-row">
           <button class="btn btn-play" onclick="playSerial('malayalam',1)">&#x25B6; Play</button>
           <button class="btn btn-copy" onclick="copyUrl('malayalam',1)">&#x1F4CB; Copy</button>
-          <button class="btn btn-vlc"  onclick="openVlc('malayalam',1)">&#x1F4FA; VLC</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',1)">&#x1F4FA; VLC</button>
         </div>
       </div>
       <div class="serial-card">
@@ -254,7 +232,7 @@
         <div class="btn-row">
           <button class="btn btn-play" onclick="playSerial('malayalam',2)">&#x25B6; Play</button>
           <button class="btn btn-copy" onclick="copyUrl('malayalam',2)">&#x1F4CB; Copy</button>
-          <button class="btn btn-vlc"  onclick="openVlc('malayalam',2)">&#x1F4FA; VLC</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',2)">&#x1F4FA; VLC</button>
         </div>
       </div>
       <div class="serial-card">
@@ -262,7 +240,215 @@
         <div class="btn-row">
           <button class="btn btn-play" onclick="playSerial('malayalam',3)">&#x25B6; Play</button>
           <button class="btn btn-copy" onclick="copyUrl('malayalam',3)">&#x1F4CB; Copy</button>
-          <button class="btn btn-vlc"  onclick="openVlc('malayalam',3)">&#x1F4FA; VLC</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',3)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>അമ്മേ മൂകാംബികേതീയതി:01 മെയ്‌ചാനൽ:സൂര്യ ടി.വി</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',4)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',4)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',4)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>അർച്ചന ചേച്ചി LLBതീയതി:01 മെയ്‌ചാനൽ:മഴവിൽ മനോരമ</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',5)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',5)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',5)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>ഇഷ്ടം മാത്രംതീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',6)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',6)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',6)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>ഈ പുഴയും കടന്ന്തീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',7)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',7)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',7)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>ഒത്തിരി ഒത്തിരി സ്വപ്‌നങ്ങൾതീയതി:01 മെയ്‌ചാനൽ:മഴവിൽ മനോരമ</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',8)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',8)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',8)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>ഒറ്റശിഖരംതീയതി:01 മെയ്‌ചാനൽ:മഴവിൽ മനോരമ</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',9)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',9)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',9)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>കന്യാദാനംതീയതി:01 മെയ്‌ചാനൽ:സൂര്യ ടി.വി</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',10)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',10)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',10)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>കാറ്റത്തെ കിളിക്കൂട്തീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',11)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',11)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',11)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>കുടുംബശ്രീ ശാരദതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',12)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',12)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',12)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>കൃഷ്ണഗാഥതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',13)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',13)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',13)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>ചട്ടമ്പിപാറുതീയതി:01 മെയ്‌ചാനൽ:സൂര്യ ടി.വി</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',14)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',14)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',14)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>ചെമ്പനീർ പൂവ്തീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',15)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',15)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',15)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>ചെമ്പരത്തിതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',16)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',16)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',16)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>ദുർഗതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',17)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',17)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',17)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>പത്തരമാറ്റുതീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',18)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',18)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',18)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>പെയ്തൊഴിയാതെതീയതി:01 മെയ്‌ചാനൽ:സൂര്യ ടി.വി</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',19)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',19)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',19)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>മംഗല്യം തന്തുനാനേന്നതീയതി:01 മെയ്‌ചാനൽ:സൂര്യ ടി.വി</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',20)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',20)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',20)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>മംഗല്യംതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',21)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',21)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',21)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>മഴ തോരും മുൻപേതീയതി:02 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',22)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',22)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',22)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>മൗനരാഗംതീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',23)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',23)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',23)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>വല്യേട്ടൻതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',24)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',24)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',24)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>സാന്ത്വനം 2തീയതി:02 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',25)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',25)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',25)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>സ്നേഹക്കൂട്ട്തീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്.</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',26)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',26)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',26)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>സ്നേഹപൂർവ്വം ശ്യാമതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',27)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',27)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',27)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>സ്വയംവരപന്തൽതീയതി:01 മെയ്‌ചാനൽ:സൂര്യ ടി.വി</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',28)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',28)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',28)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>ഹൃദയംതീയതി:01 മെയ്‌ചാനൽ:സൂര്യ ടി.വി</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',29)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',29)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',29)">&#x1F4FA; VLC</button>
         </div>
       </div>
       <div class="serial-card">
@@ -270,240 +456,52 @@
         <span class="no-link-tag">&#x274C; ; video URL not found</span>
       </div>
       <div class="serial-card">
-        <span class="serial-name">>>അമ്മേ മൂകാംബികേതീയതി:01 മെയ്‌ചാനൽ:സൂര്യ ടി.വി</span>
-        <div class="btn-row">
-          <button class="btn btn-play" onclick="playSerial('malayalam',5)">&#x25B6; Play</button>
-          <button class="btn btn-copy" onclick="copyUrl('malayalam',5)">&#x1F4CB; Copy</button>
-          <button class="btn btn-vlc"  onclick="openVlc('malayalam',5)">&#x1F4FA; VLC</button>
-        </div>
-      </div>
-      <div class="serial-card">
-        <span class="serial-name">>>അർച്ചന ചേച്ചി LLBതീയതി:01 മെയ്‌ചാനൽ:മഴവിൽ മനോരമ</span>
-        <div class="btn-row">
-          <button class="btn btn-play" onclick="playSerial('malayalam',6)">&#x25B6; Play</button>
-          <button class="btn btn-copy" onclick="copyUrl('malayalam',6)">&#x1F4CB; Copy</button>
-          <button class="btn btn-vlc"  onclick="openVlc('malayalam',6)">&#x1F4FA; VLC</button>
-        </div>
-      </div>
-      <div class="serial-card">
-        <span class="serial-name">>>ഇഷ്ടം മാത്രംതീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്</span>
-        <div class="btn-row">
-          <button class="btn btn-play" onclick="playSerial('malayalam',7)">&#x25B6; Play</button>
-          <button class="btn btn-copy" onclick="copyUrl('malayalam',7)">&#x1F4CB; Copy</button>
-          <button class="btn btn-vlc"  onclick="openVlc('malayalam',7)">&#x1F4FA; VLC</button>
-        </div>
-      </div>
-      <div class="serial-card">
-        <span class="serial-name">>>ഈ പുഴയും കടന്ന്തീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്</span>
-        <div class="btn-row">
-          <button class="btn btn-play" onclick="playSerial('malayalam',8)">&#x25B6; Play</button>
-          <button class="btn btn-copy" onclick="copyUrl('malayalam',8)">&#x1F4CB; Copy</button>
-          <button class="btn btn-vlc"  onclick="openVlc('malayalam',8)">&#x1F4FA; VLC</button>
-        </div>
-      </div>
-      <div class="serial-card">
-        <span class="serial-name">>>ഒത്തിരി ഒത്തിരി സ്വപ്‌നങ്ങൾതീയതി:01 മെയ്‌ചാനൽ:മഴവിൽ മനോരമ</span>
-        <div class="btn-row">
-          <button class="btn btn-play" onclick="playSerial('malayalam',9)">&#x25B6; Play</button>
-          <button class="btn btn-copy" onclick="copyUrl('malayalam',9)">&#x1F4CB; Copy</button>
-          <button class="btn btn-vlc"  onclick="openVlc('malayalam',9)">&#x1F4FA; VLC</button>
-        </div>
-      </div>
-      <div class="serial-card">
-        <span class="serial-name">>>ഒറ്റശിഖരംതീയതി:01 മെയ്‌ചാനൽ:മഴവിൽ മനോരമ</span>
-        <div class="btn-row">
-          <button class="btn btn-play" onclick="playSerial('malayalam',10)">&#x25B6; Play</button>
-          <button class="btn btn-copy" onclick="copyUrl('malayalam',10)">&#x1F4CB; Copy</button>
-          <button class="btn btn-vlc"  onclick="openVlc('malayalam',10)">&#x1F4FA; VLC</button>
-        </div>
-      </div>
-      <div class="serial-card">
-        <span class="serial-name">>>കന്യാദാനംതീയതി:01 മെയ്‌ചാനൽ:സൂര്യ ടി.വി</span>
-        <div class="btn-row">
-          <button class="btn btn-play" onclick="playSerial('malayalam',11)">&#x25B6; Play</button>
-          <button class="btn btn-copy" onclick="copyUrl('malayalam',11)">&#x1F4CB; Copy</button>
-          <button class="btn btn-vlc"  onclick="openVlc('malayalam',11)">&#x1F4FA; VLC</button>
-        </div>
-      </div>
-      <div class="serial-card">
-        <span class="serial-name">>>കാറ്റത്തെ കിളിക്കൂട്തീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്</span>
-        <div class="btn-row">
-          <button class="btn btn-play" onclick="playSerial('malayalam',12)">&#x25B6; Play</button>
-          <button class="btn btn-copy" onclick="copyUrl('malayalam',12)">&#x1F4CB; Copy</button>
-          <button class="btn btn-vlc"  onclick="openVlc('malayalam',12)">&#x1F4FA; VLC</button>
-        </div>
-      </div>
-      <div class="serial-card">
-        <span class="serial-name">>>കുടുംബശ്രീ ശാരദതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം</span>
-        <div class="btn-row">
-          <button class="btn btn-play" onclick="playSerial('malayalam',13)">&#x25B6; Play</button>
-          <button class="btn btn-copy" onclick="copyUrl('malayalam',13)">&#x1F4CB; Copy</button>
-          <button class="btn btn-vlc"  onclick="openVlc('malayalam',13)">&#x1F4FA; VLC</button>
-        </div>
-      </div>
-      <div class="serial-card">
-        <span class="serial-name">>>കൃഷ്ണഗാഥതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം</span>
-        <div class="btn-row">
-          <button class="btn btn-play" onclick="playSerial('malayalam',14)">&#x25B6; Play</button>
-          <button class="btn btn-copy" onclick="copyUrl('malayalam',14)">&#x1F4CB; Copy</button>
-          <button class="btn btn-vlc"  onclick="openVlc('malayalam',14)">&#x1F4FA; VLC</button>
-        </div>
-      </div>
-      <div class="serial-card">
-        <span class="serial-name">>>ചട്ടമ്പിപാറുതീയതി:01 മെയ്‌ചാനൽ:സൂര്യ ടി.വി</span>
-        <div class="btn-row">
-          <button class="btn btn-play" onclick="playSerial('malayalam',15)">&#x25B6; Play</button>
-          <button class="btn btn-copy" onclick="copyUrl('malayalam',15)">&#x1F4CB; Copy</button>
-          <button class="btn btn-vlc"  onclick="openVlc('malayalam',15)">&#x1F4FA; VLC</button>
-        </div>
-      </div>
-      <div class="serial-card">
-        <span class="serial-name">>>ചെമ്പനീർ പൂവ്തീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്</span>
-        <div class="btn-row">
-          <button class="btn btn-play" onclick="playSerial('malayalam',16)">&#x25B6; Play</button>
-          <button class="btn btn-copy" onclick="copyUrl('malayalam',16)">&#x1F4CB; Copy</button>
-          <button class="btn btn-vlc"  onclick="openVlc('malayalam',16)">&#x1F4FA; VLC</button>
-        </div>
-      </div>
-      <div class="serial-card">
-        <span class="serial-name">>>ചെമ്പരത്തിതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം</span>
-        <div class="btn-row">
-          <button class="btn btn-play" onclick="playSerial('malayalam',17)">&#x25B6; Play</button>
-          <button class="btn btn-copy" onclick="copyUrl('malayalam',17)">&#x1F4CB; Copy</button>
-          <button class="btn btn-vlc"  onclick="openVlc('malayalam',17)">&#x1F4FA; VLC</button>
-        </div>
-      </div>
-      <div class="serial-card">
-        <span class="serial-name">>>ദുർഗതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം</span>
-        <div class="btn-row">
-          <button class="btn btn-play" onclick="playSerial('malayalam',18)">&#x25B6; Play</button>
-          <button class="btn btn-copy" onclick="copyUrl('malayalam',18)">&#x1F4CB; Copy</button>
-          <button class="btn btn-vlc"  onclick="openVlc('malayalam',18)">&#x1F4FA; VLC</button>
-        </div>
-      </div>
-      <div class="serial-card">
-        <span class="serial-name">>>പത്തരമാറ്റുതീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്</span>
-        <div class="btn-row">
-          <button class="btn btn-play" onclick="playSerial('malayalam',19)">&#x25B6; Play</button>
-          <button class="btn btn-copy" onclick="copyUrl('malayalam',19)">&#x1F4CB; Copy</button>
-          <button class="btn btn-vlc"  onclick="openVlc('malayalam',19)">&#x1F4FA; VLC</button>
-        </div>
-      </div>
-      <div class="serial-card">
-        <span class="serial-name">>>പെയ്തൊഴിയാതെതീയതി:01 മെയ്‌ചാനൽ:സൂര്യ ടി.വി</span>
-        <div class="btn-row">
-          <button class="btn btn-play" onclick="playSerial('malayalam',20)">&#x25B6; Play</button>
-          <button class="btn btn-copy" onclick="copyUrl('malayalam',20)">&#x1F4CB; Copy</button>
-          <button class="btn btn-vlc"  onclick="openVlc('malayalam',20)">&#x1F4FA; VLC</button>
-        </div>
-      </div>
-      <div class="serial-card">
-        <span class="serial-name">>>മംഗല്യം തന്തുനാനേന്നതീയതി:01 മെയ്‌ചാനൽ:സൂര്യ ടി.വി</span>
-        <div class="btn-row">
-          <button class="btn btn-play" onclick="playSerial('malayalam',21)">&#x25B6; Play</button>
-          <button class="btn btn-copy" onclick="copyUrl('malayalam',21)">&#x1F4CB; Copy</button>
-          <button class="btn btn-vlc"  onclick="openVlc('malayalam',21)">&#x1F4FA; VLC</button>
-        </div>
-      </div>
-      <div class="serial-card">
-        <span class="serial-name">>>മംഗല്യംതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം</span>
-        <div class="btn-row">
-          <button class="btn btn-play" onclick="playSerial('malayalam',22)">&#x25B6; Play</button>
-          <button class="btn btn-copy" onclick="copyUrl('malayalam',22)">&#x1F4CB; Copy</button>
-          <button class="btn btn-vlc"  onclick="openVlc('malayalam',22)">&#x1F4FA; VLC</button>
-        </div>
-      </div>
-      <div class="serial-card">
-        <span class="serial-name">>>മഴ തോരും മുൻപേതീയതി:02 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്</span>
-        <div class="btn-row">
-          <button class="btn btn-play" onclick="playSerial('malayalam',23)">&#x25B6; Play</button>
-          <button class="btn btn-copy" onclick="copyUrl('malayalam',23)">&#x1F4CB; Copy</button>
-          <button class="btn btn-vlc"  onclick="openVlc('malayalam',23)">&#x1F4FA; VLC</button>
-        </div>
-      </div>
-      <div class="serial-card">
         <span class="serial-name no-link">>>മാനത്തെ കൊട്ടാരംതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം</span>
         <span class="no-link-tag">&#x274C; ; video URL not found</span>
-      </div>
-      <div class="serial-card">
-        <span class="serial-name">>>മൗനരാഗംതീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്</span>
-        <div class="btn-row">
-          <button class="btn btn-play" onclick="playSerial('malayalam',25)">&#x25B6; Play</button>
-          <button class="btn btn-copy" onclick="copyUrl('malayalam',25)">&#x1F4CB; Copy</button>
-          <button class="btn btn-vlc"  onclick="openVlc('malayalam',25)">&#x1F4FA; VLC</button>
-        </div>
-      </div>
-      <div class="serial-card">
-        <span class="serial-name">>>വല്യേട്ടൻതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം</span>
-        <div class="btn-row">
-          <button class="btn btn-play" onclick="playSerial('malayalam',26)">&#x25B6; Play</button>
-          <button class="btn btn-copy" onclick="copyUrl('malayalam',26)">&#x1F4CB; Copy</button>
-          <button class="btn btn-vlc"  onclick="openVlc('malayalam',26)">&#x1F4FA; VLC</button>
-        </div>
-      </div>
-      <div class="serial-card">
-        <span class="serial-name">>>സാന്ത്വനം 2തീയതി:02 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്</span>
-        <div class="btn-row">
-          <button class="btn btn-play" onclick="playSerial('malayalam',27)">&#x25B6; Play</button>
-          <button class="btn btn-copy" onclick="copyUrl('malayalam',27)">&#x1F4CB; Copy</button>
-          <button class="btn btn-vlc"  onclick="openVlc('malayalam',27)">&#x1F4FA; VLC</button>
-        </div>
       </div>
       <div class="serial-card">
         <span class="serial-name no-link">>>സിന്ദൂരപൊട്ടുതീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്.</span>
         <span class="no-link-tag">&#x274C; ; video URL not found</span>
       </div>
-      <div class="serial-card">
-        <span class="serial-name">>>സ്നേഹക്കൂട്ട്തീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്.</span>
-        <div class="btn-row">
-          <button class="btn btn-play" onclick="playSerial('malayalam',29)">&#x25B6; Play</button>
-          <button class="btn btn-copy" onclick="copyUrl('malayalam',29)">&#x1F4CB; Copy</button>
-          <button class="btn btn-vlc"  onclick="openVlc('malayalam',29)">&#x1F4FA; VLC</button>
-        </div>
+    </div>
+  </div>
+</div>
+
+<div class="tab-panel" id="panel-tamil-all">
+  <div class="container">
+    <div class="channel-block">
+      <div class="channel-heading">&#x1F4FA; Sun TV &mdash; 0 of 0 links</div>
+      <div class="serial-list"><p style="color:#555;padding:20px 0">No data for this channel.</p>
       </div>
-      <div class="serial-card">
-        <span class="serial-name">>>സ്നേഹപൂർവ്വം ശ്യാമതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം</span>
-        <div class="btn-row">
-          <button class="btn btn-play" onclick="playSerial('malayalam',30)">&#x25B6; Play</button>
-          <button class="btn btn-copy" onclick="copyUrl('malayalam',30)">&#x1F4CB; Copy</button>
-          <button class="btn btn-vlc"  onclick="openVlc('malayalam',30)">&#x1F4FA; VLC</button>
-        </div>
+    </div>
+    <div class="channel-block">
+      <div class="channel-heading">&#x1F4FA; Vijay TV &mdash; 0 of 0 links</div>
+      <div class="serial-list"><p style="color:#555;padding:20px 0">No data for this channel.</p>
       </div>
-      <div class="serial-card">
-        <span class="serial-name">>>സ്വയംവരപന്തൽതീയതി:01 മെയ്‌ചാനൽ:സൂര്യ ടി.വി</span>
-        <div class="btn-row">
-          <button class="btn btn-play" onclick="playSerial('malayalam',31)">&#x25B6; Play</button>
-          <button class="btn btn-copy" onclick="copyUrl('malayalam',31)">&#x1F4CB; Copy</button>
-          <button class="btn btn-vlc"  onclick="openVlc('malayalam',31)">&#x1F4FA; VLC</button>
-        </div>
-      </div>
-      <div class="serial-card">
-        <span class="serial-name">>>ഹൃദയംതീയതി:01 മെയ്‌ചാനൽ:സൂര്യ ടി.വി</span>
-        <div class="btn-row">
-          <button class="btn btn-play" onclick="playSerial('malayalam',32)">&#x25B6; Play</button>
-          <button class="btn btn-copy" onclick="copyUrl('malayalam',32)">&#x1F4CB; Copy</button>
-          <button class="btn btn-vlc"  onclick="openVlc('malayalam',32)">&#x1F4FA; VLC</button>
-        </div>
+    </div>
+    <div class="channel-block">
+      <div class="channel-heading">&#x1F4FA; Zee Tamil &mdash; 0 of 0 links</div>
+      <div class="serial-list"><p style="color:#555;padding:20px 0">No data for this channel.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="tab-panel" data-channel="suntv" id="panel-suntv">
+<div class="tab-panel" id="panel-ch-suntv">
   <div class="container">
     <p class="summary">Sun TV &mdash; 0 of 0 links found</p>
     <div class="serial-list"><p style="color:#555;padding:20px 0">No data for this channel.</p>
     </div>
   </div>
 </div>
-<div class="tab-panel" data-channel="vijaytv" id="panel-vijaytv">
+<div class="tab-panel" id="panel-ch-vijaytv">
   <div class="container">
     <p class="summary">Vijay TV &mdash; 0 of 0 links found</p>
     <div class="serial-list"><p style="color:#555;padding:20px 0">No data for this channel.</p>
     </div>
   </div>
 </div>
-<div class="tab-panel" data-channel="zeetamil" id="panel-zeetamil">
+<div class="tab-panel" id="panel-ch-zeetamil">
   <div class="container">
     <p class="summary">Zee Tamil &mdash; 0 of 0 links found</p>
     <div class="serial-list"><p style="color:#555;padding:20px 0">No data for this channel.</p>
@@ -521,13 +519,13 @@
     </div>
     <div class="modal-actions" id="modalHlsActions">
       <button class="btn btn-copy" onclick="doCopy(currentUrl)">&#x1F4CB; Copy URL</button>
-      <button class="btn btn-vlc" onclick="openVlc('', -1)">&#x1F4FA; Open in VLC</button>
+      <button class="btn btn-vlc"  onclick="openVlc('', -1)">&#x1F4FA; Open in VLC</button>
     </div>
     <div class="modal-url" id="modalUrlDisplay"></div>
   </div>
 </div>
 
-<script>window.SERIALS = {"malayalam": [{"name": ">>Super കൺമണിതീയതി:01 മെയ്‌ചാനൽ:മഴവിൽ മനോരമ", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/db/s8/2/S/X/1/j/SX1jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=106851840-106864242"}, {"name": ">>അകലെതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/ca/s8/2/o/W/5/j/oW5jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=111425536-111438539"}, {"name": ">>അഞ്ചു സുന്ദരികൾതീയതി:01 മെയ്‌ചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fww1/30/s8/2/C/P/1/j/CP1jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=111399424-111412411"}, {"name": ">>അഡ്വ: അഞ്ജലിതീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/a8/s8/2/K/_/X/j/K_XjA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=107147264-107159770"}, {"name": ">>അമ്മമനസ്സ്തീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്."}, {"name": ">>അമ്മേ മൂകാംബികേതീയതി:01 മെയ്‌ചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fww1/54/s8/2/E/X/7/j/EX7jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=107820032-107832630"}, {"name": ">>അർച്ചന ചേച്ചി LLBതീയതി:01 മെയ്‌ചാനൽ:മഴവിൽ മനോരമ", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/73/s8/2/Q/0/1/j/Q01jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=109627392-109640092"}, {"name": ">>ഇഷ്ടം മാത്രംതീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/c5/s8/2/Y/8/X/j/Y8XjA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=108254208-108266900"}, {"name": ">>ഈ പുഴയും കടന്ന്തീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/d7/s8/2/y/V/X/j/yVXjA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=108867584-108880280"}, {"name": ">>ഒത്തിരി ഒത്തിരി സ്വപ്‌നങ്ങൾതീയതി:01 മെയ്‌ചാനൽ:മഴവിൽ മനോരമ", "url": "https://hugh.cdn.rumble.cloud/video/fww1/03/s8/2/m/Z/1/j/mZ1jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=118523392-118537104"}, {"name": ">>ഒറ്റശിഖരംതീയതി:01 മെയ്‌ചാനൽ:മഴവിൽ മനോരമ", "url": "https://hugh.cdn.rumble.cloud/video/fww1/3d/s8/2/A/W/1/j/AW1jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=108996608-109009318"}, {"name": ">>കന്യാദാനംതീയതി:01 മെയ്‌ചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/dc/s8/2/a/P/1/j/aP1jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=112791552-112804749"}, {"name": ">>കാറ്റത്തെ കിളിക്കൂട്തീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/09/s8/2/s/Y/X/j/sYXjA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=109286400-109299197"}, {"name": ">>കുടുംബശ്രീ ശാരദതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/22/s8/2/s/X/5/j/sX5jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=110628352-110641258"}, {"name": ">>കൃഷ്ണഗാഥതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം", "url": "https://hugh.cdn.rumble.cloud/video/fww1/4b/s8/2/E/M/8/j/EM8jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=111958016-111971115"}, {"name": ">>ചട്ടമ്പിപാറുതീയതി:01 മെയ്‌ചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fww1/f8/s8/2/o/j/6/j/oj6jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=110920704-110933709"}, {"name": ">>ചെമ്പനീർ പൂവ്തീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/e2/s8/2/O/N/X/j/ONXjA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=100956672-100968365"}, {"name": ">>ചെമ്പരത്തിതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/bb/s8/2/O/I/6/j/OI6jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=125856768-125871483"}, {"name": ">>ദുർഗതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/ad/s8/2/O/l/7/j/Ol7jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=113928704-113941997"}, {"name": ">>പത്തരമാറ്റുതീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/ab/s8/2/O/L/X/j/OLXjA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=102877184-102889178"}, {"name": ">>പെയ്തൊഴിയാതെതീയതി:01 മെയ്‌ചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/9e/s8/2/o/1/5/j/o15jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=111692288-111705292"}, {"name": ">>മംഗല്യം തന്തുനാനേന്നതീയതി:01 മെയ്‌ചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/11/s8/2/8/P/1/j/8P1jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=111577088-111590090"}, {"name": ">>മംഗല്യംതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/01/s8/2/-/b/8/j/-b8jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=111678976-111692080"}, {"name": ">>മഴ തോരും മുൻപേതീയതി:02 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/84/s8/2/G/f/e/k/GfekA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=109367296-109380077"}, {"name": ">>മാനത്തെ കൊട്ടാരംതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം"}, {"name": ">>മൗനരാഗംതീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/11/s8/2/c/0/X/j/c0XjA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=106725888-106738286"}, {"name": ">>വല്യേട്ടൻതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/a6/s8/2/U/h/6/j/Uh6jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=109236736-109249425"}, {"name": ">>സാന്ത്വനം 2തീയതി:02 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fww1/88/s8/2/2/j/e/k/2jekA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=111244288-111257280"}, {"name": ">>സിന്ദൂരപൊട്ടുതീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്."}, {"name": ">>സ്നേഹക്കൂട്ട്തീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്.", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/d0/s8/2/q/9/X/j/q9XjA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=105769984-105782276"}, {"name": ">>സ്നേഹപൂർവ്വം ശ്യാമതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/37/s8/2/u/J/7/j/uJ7jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=108276736-108289348"}, {"name": ">>സ്വയംവരപന്തൽതീയതി:01 മെയ്‌ചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fww1/f0/s8/2/A/P/1/j/AP1jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=113065984-113079184"}, {"name": ">>ഹൃദയംതീയതി:01 മെയ്‌ചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/de/s8/2/-/P/1/j/-P1jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=109572608-109585414"}], "tamil_suntv": [], "tamil_vijaytv": [], "tamil_zeetamil": []};</script>
+<script>window.SERIALS = {"malayalam": [{"name": ">>Super കൺമണിതീയതി:01 മെയ്‌ചാനൽ:മഴവിൽ മനോരമ", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/db/s8/2/S/X/1/j/SX1jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=106851840-106864242"}, {"name": ">>അകലെതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/ca/s8/2/o/W/5/j/oW5jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=111425536-111438539"}, {"name": ">>അഞ്ചു സുന്ദരികൾതീയതി:01 മെയ്‌ചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fww1/30/s8/2/C/P/1/j/CP1jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=111399424-111412411"}, {"name": ">>അഡ്വ: അഞ്ജലിതീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/a8/s8/2/K/_/X/j/K_XjA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=107147264-107159770"}, {"name": ">>അമ്മേ മൂകാംബികേതീയതി:01 മെയ്‌ചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fww1/54/s8/2/E/X/7/j/EX7jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=107820032-107832630"}, {"name": ">>അർച്ചന ചേച്ചി LLBതീയതി:01 മെയ്‌ചാനൽ:മഴവിൽ മനോരമ", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/73/s8/2/Q/0/1/j/Q01jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=109627392-109640092"}, {"name": ">>ഇഷ്ടം മാത്രംതീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/c5/s8/2/Y/8/X/j/Y8XjA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=108254208-108266900"}, {"name": ">>ഈ പുഴയും കടന്ന്തീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/d7/s8/2/y/V/X/j/yVXjA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=108867584-108880280"}, {"name": ">>ഒത്തിരി ഒത്തിരി സ്വപ്‌നങ്ങൾതീയതി:01 മെയ്‌ചാനൽ:മഴവിൽ മനോരമ", "url": "https://hugh.cdn.rumble.cloud/video/fww1/03/s8/2/m/Z/1/j/mZ1jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=118523392-118537104"}, {"name": ">>ഒറ്റശിഖരംതീയതി:01 മെയ്‌ചാനൽ:മഴവിൽ മനോരമ", "url": "https://hugh.cdn.rumble.cloud/video/fww1/3d/s8/2/A/W/1/j/AW1jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=108996608-109009318"}, {"name": ">>കന്യാദാനംതീയതി:01 മെയ്‌ചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/dc/s8/2/a/P/1/j/aP1jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=112791552-112804749"}, {"name": ">>കാറ്റത്തെ കിളിക്കൂട്തീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/09/s8/2/s/Y/X/j/sYXjA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=109286400-109299197"}, {"name": ">>കുടുംബശ്രീ ശാരദതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/22/s8/2/s/X/5/j/sX5jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=110628352-110641258"}, {"name": ">>കൃഷ്ണഗാഥതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം", "url": "https://hugh.cdn.rumble.cloud/video/fww1/4b/s8/2/E/M/8/j/EM8jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=111958016-111971115"}, {"name": ">>ചട്ടമ്പിപാറുതീയതി:01 മെയ്‌ചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fww1/f8/s8/2/o/j/6/j/oj6jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=110920704-110933709"}, {"name": ">>ചെമ്പനീർ പൂവ്തീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/e2/s8/2/O/N/X/j/ONXjA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=100956672-100968365"}, {"name": ">>ചെമ്പരത്തിതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/bb/s8/2/O/I/6/j/OI6jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=125856768-125871483"}, {"name": ">>ദുർഗതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/ad/s8/2/O/l/7/j/Ol7jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=113928704-113941997"}, {"name": ">>പത്തരമാറ്റുതീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/ab/s8/2/O/L/X/j/OLXjA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=102877184-102889178"}, {"name": ">>പെയ്തൊഴിയാതെതീയതി:01 മെയ്‌ചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/9e/s8/2/o/1/5/j/o15jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=111692288-111705292"}, {"name": ">>മംഗല്യം തന്തുനാനേന്നതീയതി:01 മെയ്‌ചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/11/s8/2/8/P/1/j/8P1jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=111577088-111590090"}, {"name": ">>മംഗല്യംതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/01/s8/2/-/b/8/j/-b8jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=111678976-111692080"}, {"name": ">>മഴ തോരും മുൻപേതീയതി:02 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/84/s8/2/G/f/e/k/GfekA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=109367296-109380077"}, {"name": ">>മൗനരാഗംതീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/11/s8/2/c/0/X/j/c0XjA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=106725888-106738286"}, {"name": ">>വല്യേട്ടൻതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/a6/s8/2/U/h/6/j/Uh6jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=109236736-109249425"}, {"name": ">>സാന്ത്വനം 2തീയതി:02 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fww1/88/s8/2/2/j/e/k/2jekA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=111244288-111257280"}, {"name": ">>സ്നേഹക്കൂട്ട്തീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്.", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/d0/s8/2/q/9/X/j/q9XjA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=105769984-105782276"}, {"name": ">>സ്നേഹപൂർവ്വം ശ്യാമതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/37/s8/2/u/J/7/j/uJ7jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=108276736-108289348"}, {"name": ">>സ്വയംവരപന്തൽതീയതി:01 മെയ്‌ചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fww1/f0/s8/2/A/P/1/j/AP1jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=113065984-113079184"}, {"name": ">>ഹൃദയംതീയതി:01 മെയ്‌ചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/de/s8/2/-/P/1/j/-P1jA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=109572608-109585414"}, {"name": ">>അമ്മമനസ്സ്തീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്."}, {"name": ">>മാനത്തെ കൊട്ടാരംതീയതി:01 മെയ്‌ചാനൽ:സീ കേരളം"}, {"name": ">>സിന്ദൂരപൊട്ടുതീയതി:01 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്."}], "tamil_suntv": [], "tamil_vijaytv": [], "tamil_zeetamil": []};</script>
 
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <script>
@@ -536,88 +534,85 @@ var currentUrl = '';
 
 function showToast(msg) {
   var t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(function() { t.classList.remove('show'); }, 2200);
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 2200);
 }
 
-function playSerial(namespace, idx) {
-  var arr = window.SERIALS[namespace];
-  if (!arr) return;
-  var s = arr[idx];
-  if (!s) return;
+/* ── Play Dailymotion (Tamil or Malayalam) ── */
+function playDailymotion(ns, idx) {
+  var arr = window.SERIALS[ns]; if (!arr) return;
+  var s = arr[idx];             if (!s || !s.dm_id) return;
+  _openDailymotionEmbed(s.name, s.dm_id, s.dm_url);
+}
 
-  // Tamil serials: use dailymotion embed instead of HLS modal
-  if (s.dm_id) {
-    openDailymotion(s.name, s.dm_id, s.dm_url);
-    return;
-  }
+/* ── Play JW/HLS (Tamil only) ── */
+function playJw(ns, idx) {
+  var arr = window.SERIALS[ns]; if (!arr) return;
+  var s = arr[idx];             if (!s || !s.jw_url) return;
+  _openHlsPlayer(s.name, s.jw_url);
+}
 
-  if (!s.url) return;
-  currentUrl = s.url;
-  document.getElementById('modalTitle').textContent = s.name;
-  document.getElementById('modalUrlDisplay').textContent = s.url;
+/* ── Malayalam unified play: prefers DM, falls back to video_url ── */
+function playSerial(ns, idx) {
+  var arr = window.SERIALS[ns]; if (!arr) return;
+  var s = arr[idx];             if (!s) return;
+  if (s.dm_id) { _openDailymotionEmbed(s.name, s.dm_id, s.dm_url); return; }
+  if (s.url)   { _openHlsPlayer(s.name, s.url); }
+}
 
+function _openHlsPlayer(name, url) {
+  currentUrl = url;
+  document.getElementById('modalTitle').textContent = name;
+  document.getElementById('modalUrlDisplay').textContent = url;
+  var c = document.getElementById('modalVideoContainer');
+  c.innerHTML = '<video id="modalVideo" controls autoplay playsinline></video>';
   var video = document.getElementById('modalVideo');
   if (hlsPlayer) { hlsPlayer.destroy(); hlsPlayer = null; }
-
-  if (s.url.indexOf('.m3u8') !== -1) {
+  if (url.indexOf('.m3u8') !== -1) {
     if (typeof Hls !== 'undefined' && Hls.isSupported()) {
       hlsPlayer = new Hls();
-      hlsPlayer.loadSource(s.url);
+      hlsPlayer.loadSource(url);
       hlsPlayer.attachMedia(video);
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = s.url;
+      video.src = url;
     }
-  } else {
-    video.src = s.url;
-  }
+  } else { video.src = url; }
+  document.getElementById('modalHlsActions').style.display = '';
   document.getElementById('playerModal').classList.add('active');
 }
 
-function openDailymotion(name, dmId, dmUrl) {
+function _openDailymotionEmbed(name, dmId, dmUrl) {
+  currentUrl = dmUrl || '';
   document.getElementById('modalTitle').textContent = name;
   document.getElementById('modalUrlDisplay').textContent = dmUrl || '';
-  currentUrl = dmUrl || '';
-
-  // Replace the video element with a DM iframe
-  var container = document.getElementById('modalVideoContainer');
-  container.innerHTML =
-    '<iframe class="dm-embed" src="https://www.dailymotion.com/embed/video/' + dmId +
-    '?autoplay=1" allowfullscreen allow="autoplay"></iframe>';
-
-  // Hide HLS-specific actions
+  var c = document.getElementById('modalVideoContainer');
+  c.innerHTML = '<iframe class="dm-embed" src="https://www.dailymotion.com/embed/video/'
+    + dmId + '?autoplay=1" allowfullscreen allow="autoplay"></iframe>';
   document.getElementById('modalHlsActions').style.display = 'none';
   document.getElementById('playerModal').classList.add('active');
 }
 
 function closePlayer() {
-  var container = document.getElementById('modalVideoContainer');
-  // Restore video element (kills iframe / stops playback)
-  container.innerHTML = '<video id="modalVideo" controls autoplay playsinline></video>';
+  var c = document.getElementById('modalVideoContainer');
+  c.innerHTML = '<video id="modalVideo" controls autoplay playsinline></video>';
   if (hlsPlayer) { hlsPlayer.destroy(); hlsPlayer = null; }
   document.getElementById('modalHlsActions').style.display = '';
   document.getElementById('playerModal').classList.remove('active');
   currentUrl = '';
 }
 
-function copyUrl(namespace, idx) {
-  var arr = window.SERIALS[namespace];
-  if (!arr) return;
-  var s = arr[idx];
-  if (!s) return;
-  var url = s.dm_url || s.url || '';
-  if (url) doCopy(url);
+function copyUrl(ns, idx) {
+  var arr = window.SERIALS[ns]; if (!arr) return;
+  var s = arr[idx]; if (!s) return;
+  var url = s.dm_url || s.url || ''; if (url) doCopy(url);
 }
 
 function doCopy(text) {
   if (navigator.clipboard && window.isSecureContext) {
     navigator.clipboard.writeText(text)
-      .then(function() { showToast('URL copied!'); })
-      .catch(function() { legacyCopy(text); });
-  } else {
-    legacyCopy(text);
-  }
+      .then(function(){ showToast('URL copied!'); })
+      .catch(function(){ legacyCopy(text); });
+  } else { legacyCopy(text); }
 }
 
 function legacyCopy(text) {
@@ -626,111 +621,111 @@ function legacyCopy(text) {
   ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0';
   document.body.appendChild(ta);
   ta.focus(); ta.select();
-  try {
-    document.execCommand('copy');
-    showToast('URL copied!');
-  } catch(e) {
-    showToast('Long-press the URL below to copy');
-  }
+  try { document.execCommand('copy'); showToast('URL copied!'); }
+  catch(e) { showToast('Long-press the URL below to copy'); }
   document.body.removeChild(ta);
 }
 
-function openVlc(namespace, idx) {
+function openVlc(ns, idx) {
   var url = '';
-  if (idx === -1) {
-    url = currentUrl;
-  } else {
-    var arr = window.SERIALS[namespace];
-    if (!arr) return;
-    var s = arr[idx];
-    if (!s) return;
+  if (idx === -1) { url = currentUrl; }
+  else {
+    var arr = window.SERIALS[ns]; if (!arr) return;
+    var s = arr[idx]; if (!s) return;
     url = s.url || s.dm_url || '';
   }
   if (!url) return;
   var ua = navigator.userAgent || '';
   var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
-  if (isIOS) {
-    window.location.href = 'vlc-x-callback://x-callback-url/stream?url=' + encodeURIComponent(url);
-  } else {
-    window.location.href = 'vlc://' + url.replace(/^https?:\/\//, '');
-  }
-  setTimeout(function() {
-    showToast("VLC not opening? Install VLC or copy the URL.");
-  }, 1800);
+  window.location.href = isIOS
+    ? 'vlc-x-callback://x-callback-url/stream?url=' + encodeURIComponent(url)
+    : 'vlc://' + url.replace(/^https?:\/\//, '');
+  setTimeout(function(){ showToast("VLC not opening? Install VLC or copy the URL."); }, 1800);
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  var overlay = document.getElementById('playerModal');
-  if (overlay) {
-    overlay.addEventListener('click', function(e) {
-      if (e.target === this) closePlayer();
-    });
-  }
+  var ov = document.getElementById('playerModal');
+  if (ov) ov.addEventListener('click', function(e){ if (e.target===this) closePlayer(); });
 });
 </script>
 
 
 <script>
-/* ── Tab switching ── */
-function switchLang(lang) {
-  // Deactivate all lang buttons and panels
-  document.querySelectorAll('.lang-tab-btn').forEach(function(b) {
-    b.classList.remove('active');
-  });
-  document.querySelectorAll('.tab-panel[data-lang]').forEach(function(p) {
+function _hideAll() {
+  document.querySelectorAll('.tab-panel').forEach(function(p){
     p.classList.remove('active');
   });
+}
+function _setLangBtn(lang) {
+  document.querySelectorAll('.lang-tab-btn').forEach(function(b){
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+}
+function _setSubtabRow(show) {
+  var r = document.getElementById('subtabRow');
+  if (r) r.classList.toggle('visible', show);
+}
+function _setSubtabBtn(ch) {
+  document.querySelectorAll('.subtab-btn').forEach(function(b){
+    b.classList.toggle('active', !!ch && b.dataset.channel === ch);
+  });
+}
 
-  // Activate chosen lang button
-  var btn = document.querySelector('.lang-tab-btn[data-lang="' + lang + '"]');
-  if (btn) btn.classList.add('active');
-
-  // If Tamil, activate the currently-selected subtab panel; else activate the lang panel
-  if (lang === 'tamil') {
-    var active = document.querySelector('.subtab-btn.active');
-    var ch = active ? active.dataset.channel : 'suntv';
-    showChannel(ch);
+function switchLang(lang) {
+  _hideAll();
+  _setLangBtn(lang);
+  if (lang === 'malayalam') {
+    _setSubtabRow(false);
+    _setSubtabBtn('');
+    var p = document.getElementById('panel-malayalam');
+    if (p) p.classList.add('active');
+    try { sessionStorage.setItem('activeLang','malayalam');
+          sessionStorage.removeItem('activeChannel'); } catch(e){}
   } else {
-    var panel = document.querySelector('.tab-panel[data-lang="' + lang + '"]');
-    if (panel) panel.classList.add('active');
+    switchSubtab('suntv');
+    return;
   }
-
-  // Persist selection
-  try { sessionStorage.setItem('activeLang', lang); } catch(e) {}
 }
 
-function switchSubtab(channel) {
-  // First make sure Tamil lang tab is active
-  switchLang('tamil');
-
-  // Then highlight the right subtab
-  showChannel(channel);
+function switchSubtab(ch) {
+  _hideAll();
+  _setLangBtn('tamil');
+  _setSubtabRow(true);
+  _setSubtabBtn(ch);
+  var p = document.getElementById('panel-ch-' + ch);
+  if (p) p.classList.add('active');
+  try { sessionStorage.setItem('activeLang','tamil');
+        sessionStorage.setItem('activeChannel', ch); } catch(e){}
 }
 
-function showChannel(channel) {
-  document.querySelectorAll('.subtab-btn').forEach(function(b) {
-    b.classList.toggle('active', b.dataset.channel === channel);
-  });
-  document.querySelectorAll('.tab-panel[data-channel]').forEach(function(p) {
-    p.classList.toggle('active', p.dataset.channel === channel);
-  });
-  try { sessionStorage.setItem('activeChannel', channel); } catch(e) {}
-}
-
-// Restore tab state on load
 document.addEventListener('DOMContentLoaded', function() {
   try {
     var lang = sessionStorage.getItem('activeLang') || 'malayalam';
     var ch   = sessionStorage.getItem('activeChannel') || 'suntv';
-    // Activate subtab first so showChannel works
-    document.querySelectorAll('.subtab-btn').forEach(function(b) {
-      if (b.dataset.channel === ch) b.classList.add('active');
-    });
-    switchLang(lang);
-  } catch(e) {
-    switchLang('malayalam');
-  }
+    if (lang === 'tamil') { switchSubtab(ch); }
+    else { switchLang('malayalam'); }
+  } catch(e) { switchLang('malayalam'); }
 });
 </script>
 
+
+<script>
+(function() {
+  var BASE = 'https://api.countapi.xyz';
+  var NS   = 'shaseria-serials';
+  var DAY  = '2026-05-02';
+  function setEl(id, val) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = Number(val).toLocaleString();
+  }
+  fetch(BASE + '/hit/' + NS + '/' + DAY)
+    .then(function(r){ return r.json(); })
+    .then(function(d){ setEl('visits-day', d.value); })
+    .catch(function(){ setEl('visits-day', '—'); });
+  fetch(BASE + '/hit/' + NS + '/total')
+    .then(function(r){ return r.json(); })
+    .then(function(d){ setEl('visits-total', d.value); })
+    .catch(function(){ setEl('visits-total', '—'); });
+})();
+</script>
 </body></html>
