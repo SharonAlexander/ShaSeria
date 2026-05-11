@@ -527,6 +527,7 @@ if __name__ == "__main__":
     )
     parser.add_argument("--limit",  type=int, default=0,      help="Cap serials per channel for testing (0 = all)")
     parser.add_argument("--output", type=str, default="data", help="Output directory")
+    parser.add_argument("--workers", type=int, default=3)
     parser.add_argument(
         "--date",
         type=str,
