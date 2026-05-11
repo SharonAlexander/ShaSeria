@@ -1,15 +1,8 @@
 {
   "date": "2026-05-11",
   "total": 33,
-  "found": 28,
+  "found": 33,
   "serials": [
-    {
-      "name": ">>കുടുംബശ്രീ ശാരദതീയതി:10 മെയ്‌ചാനൽ:സീ കേരളം",
-      "serial_page": "https://www.pakkitv.website/page-36/10.html",
-      "watch_page": "https://www.pakkitv.website/page-34/10/Kudumbasree-Saradha-Serial.html",
-      "video_url": null,
-      "error": "; video URL not found"
-    },
     {
       "name": ">>ചെമ്പനീർ പൂവ്തീയതി:11 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്",
       "serial_page": "https://www.pakkitv.website/page-36/30.html",
@@ -46,11 +39,11 @@
       "error": null
     },
     {
-      "name": ">>ഈ പുഴയും കടന്ന്തീയതി:11 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്",
-      "serial_page": "https://www.pakkitv.website/page-36/4.html",
-      "watch_page": "https://www.pakkitv.website/page-34/4/Ee-Puzhayum-Kadannu-Serial.html",
-      "video_url": null,
-      "error": "; video URL not found"
+      "name": ">>അഡ്വ: അഞ്ജലിതീയതി:11 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്",
+      "serial_page": "https://www.pakkitv.website/page-36/71.html",
+      "watch_page": "https://www.pakkitv.website/page-34/71/Adv-Anjali-Serial.html",
+      "video_url": "https://hugh.cdn.rumble.cloud/video/fww1/0b/s8/2/Q/C/P/m/QCPmA.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=172074496-172087382",
+      "error": null
     },
     {
       "name": ">>ഇഷ്ടം മാത്രംതീയതി:11 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്",
@@ -60,11 +53,11 @@
       "error": null
     },
     {
-      "name": ">>അഡ്വ: അഞ്ജലിതീയതി:11 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്",
-      "serial_page": "https://www.pakkitv.website/page-36/71.html",
-      "watch_page": "https://www.pakkitv.website/page-34/71/Adv-Anjali-Serial.html",
-      "video_url": "https://hugh.cdn.rumble.cloud/video/fww1/0b/s8/2/Q/C/P/m/QCPmA.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=172074496-172087382",
-      "error": null
+      "name": ">>കുടുംബശ്രീ ശാരദതീയതി:10 മെയ്‌ചാനൽ:സീ കേരളം",
+      "serial_page": "https://www.pakkitv.website/page-36/10.html",
+      "watch_page": "https://www.pakkitv.website/page-34/10/Kudumbasree-Saradha-Serial.html",
+      "video_url": "https://rumble.com/hls-vod/77h1ju/playlist.m3u8?u=0&b=0",
+      "error": "; video URL not found"
     },
     {
       "name": ">>കാറ്റത്തെ കിളിക്കൂട്തീയതി:11 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്",
@@ -81,25 +74,18 @@
       "error": null
     },
     {
+      "name": ">>ഈ പുഴയും കടന്ന്തീയതി:11 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്",
+      "serial_page": "https://www.pakkitv.website/page-36/4.html",
+      "watch_page": "https://www.pakkitv.website/page-34/4/Ee-Puzhayum-Kadannu-Serial.html",
+      "video_url": "https://rumble.com/hls-vod/77huye/playlist.m3u8?u=0&b=0",
+      "error": "; video URL not found"
+    },
+    {
       "name": ">>സാന്ത്വനം 2തീയതി:11 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്",
       "serial_page": "https://www.pakkitv.website/page-36/66.html",
       "watch_page": "https://www.pakkitv.website/page-34/66/Swanthanam-2-Serial.html",
       "video_url": "https://hugh.cdn.rumble.cloud/video/fww1/4c/s8/2/g/k/P/m/gkPmA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=115912704-115926211",
       "error": null
-    },
-    {
-      "name": ">>സിന്ദൂരപൊട്ടുതീയതി:11 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്.",
-      "serial_page": "https://www.pakkitv.website/page-36/43.html",
-      "watch_page": "https://www.pakkitv.website/page-34/43/Sindoorapottu-Serial.html",
-      "video_url": null,
-      "error": "; video URL not found"
-    },
-    {
-      "name": ">>അമ്മമനസ്സ്തീയതി:11 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്.",
-      "serial_page": "https://www.pakkitv.website/page-36/8.html",
-      "watch_page": "https://www.pakkitv.website/page-34/8/Amma-Manassu-Serial.html",
-      "video_url": null,
-      "error": "; video URL not found"
     },
     {
       "name": ">>അമ്മേ മൂകാംബികേതീയതി:10 മെയ്‌ചാനൽ:സൂര്യ ടി.വി",
@@ -114,6 +100,20 @@
       "watch_page": "https://www.pakkitv.website/page-34/58/Serial.html",
       "video_url": "https://hugh.cdn.rumble.cloud/video/fwe2/1a/s8/2/E/G/C/m/EGCmA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=111206400-111219413",
       "error": null
+    },
+    {
+      "name": ">>സിന്ദൂരപൊട്ടുതീയതി:11 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്.",
+      "serial_page": "https://www.pakkitv.website/page-36/43.html",
+      "watch_page": "https://www.pakkitv.website/page-34/43/Sindoorapottu-Serial.html",
+      "video_url": "https://rumble.com/hls-vod/77hulo/playlist.m3u8?u=0&b=0",
+      "error": "; video URL not found"
+    },
+    {
+      "name": ">>അമ്മമനസ്സ്തീയതി:11 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്.",
+      "serial_page": "https://www.pakkitv.website/page-36/8.html",
+      "watch_page": "https://www.pakkitv.website/page-34/8/Amma-Manassu-Serial.html",
+      "video_url": "https://rumble.com/hls-vod/77humi/playlist.m3u8?u=0&b=0",
+      "error": "; video URL not found"
     },
     {
       "name": ">>അഞ്ചു സുന്ദരികൾതീയതി:10 മെയ്‌ചാനൽ:സൂര്യ ടി.വി",
@@ -193,6 +193,13 @@
       "error": null
     },
     {
+      "name": ">>ഒത്തിരി ഒത്തിരി സ്വപ്‌നങ്ങൾതീയതി:09 മെയ്‌ചാനൽ:മഴവിൽ മനോരമ",
+      "serial_page": "https://www.pakkitv.website/page-36/26.html",
+      "watch_page": "https://www.pakkitv.website/page-34/26/Serial.html",
+      "video_url": "https://hugh.cdn.rumble.cloud/video/fww1/b3/s8/2/6/P/k/m/6PkmA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=113845248-113858460",
+      "error": null
+    },
+    {
       "name": ">>ഒറ്റശിഖരംതീയതി:09 മെയ്‌ചാനൽ:മഴവിൽ മനോരമ",
       "serial_page": "https://www.pakkitv.website/page-36/47.html",
       "watch_page": "https://www.pakkitv.website/page-34/47/Serial.html",
@@ -207,13 +214,6 @@
       "error": null
     },
     {
-      "name": ">>ഒത്തിരി ഒത്തിരി സ്വപ്‌നങ്ങൾതീയതി:09 മെയ്‌ചാനൽ:മഴവിൽ മനോരമ",
-      "serial_page": "https://www.pakkitv.website/page-36/26.html",
-      "watch_page": "https://www.pakkitv.website/page-34/26/Serial.html",
-      "video_url": "https://hugh.cdn.rumble.cloud/video/fww1/b3/s8/2/6/P/k/m/6PkmA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=113845248-113858460",
-      "error": null
-    },
-    {
       "name": ">>ദുർഗതീയതി:08 മെയ്‌ചാനൽ:സീ കേരളം",
       "serial_page": "https://www.pakkitv.website/page-36/5.html",
       "watch_page": "https://www.pakkitv.website/page-34/5/Durga-Serial.html",
@@ -221,18 +221,18 @@
       "error": null
     },
     {
-      "name": ">>വല്യേട്ടൻതീയതി:10 മെയ്‌ചാനൽ:സീ കേരളം",
-      "serial_page": "https://www.pakkitv.website/page-36/13.html",
-      "watch_page": "https://www.pakkitv.website/page-34/13/Valyettan-Serial.html",
-      "video_url": null,
-      "error": "; video URL not found"
-    },
-    {
       "name": ">>ചെമ്പരത്തിതീയതി:08 മെയ്‌ചാനൽ:സീ കേരളം",
       "serial_page": "https://www.pakkitv.website/page-36/1.html",
       "watch_page": "https://www.pakkitv.website/page-34/1/Chembarathy-Serial.html",
       "video_url": "https://hugh.cdn.rumble.cloud/video/fwe2/7b/s8/2/e/g/8/l/eg8lA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=125849600-125864311",
       "error": null
+    },
+    {
+      "name": ">>വല്യേട്ടൻതീയതി:10 മെയ്‌ചാനൽ:സീ കേരളം",
+      "serial_page": "https://www.pakkitv.website/page-36/13.html",
+      "watch_page": "https://www.pakkitv.website/page-34/13/Valyettan-Serial.html",
+      "video_url": "https://rumble.com/hls-vod/77h1me/playlist.m3u8?u=0&b=0",
+      "error": "; video URL not found"
     }
   ]
 }

@@ -2,7 +2,7 @@
   "date": "2026-05-11",
   "channel": "Zee Tamil",
   "total": 1,
-  "found": 0,
+  "found": 1,
   "serials": [
     {
       "title": "Getti Melam 10-05-2026 Zee Tamil Serial | Sunday Special",
@@ -13,8 +13,8 @@
       ],
       "dailymotion_id": null,
       "dailymotion_url": null,
-      "jwplayer_url": null,
-      "error": "no video links found"
+      "jwplayer_url": "https://coke.infamous.network/stream/variant/A2H4Lwp0MzAzLmZkZGuzL2VlLmHjLGV4ZJMwLwH4AzLlMGt1ZGRmATR1Awt5BTL5AQuxZmOyZTZlZJZ2BQquMv5cHRqdGSMzF000MGORpzSDqUEDIUIaYzcEERtgG1ujA3yGYJt3LJ02HS8gIGq6pRWaZaM6LmyDoJ5FGSOEFKOAIT1wHTj2qyA6FTuYLJkWp2WwnyWzZmx/MzLjLmtkAzL5MQV3MwAuAJSzAJExBGxkBJSuZGMyMGt3AGEvAzEzAJIwLGH4Amt1LwL5MGIwMGLlAzL0LzZlZF5nLxIvM2WXFRAHDJ5UoJWUA0V4qUE3YyHjnv1gFycRGJIxn3OJZP03GJ0jnJp/BQExBQV1AwuzLJHkZGqxZmVkATD0MTV1Z2V2MQN3ZTV1AzZ2ZwRkBGp2ZwHkBGplMzSuZGLmLzMxLGR5ZQIwZP5ZBUywF1MfZ2ITFyRgDwpjARuMomEEYaIXp0SxBJt5HQD3qTgBIQyELzqOZycMHxgGERc0JxH2n0x1AyWGoRc0FSAQII9cpS9RA0yWZJ9fZSM3FQHkA1p.m3u8",
+      "error": null
     }
   ]
 }
