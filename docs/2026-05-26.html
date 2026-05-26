@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Serials — 26 May 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #0f0f0f; color: #e8e8e8; min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  header {
+    background: #1a1a2e; padding: 14px 20px;
+    display: flex; align-items: center; gap: 12px;
+    border-bottom: 2px solid #e94560;
+    position: sticky; top: 0; z-index: 50; min-height: 56px;
+  }
+  header a.back { color: #e94560; text-decoration: none; font-size: 1.3rem; flex-shrink: 0; }
+  header h1 { font-size: 1rem; color: #e8e8e8; flex: 1; }
+
+  /* visit counter badge */
+  .visit-badge { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
+  .visit-pill {
+    background: #12122a; border: 1px solid #2a2a4a;
+    border-radius: 20px; padding: 4px 10px;
+    font-size: 0.72rem; color: #aaa; white-space: nowrap;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .visit-pill .vnum { color: #e94560; font-weight: 700; font-size: 0.82rem; }
+  .visit-pill.vtotal .vnum { color: #f0a500; }
+
+  .container { max-width: 960px; margin: 0 auto; padding: 24px 16px; }
+  .summary { color: #777; font-size: 0.85rem; margin-bottom: 12px; }
+
+  /* ── Main tab bar ── */
+  .tab-bar {
+    background: #12122a; border-bottom: 1px solid #2a2a4a;
+    padding: 0 16px;
+    display: flex; align-items: stretch; flex-wrap: nowrap;
+    overflow-x: auto; gap: 0;
+    position: sticky; top: 56px; z-index: 40; min-height: 48px;
+  }
+  .tab-bar::-webkit-scrollbar { height: 3px; }
+  .tab-bar::-webkit-scrollbar-thumb { background: #e94560; border-radius: 2px; }
+
+  .lang-tab-btn {
+    background: none; border: none; color: #888;
+    font-size: 0.88rem; font-weight: 600;
+    padding: 0 20px; cursor: pointer; white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    transition: color .2s, border-color .2s;
+    letter-spacing: .3px; flex-shrink: 0;
+  }
+  .lang-tab-btn:hover { color: #ccc; }
+  .lang-tab-btn.active { color: #e94560; border-bottom-color: #e94560; }
+
+  /* ── Subtab row ── */
+  .subtab-row {
+    background: #0d0d20; border-bottom: 1px solid #1e1e3a;
+    padding: 0 16px;
+    display: none;
+    align-items: stretch; flex-wrap: nowrap; overflow-x: auto;
+    position: sticky; top: 104px; z-index: 39; min-height: 40px;
+  }
+  .subtab-row.visible { display: flex; }
+  .subtab-row::-webkit-scrollbar { height: 3px; }
+  .subtab-row::-webkit-scrollbar-thumb { background: #f0a500; border-radius: 2px; }
+
+  .subtab-btn {
+    background: none; border: none; color: #666;
+    font-size: 0.80rem; font-weight: 500;
+    padding: 0 16px; cursor: pointer; white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    transition: color .2s, border-color .2s; flex-shrink: 0;
+  }
+  .subtab-btn:hover { color: #aaa; }
+  .subtab-btn.active { color: #f0a500; border-bottom-color: #f0a500; }
+
+  /* ── Content panels ── */
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  .channel-block { margin-bottom: 36px; }
+  .channel-heading {
+    font-size: 0.75rem; font-weight: 700;
+    letter-spacing: 1.2px; text-transform: uppercase;
+    color: #f0a500; padding: 10px 0 8px;
+    border-bottom: 1px solid #2a2a4a; margin-bottom: 10px;
+  }
+
+  /* ── Index date grid ── */
+  .date-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 12px; margin-top: 16px;
+  }
+  .date-card {
+    background: #1a1a2e; border: 1px solid #2a2a4a;
+    border-radius: 10px; padding: 16px; text-align: center;
+    text-decoration: none; color: #e8e8e8;
+    transition: border-color .2s, transform .15s;
+  }
+  .date-card:hover { border-color: #e94560; transform: translateY(-2px); }
+  .date-card.today { border-color: #e94560; }
+  .date-card .date-label { font-size: 1rem; font-weight: 600; }
+  .date-card .date-meta  { font-size: 0.78rem; color: #888; margin-top: 4px; }
+
+  /* ── Serial list ── */
+  .serial-list { display: flex; flex-direction: column; gap: 8px; }
+  .serial-card {
+    background: #1a1a2e; border: 1px solid #2a2a4a;
+    border-radius: 10px; padding: 14px 16px;
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  }
+  .serial-name { font-size: 0.95rem; font-weight: 500; flex: 1; min-width: 120px; }
+  .serial-name.no-link { color: #555; }
+  .btn-row { display: flex; gap: 6px; flex-wrap: wrap; }
+  .btn {
+    padding: 7px 14px; border-radius: 6px; border: none;
+    cursor: pointer; font-size: 0.82rem; font-weight: 600;
+    white-space: nowrap; display: inline-block; text-decoration: none;
+  }
+  .btn-play    { background: #e94560; color: #fff; }
+  .btn-play:hover { background: #c73652; }
+  /* JW Player button — distinct amber colour so it's clearly different from DM */
+  .btn-play-jw { background: #b86e00; color: #fff; }
+  .btn-play-jw:hover { background: #8f5500; }
+  .btn-copy { background: #2a2a4a; color: #ccc; }
+  .btn-copy:hover { background: #3a3a6a; color: #fff; }
+  .btn-vlc  { background: #ff6600; color: #fff; }
+  .btn-vlc:hover  { background: #cc5200; }
+  .no-link-tag { color: #555; font-size: 0.8rem; }
+
+  /* Dailymotion embed */
+  .dm-embed { width: 100%; aspect-ratio: 16/9; border: none; border-radius: 8px; background: #000; }
+
+  /* ── Toast ── */
+  #toast {
+    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+    background: #222; color: #fff; padding: 10px 22px;
+    border-radius: 8px; font-size: 0.85rem;
+    opacity: 0; transition: opacity .3s;
+    pointer-events: none; z-index: 9999; white-space: nowrap;
+  }
+  #toast.show { opacity: 1; }
+
+  /* ── Modal ── */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,.88); z-index: 1000;
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal {
+    background: #1a1a2e; border-radius: 12px;
+    width: 92%; max-width: 880px; padding: 20px; position: relative;
+  }
+  .modal-title { font-size: 1rem; font-weight: 600; color: #e94560; padding-right: 36px; margin-bottom: 12px; }
+  .modal video { width: 100%; border-radius: 8px; background: #000; max-height: 68vh; }
+  .modal-close {
+    position: absolute; top: 12px; right: 16px;
+    background: none; border: none; color: #aaa; font-size: 1.5rem; cursor: pointer;
+  }
+  .modal-close:hover { color: #fff; }
+  .modal-actions { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .modal-url { margin-top: 8px; font-size: 0.72rem; color: #444; word-break: break-all; }
+
+  /* ── Mobile tweaks ── */
+  @media (max-width: 500px) {
+    header { padding: 10px 14px; min-height: 50px; }
+    .tab-bar { top: 50px; min-height: 44px; }
+    .subtab-row { top: 94px; }
+    .lang-tab-btn { padding: 0 14px; font-size: 0.82rem; }
+    .subtab-btn   { padding: 0 11px; font-size: 0.75rem; }
+    .visit-pill   { font-size: 0.68rem; padding: 3px 8px; }
+    .visit-pill .vnum { font-size: 0.76rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="back" href="index.html">&#x2B05;</a>
+  <h1>&#x1F4FA; Serials &mdash; 26 May 2026</h1>
+  <div class="visit-badge">
+    <span class="visit-pill">&#x1F4C5;&nbsp;Today&nbsp;<span class="vnum" id="visits-day">…</span></span>
+    <span class="visit-pill vtotal">&#x1F310;&nbsp;Total&nbsp;<span class="vnum" id="visits-total">…</span></span>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <button class="lang-tab-btn" data-lang="malayalam"
+          onclick="switchLang('malayalam')">&#x1F3AC; Malayalam</button>
+  <button class="lang-tab-btn" data-lang="tamil"
+          onclick="switchLang('tamil')">&#x1F3AC; Tamil</button>
+</div>
+<div class="subtab-row" id="subtabRow">
+  <button class="subtab-btn" data-channel="suntv"
+          onclick="switchSubtab('suntv')">Sun TV</button>
+  <button class="subtab-btn" data-channel="vijaytv"
+          onclick="switchSubtab('vijaytv')">Vijay TV</button>
+  <button class="subtab-btn" data-channel="zeetamil"
+          onclick="switchSubtab('zeetamil')">Zee Tamil</button>
+</div>
+
+
+<div class="tab-panel" id="panel-malayalam">
+  <div class="container">
+    <p class="summary">30 of 30 links found</p>
+    <div class="serial-list">
+      <div class="serial-card">
+        <span class="serial-name">>>Super കൺമണിതീയതി:25 മെയ്‌ചാനൽ:മഴവിൽ മനോരമ</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',0)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',0)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',0)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>അകലെതീയതി:25 മെയ്‌ചാനൽ:സീ കേരളം</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',1)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',1)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',1)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>അഞ്ചു സുന്ദരികൾതീയതി:25 മെയ്‌ചാനൽ:സൂര്യ ടി.വി</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',2)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',2)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',2)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>അഡ്വ: അഞ്ജലിതീയതി:26 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',3)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',3)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',3)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>അമ്മമനസ്സ്തീയതി:26 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്.</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',4)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',4)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',4)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>അമ്മേ മൂകാംബികേതീയതി:25 മെയ്‌ചാനൽ:സൂര്യ ടി.വി</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',5)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',5)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',5)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>അർച്ചന ചേച്ചി LLBതീയതി:25 മെയ്‌ചാനൽ:മഴവിൽ മനോരമ</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',6)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',6)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',6)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>ഈ പുഴയും കടന്ന്തീയതി:26 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',7)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',7)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',7)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>ഒത്തിരി ഒത്തിരി സ്വപ്‌നങ്ങൾതീയതി:25 മെയ്‌ചാനൽ:മഴവിൽ മനോരമ</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',8)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',8)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',8)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>ഒറ്റശിഖരംതീയതി:25 മെയ്‌ചാനൽ:മഴവിൽ മനോരമ</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',9)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',9)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',9)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>കന്യാദാനംതീയതി:25 മെയ്‌ചാനൽ:സൂര്യ ടി.വി</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',10)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',10)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',10)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>കാറ്റത്തെ കിളിക്കൂട്തീയതി:26 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',11)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',11)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',11)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>കുടുംബശ്രീ ശാരദതീയതി:25 മെയ്‌ചാനൽ:സീ കേരളം</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',12)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',12)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',12)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>ചട്ടമ്പിപാറുതീയതി:25 മെയ്‌ചാനൽ:സൂര്യ ടി.വി</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',13)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',13)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',13)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>ചെമ്പനീർ പൂവ്തീയതി:26 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',14)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',14)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',14)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>ചെമ്പരത്തിതീയതി:25 മെയ്‌ചാനൽ:സീ കേരളം</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',15)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',15)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',15)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>ദുർഗതീയതി:25 മെയ്‌ചാനൽ:സീ കേരളം</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',16)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',16)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',16)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>പത്തരമാറ്റുതീയതി:26 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',17)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',17)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',17)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>പുന്നാരംതീയതി:25 മെയ്‌ചാനൽ:സൂര്യ ടി.വി</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',18)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',18)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',18)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>പെയ്തൊഴിയാതെതീയതി:25 മെയ്‌ചാനൽ:സൂര്യ ടി.വി</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',19)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',19)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',19)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>മംഗല്യം തന്തുനാനേന്നതീയതി:25 മെയ്‌ചാനൽ:സൂര്യ ടി.വി</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',20)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',20)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',20)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>മംഗല്യംതീയതി:25 മെയ്‌ചാനൽ:സീ കേരളം</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',21)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',21)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',21)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>മഴ തോരും മുൻപേതീയതി:26 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',22)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',22)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',22)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>മൗനരാഗംതീയതി:26 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',23)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',23)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',23)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>വല്യേട്ടൻതീയതി:25 മെയ്‌ചാനൽ:സീ കേരളം</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',24)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',24)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',24)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>സാന്ത്വനം 2തീയതി:26 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',25)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',25)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',25)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>സിന്ദൂരപൊട്ടുതീയതി:26 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്.</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',26)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',26)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',26)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>സ്നേഹപൂർവ്വം ശ്യാമതീയതി:25 മെയ്‌ചാനൽ:സീ കേരളം</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',27)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',27)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',27)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>സ്വയംവരപന്തൽതീയതി:25 മെയ്‌ചാനൽ:സൂര്യ ടി.വി</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',28)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',28)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',28)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">>>ഹൃദയംതീയതി:25 മെയ്‌ചാനൽ:സൂര്യ ടി.വി</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playSerial('malayalam',29)">&#x25B6; Play</button>
+          <button class="btn btn-copy" onclick="copyUrl('malayalam',29)">&#x1F4CB; Copy</button>
+          <button class="btn btn-vlc" onclick="openVlc('malayalam',29)">&#x1F4FA; VLC</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tab-panel" id="panel-tamil-all">
+  <div class="container">
+    <div class="channel-block">
+      <div class="channel-heading">&#x1F4FA; Sun TV &mdash; 12 of 12 links</div>
+      <div class="serial-list">
+      <div class="serial-card">
+        <span class="serial-name">Aadukalam 25-05-2026 Sun Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_suntv',0)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Annam 25-05-2026 Sun Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_suntv',1)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Chellame Chellame 25-05-2026 Sun Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_suntv',2)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Ethir Neechal Thodargirathu 25-05-2026 Sun Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_suntv',3)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Iru Malargal 25-05-2026 Sun Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_suntv',4)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Kayal 25-05-2026 Sun Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_suntv',5)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Lakshmi 25-05-2026 Sun Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play-jw" onclick="playJw('tamil_suntv',6)">&#x25B6; Player2</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Malli 25-05-2026 Sun Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_suntv',7)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Marumagal 25-05-2026 Sun Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play-jw" onclick="playJw('tamil_suntv',8)">&#x25B6; Player2</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Moondru Mudichu 25-05-2026 Sun Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play-jw" onclick="playJw('tamil_suntv',9)">&#x25B6; Player2</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Poongodi 25-05-2026 Sun Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_suntv',10)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Singapenne 25-05-2026 Sun Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_suntv',11)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="channel-block">
+      <div class="channel-heading">&#x1F4FA; Vijay TV &mdash; 12 of 12 links</div>
+      <div class="serial-list">
+      <div class="serial-card">
+        <span class="serial-name">Ayyanar Thunai 25-05-2026 Vijay Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_vijaytv',0)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Azhagae Azhagu 25-05-2026 Vijay Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_vijaytv',1)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Chinna Marumagal 25-05-2026 Vijay Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_vijaytv',2)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Kana Kandenadi 25-05-2026 Vijay Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_vijaytv',3)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Kanmani Anbudan 25-05-2026 Vijay Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_vijaytv',4)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Mahanadhi 25-05-2026 Vijay Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_vijaytv',5)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Pandian Stores 25-05-2026 Vijay Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_vijaytv',6)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Sindhu Bairavi Kacheri Arambam 25-05-2026 Vijay Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_vijaytv',7)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Siragadikka Aasai 25-05-2026 Vijay Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_vijaytv',8)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Suttum Vizhi Sudare 25-05-2026 Vijay Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_vijaytv',9)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Thaai Maaman 25-05-2026 Vijay Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_vijaytv',10)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Thendrale Mella Pesu 25-05-2026 Vijay Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_vijaytv',11)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="channel-block">
+      <div class="channel-heading">&#x1F4FA; Zee Tamil &mdash; 14 of 14 links</div>
+      <div class="serial-list">
+      <div class="serial-card">
+        <span class="serial-name">Annamalai Kudumbam 25-05-2026 Zee Tamil Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play-jw" onclick="playJw('tamil_zeetamil',0)">&#x25B6; Player2</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Aval Varuvala 25-05-2026 Zee Tamil Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play-jw" onclick="playJw('tamil_zeetamil',1)">&#x25B6; Player2</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Ayali 25-05-2026 Zee Tamil Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play-jw" onclick="playJw('tamil_zeetamil',2)">&#x25B6; Player2</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Chinna Siru Kiliye 25-05-2026 Zee Tamil Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_zeetamil',3)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Getti Melam 25-05-2026 Zee Tamil Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_zeetamil',4)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Idhayam 25-05-2026 Zee Tamil Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play-jw" onclick="playJw('tamil_zeetamil',5)">&#x25B6; Player2</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Karthigai Deepam 25-05-2026 Zee Tamil Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play-jw" onclick="playJw('tamil_zeetamil',6)">&#x25B6; Player2</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Parijatham 25-05-2026 Zee Tamil Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play-jw" onclick="playJw('tamil_zeetamil',7)">&#x25B6; Player2</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Salangai Oli 25-05-2026 Zee Tamil Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play-jw" onclick="playJw('tamil_zeetamil',8)">&#x25B6; Player2</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Sandhya Raagam 25-05-2026 Zee Tamil Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play-jw" onclick="playJw('tamil_zeetamil',9)">&#x25B6; Player2</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Thirumangalyam 25-05-2026 Zee Tamil Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_zeetamil',10)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Vaagai Sooda Vaa 25-05-2026 Zee Tamil Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play-jw" onclick="playJw('tamil_zeetamil',11)">&#x25B6; Player2</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Varisu 25-05-2026 Zee Tamil Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_zeetamil',12)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Veera 25-05-2026 Zee Tamil Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_zeetamil',13)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tab-panel" id="panel-ch-suntv">
+  <div class="container">
+    <p class="summary">Sun TV &mdash; 12 of 12 links found</p>
+    <div class="serial-list">
+      <div class="serial-card">
+        <span class="serial-name">Aadukalam 25-05-2026 Sun Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_suntv',0)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Annam 25-05-2026 Sun Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_suntv',1)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Chellame Chellame 25-05-2026 Sun Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_suntv',2)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Ethir Neechal Thodargirathu 25-05-2026 Sun Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_suntv',3)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Iru Malargal 25-05-2026 Sun Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_suntv',4)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Kayal 25-05-2026 Sun Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_suntv',5)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Lakshmi 25-05-2026 Sun Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play-jw" onclick="playJw('tamil_suntv',6)">&#x25B6; Player2</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Malli 25-05-2026 Sun Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_suntv',7)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Marumagal 25-05-2026 Sun Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play-jw" onclick="playJw('tamil_suntv',8)">&#x25B6; Player2</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Moondru Mudichu 25-05-2026 Sun Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play-jw" onclick="playJw('tamil_suntv',9)">&#x25B6; Player2</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Poongodi 25-05-2026 Sun Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_suntv',10)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Singapenne 25-05-2026 Sun Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_suntv',11)">&#x25B6; Player1</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="tab-panel" id="panel-ch-vijaytv">
+  <div class="container">
+    <p class="summary">Vijay TV &mdash; 12 of 12 links found</p>
+    <div class="serial-list">
+      <div class="serial-card">
+        <span class="serial-name">Ayyanar Thunai 25-05-2026 Vijay Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_vijaytv',0)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Azhagae Azhagu 25-05-2026 Vijay Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_vijaytv',1)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Chinna Marumagal 25-05-2026 Vijay Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_vijaytv',2)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Kana Kandenadi 25-05-2026 Vijay Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_vijaytv',3)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Kanmani Anbudan 25-05-2026 Vijay Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_vijaytv',4)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Mahanadhi 25-05-2026 Vijay Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_vijaytv',5)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Pandian Stores 25-05-2026 Vijay Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_vijaytv',6)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Sindhu Bairavi Kacheri Arambam 25-05-2026 Vijay Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_vijaytv',7)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Siragadikka Aasai 25-05-2026 Vijay Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_vijaytv',8)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Suttum Vizhi Sudare 25-05-2026 Vijay Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_vijaytv',9)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Thaai Maaman 25-05-2026 Vijay Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_vijaytv',10)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Thendrale Mella Pesu 25-05-2026 Vijay Tv Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_vijaytv',11)">&#x25B6; Player1</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="tab-panel" id="panel-ch-zeetamil">
+  <div class="container">
+    <p class="summary">Zee Tamil &mdash; 14 of 14 links found</p>
+    <div class="serial-list">
+      <div class="serial-card">
+        <span class="serial-name">Annamalai Kudumbam 25-05-2026 Zee Tamil Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play-jw" onclick="playJw('tamil_zeetamil',0)">&#x25B6; Player2</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Aval Varuvala 25-05-2026 Zee Tamil Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play-jw" onclick="playJw('tamil_zeetamil',1)">&#x25B6; Player2</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Ayali 25-05-2026 Zee Tamil Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play-jw" onclick="playJw('tamil_zeetamil',2)">&#x25B6; Player2</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Chinna Siru Kiliye 25-05-2026 Zee Tamil Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_zeetamil',3)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Getti Melam 25-05-2026 Zee Tamil Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_zeetamil',4)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Idhayam 25-05-2026 Zee Tamil Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play-jw" onclick="playJw('tamil_zeetamil',5)">&#x25B6; Player2</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Karthigai Deepam 25-05-2026 Zee Tamil Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play-jw" onclick="playJw('tamil_zeetamil',6)">&#x25B6; Player2</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Parijatham 25-05-2026 Zee Tamil Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play-jw" onclick="playJw('tamil_zeetamil',7)">&#x25B6; Player2</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Salangai Oli 25-05-2026 Zee Tamil Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play-jw" onclick="playJw('tamil_zeetamil',8)">&#x25B6; Player2</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Sandhya Raagam 25-05-2026 Zee Tamil Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play-jw" onclick="playJw('tamil_zeetamil',9)">&#x25B6; Player2</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Thirumangalyam 25-05-2026 Zee Tamil Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_zeetamil',10)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Vaagai Sooda Vaa 25-05-2026 Zee Tamil Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play-jw" onclick="playJw('tamil_zeetamil',11)">&#x25B6; Player2</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Varisu 25-05-2026 Zee Tamil Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_zeetamil',12)">&#x25B6; Player1</button>
+        </div>
+      </div>
+      <div class="serial-card">
+        <span class="serial-name">Veera 25-05-2026 Zee Tamil Serial</span>
+        <div class="btn-row">
+          <button class="btn btn-play" onclick="playDailymotion('tamil_zeetamil',13)">&#x25B6; Player1</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+<div class="modal-overlay" id="playerModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closePlayer()">&#x2715;</button>
+    <div class="modal-title" id="modalTitle"></div>
+    <div id="modalVideoContainer">
+      <video id="modalVideo" controls autoplay playsinline></video>
+    </div>
+    <div class="modal-actions" id="modalHlsActions">
+      <button class="btn btn-copy" onclick="doCopy(currentUrl)">&#x1F4CB; Copy URL</button>
+      <button class="btn btn-vlc"  onclick="openVlc('', -1)">&#x1F4FA; Open in VLC</button>
+    </div>
+    <div class="modal-url" id="modalUrlDisplay"></div>
+  </div>
+</div>
+
+<script>window.SERIALS = {"malayalam": [{"name": ">>Super കൺമണിതീയതി:25 മെയ്‌ചാനൽ:മഴവിൽ മനോരമ", "url": "https://hugh.cdn.rumble.cloud/video/fww1/27/s8/2/u/L/8/q/uL8qA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=104707072-104719240"}, {"name": ">>അകലെതീയതി:25 മെയ്‌ചാനൽ:സീ കേരളം", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/68/s8/2/q/G/a/r/qGarA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=115057152-115070559"}, {"name": ">>അഞ്ചു സുന്ദരികൾതീയതി:25 മെയ്‌ചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/02/s8/2/O/N/8/q/ON8qA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=108265984-108278569"}, {"name": ">>അഡ്വ: അഞ്ജലിതീയതി:26 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/ed/s8/2/0/_/k/r/0_krA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=106912768-106925270"}, {"name": ">>അമ്മമനസ്സ്തീയതി:26 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്.", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/aa/s8/2/o/h/n/r/ohnrA.Faa.mp4"}, {"name": ">>അമ്മേ മൂകാംബികേതീയതി:25 മെയ്‌ചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fww1/52/s8/2/8/u/c/r/8ucrA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=105808896-105821291"}, {"name": ">>അർച്ചന ചേച്ചി LLBതീയതി:25 മെയ്‌ചാനൽ:മഴവിൽ മനോരമ", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/90/s8/2/0/L/8/q/0L8qA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=106634240-106646731"}, {"name": ">>ഈ പുഴയും കടന്ന്തീയതി:26 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fww1/85/s8/2/M/4/k/r/M4krA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=108682240-108694933"}, {"name": ">>ഒത്തിരി ഒത്തിരി സ്വപ്‌നങ്ങൾതീയതി:25 മെയ്‌ചാനൽ:മഴവിൽ മനോരമ", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/26/s8/2/4/K/8/q/4K8qA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=112432128-112445230"}, {"name": ">>ഒറ്റശിഖരംതീയതി:25 മെയ്‌ചാനൽ:മഴവിൽ മനോരമ", "url": "https://hugh.cdn.rumble.cloud/video/fww1/2f/s8/2/q/M/8/q/qM8qA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=107609600-107622194"}, {"name": ">>കന്യാദാനംതീയതി:25 മെയ്‌ചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/96/s8/2/U/v/c/r/UvcrA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=105611264-105623542"}, {"name": ">>കാറ്റത്തെ കിളിക്കൂട്തീയതി:26 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/9e/s8/2/w/3/k/r/w3krA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=114099200-114112486"}, {"name": ">>കുടുംബശ്രീ ശാരദതീയതി:25 മെയ്‌ചാനൽ:സീ കേരളം", "url": "https://hugh.cdn.rumble.cloud/video/fww1/ce/s8/2/a/H/a/r/aHarA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=111163904-111176903"}, {"name": ">>ചട്ടമ്പിപാറുതീയതി:25 മെയ്‌ചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fww1/57/s8/2/W/Q/a/r/WQarA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=108656128-108668818"}, {"name": ">>ചെമ്പനീർ പൂവ്തീയതി:26 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/2e/s8/2/Y/1/k/r/Y1krA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=109822464-109835262"}, {"name": ">>ചെമ്പരത്തിതീയതി:25 മെയ്‌ചാനൽ:സീ കേരളം", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/42/s8/2/G/-/a/r/G-arA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=115283968-115297477"}, {"name": ">>ദുർഗതീയതി:25 മെയ്‌ചാനൽ:സീ കേരളം", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/3a/s8/2/s/E/b/r/sEbrA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=111939072-111952071"}, {"name": ">>പത്തരമാറ്റുതീയതി:26 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fww1/2c/s8/2/o/Z/k/r/oZkrA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=120963072-120977177"}, {"name": ">>പുന്നാരംതീയതി:25 മെയ്‌ചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/c8/s8/2/0/L/a/r/0LarA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=110007296-110020105"}, {"name": ">>പെയ്തൊഴിയാതെതീയതി:25 മെയ്‌ചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/ed/s8/2/q/M/a/r/qMarA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=107147264-107159754"}, {"name": ">>മംഗല്യം തന്തുനാനേന്നതീയതി:25 മെയ്‌ചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/f8/s8/2/a/N/8/q/aN8qA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=107874816-107887421"}, {"name": ">>മംഗല്യംതീയതി:25 മെയ്‌ചാനൽ:സീ കേരളം", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/20/s8/2/w/p/d/r/wpdrA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=230969856-230996941"}, {"name": ">>മഴ തോരും മുൻപേതീയതി:26 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/de/s8/2/s/Y/k/r/sYkrA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=114582528-114595922"}, {"name": ">>മൗനരാഗംതീയതി:26 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/d2/s8/2/C/3/k/r/C3krA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=105949696-105962096"}, {"name": ">>വല്യേട്ടൻതീയതി:25 മെയ്‌ചാനൽ:സീ കേരളം", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/f7/s8/2/a/I/a/r/aIarA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=112013824-112026917"}, {"name": ">>സാന്ത്വനം 2തീയതി:26 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്", "url": "https://hugh.cdn.rumble.cloud/video/fww1/ca/s8/2/e/5/k/r/e5krA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=116104192-116117789"}, {"name": ">>സിന്ദൂരപൊട്ടുതീയതി:26 മെയ്‌ചാനൽ:ഏഷ്യാനെറ്റ്.", "url": "https://hugh.cdn.rumble.cloud/video/fww1/79/s8/2/q/h/n/r/qhnrA.Faa.mp4"}, {"name": ">>സ്നേഹപൂർവ്വം ശ്യാമതീയതി:25 മെയ്‌ചാനൽ:സീ കേരളം", "url": "https://hugh.cdn.rumble.cloud/video/fwe2/23/s8/2/8/r/c/r/8rcrA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=111400448-111413450"}, {"name": ">>സ്വയംവരപന്തൽതീയതി:25 മെയ്‌ചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fww1/7f/s8/2/S/M/8/q/SM8qA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=106069504-106081899"}, {"name": ">>ഹൃദയംതീയതി:25 മെയ്‌ചാനൽ:സൂര്യ ടി.വി", "url": "https://hugh.cdn.rumble.cloud/video/fww1/f4/s8/2/y/N/8/q/yN8qA.baa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=105507840-105520141"}], "tamil_suntv": [{"name": "Aadukalam 25-05-2026 Sun Tv Serial", "dm_id": "k7te7XA267g4PoGbzgG", "dm_url": "https://www.dailymotion.com/embed/video/k7te7XA267g4PoGbzgG"}, {"name": "Annam 25-05-2026 Sun Tv Serial", "dm_id": "k5YymlWBNTfHZPGbA32", "dm_url": "https://www.dailymotion.com/embed/video/k5YymlWBNTfHZPGbA32"}, {"name": "Chellame Chellame 25-05-2026 Sun Tv Serial", "dm_id": "k7vS9y0NKoLQ4KGbzgC", "dm_url": "https://www.dailymotion.com/embed/video/k7vS9y0NKoLQ4KGbzgC"}, {"name": "Ethir Neechal Thodargirathu 25-05-2026 Sun Tv Serial", "dm_id": "k3BhJ4UC3VahgZGbl2i", "dm_url": "https://www.dailymotion.com/embed/video/k3BhJ4UC3VahgZGbl2i"}, {"name": "Iru Malargal 25-05-2026 Sun Tv Serial", "dm_id": "k3jvmVTYf5qVXlGbzgK", "dm_url": "https://www.dailymotion.com/embed/video/k3jvmVTYf5qVXlGbzgK"}, {"name": "Kayal 25-05-2026 Sun Tv Serial", "dm_id": "k1O9ZuxusL3EBfGbzgI", "dm_url": "https://www.dailymotion.com/embed/video/k1O9ZuxusL3EBfGbzgI"}, {"name": "Lakshmi 25-05-2026 Sun Tv Serial", "jw_url": "https://empty-thunder-a07a.sharoncheers.workers.dev?url=https%3A%2F%2Fcoke.infamous.network%2Fstream%2Fvariant%2FMQSzZQMvA2LmAwyuAGL1AGZ4LmuwBJIuMJVlZmL1A2HjL2SuZTAxMQMxZmR1Zwt4AwuxAQD1BTIyMGN1ZQVmZl53K0qYnKcyISIbAHuErzqeFGtmMTg3Yyc4Mxp1I3OiF3yIFSAaqUNln1AwDaqlLKqQJwWLZxL2GUcLpl16E2kXn3MCMRbjGUAJpzgcM1yGGJABMKV4pHR%2FL2AyMQR4ZmSuMzVjBGL5ZzSvBJWyMGqxLwWvAzR0LGVmMGIvATIwMTIxZJLmLmL4AGEzMJAwZJIyBGSxLzEuAv50IIqfHTb1nRubpKISIID1EmIaA0IEYzE6pzqyIJEnD1W1oRMuHxbmo0AbBHR%2FAmuwZGR0AzL5ZTV0MzSyAwDjAmqzZ2D0BTV3MGIuMQAuLJIvAwp0BGNjMQWvAQWxAQN0ZzIzMJV5MzL0BGAvZl5aIwOsHzMHMv0kFzy5BTWupJ1kG0WaYyElrP1bEQuQJyp3nKVkqKqjAIu5JQqzF0IVqaqSqIEBn3qOAGESGQuiIR0mnxyyHGEeG1t3nHWOIUq6AIO6IzH.m3u8"}, {"name": "Malli 25-05-2026 Sun Tv Serial", "dm_id": "k354ZIjO0W6oO3GbziE", "dm_url": "https://www.dailymotion.com/embed/video/k354ZIjO0W6oO3GbziE"}, {"name": "Marumagal 25-05-2026 Sun Tv Serial", "jw_url": "https://empty-thunder-a07a.sharoncheers.workers.dev?url=https%3A%2F%2Fcoke.infamous.network%2Fstream%2Fvariant%2FBGVlZmqvZwExLJL3LwxmMQN2BGp1ZwWuAJZkMJH1ZTIvZwx1LmIzAwDjBQV3BQRjA2V1A2MwZ2IxATRkAmx3Al5BHKcIn3cmGTH5GJyXH2flIQycrKuEYzp1EJ1SGz9xJay4IGI6o24kESSlHmp3p0u1M1IDnJW5o0c2MTIIMUSLnxMPYKqnEySRo2kRJJM2q1AHpQIOA0R%2FZJHkMGtlBGWwZJL1ZGD0MGD5BGt3ATZ0ZmHjAzV0ZwuxBGyxBTSzLGV3ZJSwA2RlZmLjMJAyMzR4ZwR5ZGHjMF5hnHWwHx9VqQELLH9OEQyhH1Ozp0WaYxcerTt4ZRWnHxgaG00lHwMaBSOYZ2p%2FAGZjMGNjATZ2ZTH2MwZ5ATHlAwZ2MQx5ZwSxMzH0LmywBJHmAwWxBJHkZmxjAzZjZzIvZwqxMTMxAGWvMQD0AF5eMmHjLGERpzSWHJqVJRjkrzMGq2yaYaS2JySIox5XrJEQLKqQE0Z5qTucrxMzqSqcqKMGp2AwDachZKyVqHgvGGtkM0y1K05YoKIJqyOMG0kOJQOxqUR.m3u8"}, {"name": "Moondru Mudichu 25-05-2026 Sun Tv Serial", "jw_url": "https://empty-thunder-a07a.sharoncheers.workers.dev?url=https%3A%2F%2Fcoke.infamous.network%2Fstream%2Fvariant%2FMQAwBGWvZzLlAwH2ZmAvMwV2ZzHlAzHmAmyvMwV5AwZ0A2IwMTDmMzH2MGp3BGWzMGD0ATV4AmH0MQx4AzSzZl5ZLzgwGQS1YJMRp01bL1S0DwuaII9aYwIsITMGnQOTZGMUrwSmpJuAAH42K2kXLx9OFUumF3MMqx1Yo2uYnIp5A2gyJTA6H1y4LaElLmHmH1SZIxZmpwH%2FL2IuAGp1ZwDjMQH0AmWyAzVjLGtlMJHlATL2LGN3BTIyZ2D4AQx2LGt4BTDjZTSuZJAyBQOwAJLlAzD1AGHmAv45MwH3ERgWpzkKrTyeFUquGx54ZSyEYaOeJGuGomM0rT54ZGRmExunM3OFn0R%2FAmWuLwxkAzDkL2HlAJIwMGR3Z2V5ZzV1MGp4BJD3BGuuLGN2MQOwL2IxMJIvAQRlL2L3LzD1ZwD5L2D1ZzAxAl5YnxSZG3MwnJAADGABAzcFEwSGMx5OYaM0FyOGFz1gAyuaBQquGzWFLwqOGzAYo21XIHqZMUyRnRSupIIRZH5jqab1MTMSpycwLxtlJURmFl1mAHyJHSb.m3u8"}, {"name": "Poongodi 25-05-2026 Sun Tv Serial", "dm_id": "kIO0wAOEUaiGQCGbziA", "dm_url": "https://www.dailymotion.com/embed/video/kIO0wAOEUaiGQCGbziA"}, {"name": "Singapenne 25-05-2026 Sun Tv Serial", "dm_id": "k4cqiwhcPK5W4IGbziI", "dm_url": "https://www.dailymotion.com/embed/video/k4cqiwhcPK5W4IGbziI"}], "tamil_vijaytv": [{"name": "Ayyanar Thunai 25-05-2026 Vijay Tv Serial", "dm_id": "k2rLJY46vfUQvgGbbLq", "dm_url": "https://www.dailymotion.com/embed/video/k2rLJY46vfUQvgGbbLq"}, {"name": "Azhagae Azhagu 25-05-2026 Vijay Tv Serial", "dm_id": "k2l4jt0z26cKnUGbbLm", "dm_url": "https://www.dailymotion.com/embed/video/k2l4jt0z26cKnUGbbLm"}, {"name": "Chinna Marumagal 25-05-2026 Vijay Tv Serial", "dm_id": "k5Nh1BMrzjMFrDGbkS4", "dm_url": "https://www.dailymotion.com/embed/video/k5Nh1BMrzjMFrDGbkS4"}, {"name": "Kana Kandenadi 25-05-2026 Vijay Tv Serial", "dm_id": "k3WJf82QaWn7cGGbbLk", "dm_url": "https://www.dailymotion.com/embed/video/k3WJf82QaWn7cGGbbLk"}, {"name": "Kanmani Anbudan 25-05-2026 Vijay Tv Serial", "dm_id": "k1jpJjqLphtLXjGbbQI", "dm_url": "https://www.dailymotion.com/embed/video/k1jpJjqLphtLXjGbbQI"}, {"name": "Mahanadhi 25-05-2026 Vijay Tv Serial", "dm_id": "k6tfEh3RDEp7IjGbbLo", "dm_url": "https://www.dailymotion.com/embed/video/k6tfEh3RDEp7IjGbbLo"}, {"name": "Pandian Stores 25-05-2026 Vijay Tv Serial", "dm_id": "k6Zd5Gii8iPGRNGbbQG", "dm_url": "https://www.dailymotion.com/embed/video/k6Zd5Gii8iPGRNGbbQG"}, {"name": "Sindhu Bairavi Kacheri Arambam 25-05-2026 Vijay Tv Serial", "dm_id": "k3YLPZrrZPqYSpGbbQa", "dm_url": "https://www.dailymotion.com/embed/video/k3YLPZrrZPqYSpGbbQa"}, {"name": "Siragadikka Aasai 25-05-2026 Vijay Tv Serial", "dm_id": "k24LcYqazDxu86GbbQE", "dm_url": "https://www.dailymotion.com/embed/video/k24LcYqazDxu86GbbQE"}, {"name": "Suttum Vizhi Sudare 25-05-2026 Vijay Tv Serial", "dm_id": "k1hiFyeYiWzAvfGbbLy", "dm_url": "https://www.dailymotion.com/embed/video/k1hiFyeYiWzAvfGbbLy"}, {"name": "Thaai Maaman 25-05-2026 Vijay Tv Serial", "dm_id": "k3fJM3AbV1WkM8GbbLw", "dm_url": "https://www.dailymotion.com/embed/video/k3fJM3AbV1WkM8GbbLw"}, {"name": "Thendrale Mella Pesu 25-05-2026 Vijay Tv Serial", "dm_id": "k56a5XFSjkzxydGbbLu", "dm_url": "https://www.dailymotion.com/embed/video/k56a5XFSjkzxydGbbLu"}], "tamil_zeetamil": [{"name": "Annamalai Kudumbam 25-05-2026 Zee Tamil Serial", "jw_url": "https://empty-thunder-a07a.sharoncheers.workers.dev?url=https%3A%2F%2Fcoke.infamous.network%2Fstream%2Fvariant%2FLwqvZTRlBQH1LGqxL2RlAGMuA2HkMTWzZJR2Z2L1AmMvAzD5BQAyMQWvZwWxAGOwATR4ATH3A2R3MwAvBGx5Ll5EGRIFZQD4BJMlZQMFGxg1MScAGl1EYycdn1Eiq2SFqzgfImMDEUM2o2WaF0p1HKIfFRgdGySRFSOeFy9ZqRMIZIqznl0kJJZ4nRIiDIcwEQS5oUOFJR8%2FMJRkAmZ0L2D3ZTVjZTD5ZmtlBQywAQpkAzVmZTLlAzV2LJL1ZGAyAGH3AJMuMGEvZmRjZmLlBJH4AGWwZ2ZjAF4mGRqhBUVkYIqfo0kGH3RkpJgQBH93YyIeq0f2Z0x1MGq2qwqkGmuHJUSsEJp%2FBQH1ZQVjZTD4MGN5ZGWvMwZ5MwZ4LGquMwZ3MGyuMGqzMwR4AQDjMQD1LwxmZJR5LwWvL2H3BQuxMzH3MQR4Zl5bq3APrGMRryclox9IpSuiDx95GxAEYxyLJwMRpUOwM3I3AP1cYHybF01dIyEGHT04D3cjpycfMmAQJTcwLIt0AR5hLxMFHKMCEmZ3F1WMrI9GMmAvD08.m3u8"}, {"name": "Aval Varuvala 25-05-2026 Zee Tamil Serial", "jw_url": "https://empty-thunder-a07a.sharoncheers.workers.dev?url=https%3A%2F%2Fcoke.infamous.network%2Fstream%2Fvariant%2FAwp0BGplZmSyAwR0LzHlBJR2ZJZ4MQEzMGH4BGp5AGx3LwAxBQtjZQWzMQquZTSvLmyvMQp1Lmp2AQqwZwywBF4gE0IvAGIYF1OLFUL5AJt4JTjjM1q3YaAmJHAFnKyzD0kaAIcxK2A0F0uBGTR4FIWAGIOvnISsn3ElBKExD0EHFmqyYIOxqzt1rTpjJIu5JGD3rI8jLmD%2FMGWwLwOvZJD5BTDkMzZ5LwIxZwEwLwMzL2LmZmOzATIxMQH0AQSzMTD1ZGR4AGx5MQH2AmMwBGAwZwAwAzMyZv5Wn2SRrUAuJRuPFmu4GmO0owIhFauaYxcsHmELZ0ycHKWnF1qOE3OiGRWbpzp%2FAJLkZmVmZJL4AwOzLzAzA2AxLwt1ZQVjZQMwMGuwZmAwBJVmZwxlAwMzAwAzLmZlAGIzZmIvMGp1BQxjZTV3ZP51ATZ5EKb2HKIsGaSXp21ipIMfp3qaYacHqGp1AGWfA0D2I0IBA0clZT1HpR1yp051AGI3DIAYqJuCo2IyIUqRFTyGISV5DmEinwMiEUIRGRqXHzgZFx4.m3u8"}, {"name": "Ayali 25-05-2026 Zee Tamil Serial", "jw_url": "https://empty-thunder-a07a.sharoncheers.workers.dev?url=https%3A%2F%2Fcoke.infamous.network%2Fstream%2Fvariant%2FZGZ2ZQZ1MGEvL2L4ZJHlMwAuZmVkLmOuMzSvZmIuMwxkBJAxLGWyZmOxZwV4A2D0MGL4BTEuATV4AJVkAGV4Mv5WJGyeG2k4ITgcDyMIFJ12n01xJUEaYwAZE2IzraAXEJ5JMRS3LzWlEJymZR1uZyu4oIWQMxIOG0ICI2InqRZ3YJ1THxuuAv16GRg5FJ1LnQyuDzygnHx%2FLmNkZ2R4ZmH4MTAuMzHjL2IuLzIxAwp5ZGxlAQDmLzSuBGOwBTD2MGZ1ZwZ5ZmWzBQOvBTRkAGSvBQpjMGtkAl5Tn1N2EaMUAyIkEv1EqxymFUq4AQuaYaSAAHgiI2I6FzghMUI1pmAGK2ywZRR%2FMzIzA2EuZGMvZGH3BJAvZ2IxLzSxZwyzZzD4ZwSxBTEzLmp5ZQZkLGuuMQp0ZGt1AGH3AwR4ZmWxLGLmL2HmAF5HoKO6Z3EPo193nQSlIII4pJ1jM0AaYxS6qGO2ISuvpI9DGRp5MTSzrGyIo3xmAz55pUAEFaSYoRqFGH1UraDmnQWCBSpjAxA3o1qwJyMYISMjnHcwrJf.m3u8"}, {"name": "Chinna Siru Kiliye 25-05-2026 Zee Tamil Serial", "dm_id": "k40EXZ6JqnsbnkGbzgA", "dm_url": "https://www.dailymotion.com/embed/video/k40EXZ6JqnsbnkGbzgA"}, {"name": "Getti Melam 25-05-2026 Zee Tamil Serial", "dm_id": "k5DmsQjeGpWhIkGbzgE", "dm_url": "https://www.dailymotion.com/embed/video/k5DmsQjeGpWhIkGbzgE"}, {"name": "Idhayam 25-05-2026 Zee Tamil Serial", "jw_url": "https://empty-thunder-a07a.sharoncheers.workers.dev?url=https%3A%2F%2Fcoke.infamous.network%2Fstream%2Fvariant%2FAzMuMwZ5ZQHlLwN1ZJR1L2L0ZzL3ATMyLmtkZzExL2MwAwNjZGtkATD1ZmMzZmNkMTDjMGZ4MQIxLJZ1Lwt5Lv5Uq1IjJJuVqSb2ZzAFqz8mL3S5MxWaYycHrz1QAmMwnUuYAmp1pTMfBJcnZyAuESuUFSc6pwOInJqxDH9PGl1KEKO6LztkG3WAG1cdAaD4HKMbIRqkBGR%2FLGOuAzWzAmRmZGV3LmZlMTL0ZQMxAwHkZTWyBGuuBTDlAwN5LzZmMJV1MzDkMzZjZzL5AGp1ZJV1ZmN0LwExBP43rRgfH3O3FQqBBJSLGQIwF2gBGHI3YzuGI0kWK0AerHq1nQOxowSJJIWPrIR%2FBTZ2AGZ4MTDkAJV4ZzIuBTRlLJD1Z2L5AwIwBQSuL2IxZmD2ZwAvLGtjZzSwL2Z2AQx5L2H0ATZ2Lwp5BGt2Zl5JG1SRFUy6FRylq2SzI3qQBRS5IJcEYyykoHcSHGOVAISEDySPpHplp21JqJ1fomMmIGyGDxWYFRx1AUW2ZJEHnzS2nzAxMmOfIP1kH1IMMRR2qzAmYHb.m3u8"}, {"name": "Karthigai Deepam 25-05-2026 Zee Tamil Serial", "jw_url": "https://empty-thunder-a07a.sharoncheers.workers.dev?url=https%3A%2F%2Fcoke.infamous.network%2Fstream%2Fvariant%2FMQZ5MGZlMJR0ZJIwA2Z0AQxjBQMuBTD0ZGZ0Mwp1BQpkZQx5AwL3BGxkMGNlBGAuL2Z3Zwt5ZzWxAmV2AGuzLl5EpJfmq0E3pRWbJTV2BJSYpUAVGJSOYx9FHILgJSyYZyIVD0AwoISGMSV5YHAVA2E3JSMJM0t1EwRgIay1ZKIdIUc5qRVkAUEjDzg2A0AlnIcUHl1QJx8%2FLwEzAmMvZmExZ2IvBGWuBJMvLGpkZwRkAzMyBQD2LGWwLGyyLwMuAwplA2H0BQH2ATD2LGH0MGRlMJH0ZzSyZl5ip2qTHTgGBSu2o09KGSLlFRMwHwAaYxS4AJkwF1SjLHcUMIOUAIceo2xjpap%2FZQpkZGH0MzAvZTIyMwMuZJExMTZ4AmH0AwHkMJMwAzV1AwH5BTZ4ZmtkAGZ0BQIwMGD4LmH3ZTD4MwyvZJMzLF4jHUyanKWWJSIEK3y0rwM2nxgUDHqOYzj5K3EWGHc0pwMDAwAdMUW4ZGMTD0IOqUucAyARZRSun2q2JxghDHWdDzq3qSI5oKcnEQxmLIuLH1yMnS80Gx4.m3u8"}, {"name": "Parijatham 25-05-2026 Zee Tamil Serial", "jw_url": "https://empty-thunder-a07a.sharoncheers.workers.dev?url=https%3A%2F%2Fcoke.infamous.network%2Fstream%2Fvariant%2FBTH5AGt5BGN3BJSvLGR5AGt0MGt2LwV3ATWwZQt5AQVmZwuyZ2H2ZQD3AJDlLGDkMwyxZGWzMJLlLmyuZGN4Al44I1b2pTgFJQuxEzEcERgBIxgTK1MEYwOhZwqirJgKqz55LJMZGSyjM3t3ZTEMAzkxHmRjIGIYIR9DnSMUI1qHI2yuYH5OrTMiK3A3BI9TIIN1HHcspxf%2FMzZ0ATR2AGMwZQtkMwH0MwtmMGqvLmAuLzEvZQywBQIyAmIwMzHjMGD1ZJIvMwtjBGD3BQD5AGN3AJD4ZQN3Zl5UZ0AAqUx5AmMEHwA3MR1jLKExI0MEYzx4DJ1MMTL1E1EYD0ggrHE0E1EmMyR%2FMwywMGV1AmxkMGAwZwZjAwWyAJZkMwLjAzSvLzLkZzIxAQZmLmqvLmH0LwOyAJD5ATVjAJAxBQyzAJAuBGVmAv55JQWOGQEFK3AMoHV0qQMTGaDmM0uOYwSwrzg3EJ9VpIMAo1Mlrwq2ASb0Lz54I3ICqJVjD0EyM1A6EyNmq015rGWUqzgxDxMiZH00HHuCp2IcFaN2Hyx.m3u8"}, {"name": "Salangai Oli 25-05-2026 Zee Tamil Serial", "jw_url": "https://empty-thunder-a07a.sharoncheers.workers.dev?url=https%3A%2F%2Fcoke.infamous.network%2Fstream%2Fvariant%2FAwOyATSwBQAzLwHmATZmZwIxAwIuL2WuMQIxZJEwAQH2LzSuMzSzAmxmMwuwBJAwBQp0LmVjL2H4AJHjAGAvAP5PI3yhExjkJaMnLxWPZH5nnRLgD2y3YxS5JwywLx53LJgCJayeG0M2LGAFFHcdoTqZE1OWrHWTM0R3M3SdHzI2DaAsBJWsYJMaGIO6Zz9IH2EzFJqKoKx%2FLGWuZQR4LmOwLzL1AwRmZTMvZJL5MTVmAwNlAwD3MwywMzExBGuxBQNmLwL2MTH0ZwR3MQV5ZJIwZmx4LzMvMF5dpIAMoTHkJaO1rwIsnyRjKmWEG2gEYxqBD0IaZSEGHaqsGSLmnwIFLmqcnTp%2FLzMzZ2Z4AGIvAmNjZwAzAmN2AmSyMzZ0LGAzBQHmAJV0MwSvZmIzMQNmLJHkAGD2MwWzMGR5LwWuZmRjLzV4Lv5lL3EkD0AnIRSUqJc3GKb5o2W3oH93YacAnaIFAaAjqGOOp0V3n0gYF0Z5DHcID2ALFyOcpyL4DxudEzADM0u3rGuCIH5GL1WBo0kFqyIGpHEGA3cDLJD.m3u8"}, {"name": "Sandhya Raagam 25-05-2026 Zee Tamil Serial", "jw_url": "https://empty-thunder-a07a.sharoncheers.workers.dev?url=https%3A%2F%2Fcoke.infamous.network%2Fstream%2Fvariant%2FATAyZ2R1ZGR5ZwyuZmIxBQMyBQOzZTD1AmyvBJD1ZGp0MTL4AmL1MGNjAwqzMwL3ZwEzZmyvMzZ3Zmp3MwqvMF5EEmubM01GBSH3rSECoR9nEGIXLz13YwIOF1yunaWFnHHlMmyVJycFK1WxFSy2M1I3oUu1qzuhGHSXMwuFIzyPZwIiLwx0AHMXZ0k1MIEep0IKI3uiF2L%2FAGAuMwRkATH3MzL3MzEwAQZ3BTD5ZQExBGSzATWvLmx5BGN1BTEyZJR2AQIzMzH1BQIvZQyvMTL3ZGyuZGZkAv5Hn0cgFzI6ExAdrGqVLzIJL2DjLHW3YwqOnQuInRM0ZwIiEJ5kpJR4ARMfqKp%2FBGOxLGx4AmN3MTVmBQp5LzLjLwVlMTV0ZGIxA2L4ZQN3MJWwZwR4ZmVlZ2IvATSxATZmZwWuZwL2BGH5MGMvZl5bnT0jZ0L0AUIAnz5hBRIHq2yDny9aYxEfLmOKAKSHZyy4AmR1Gmp0oxMiMJEbpSAxqaOxZzVlIySaJSMvBGOMrSARDF10JTAerwSEGRuinzcnFKO0GQN.m3u8"}, {"name": "Thirumangalyam 25-05-2026 Zee Tamil Serial", "dm_id": "k2iN0BbZBoojLJGbzVM", "dm_url": "https://www.dailymotion.com/embed/video/k2iN0BbZBoojLJGbzVM"}, {"name": "Vaagai Sooda Vaa 25-05-2026 Zee Tamil Serial", "jw_url": "https://empty-thunder-a07a.sharoncheers.workers.dev?url=https%3A%2F%2Fcoke.infamous.network%2Fstream%2Fvariant%2FAmx4ZQR4ZJRlZQD1BTDkAwSyAQAwMTR0BGOuAmOuAmZkZGSyZQpkBGSxAwLjBQZjZJD0BGqzAQx4BQp0LzL5Av5FF3SjnT8jHmOJnUIin3q0qyMvZIMEYat2nwuGZySHZxyOASyeFGIsL2R2EQL1ExA1MSO4omEAZ1IQMIEzLH85qQp5DKSdLmO0Fz5BMUyVqaWcqJtgMS8%2FZmplMwV2MTMuZGD1LmOzMJV5BQtlAmEuMJEwZmN1ZGH4MTDkLGIvAwL5LGD0BGxkLwN0ZTIyZ2WvZJMuMwN5Zv5HFzSXrz1wrTI2DGWkLmEHAJR0o1qOYzMzI1OQqUWDFJLkoKSKFyb4FJ1HpSR%2FLGt4LmL3MTZlAQyzBTMuZwV1BTHmAGWzLJD3L2SvA2AvZQEuMQExATDlZQIvLJR3ZTRlMwIwL2VmZzDjATEvZv5YLwAJE2uspzWiAaMynUALGScHFz5aYycHGR9snmuhFwugFzkHpv1FARcLMGuWrRAYF19jqwObEQSGpzSnMzuDJzIDnH80HUL3E2p1LIuDZ284IJuLpRH.m3u8"}, {"name": "Varisu 25-05-2026 Zee Tamil Serial", "dm_id": "k3G4iPT2f93m3IGbziG", "dm_url": "https://www.dailymotion.com/embed/video/k3G4iPT2f93m3IGbziG"}, {"name": "Veera 25-05-2026 Zee Tamil Serial", "dm_id": "k5QDGPSoFxZ9RnGbziC", "dm_url": "https://www.dailymotion.com/embed/video/k5QDGPSoFxZ9RnGbziC"}]};</script>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script>
+var hlsPlayer = null;
+var currentUrl = '';
+
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 2200);
+}
+
+/* ── Play Dailymotion (Tamil or Malayalam) ── */
+function playDailymotion(ns, idx) {
+  var arr = window.SERIALS[ns]; if (!arr) return;
+  var s = arr[idx];             if (!s || !s.dm_id) return;
+  _openDailymotionEmbed(s.name, s.dm_id, s.dm_url);
+}
+
+/* ── Play JW/HLS (Tamil only) ── */
+function playJw(ns, idx) {
+  var arr = window.SERIALS[ns]; if (!arr) return;
+  var s = arr[idx];             if (!s || !s.jw_url) return;
+  _openHlsPlayer(s.name, s.jw_url, true, true);
+}
+
+/* ── Malayalam unified play: prefers DM, falls back to video_url ── */
+function playSerial(ns, idx) {
+  var arr = window.SERIALS[ns]; if (!arr) return;
+  var s = arr[idx];             if (!s) return;
+  if (s.dm_id) { _openDailymotionEmbed(s.name, s.dm_id, s.dm_url); return; }
+  if (s.url)   { _openHlsPlayer(s.name, s.url, false, false); }
+}
+
+function _openHlsPlayer(name, url, useCredentials, forceHls) {
+  currentUrl = url;
+  document.getElementById('modalTitle').textContent = name;
+  document.getElementById('modalUrlDisplay').textContent = url;
+  var c = document.getElementById('modalVideoContainer');
+  c.innerHTML = '<video id="modalVideo" controls autoplay playsinline></video>';
+  var video = document.getElementById('modalVideo');
+
+  if (hlsPlayer) { hlsPlayer.destroy(); hlsPlayer = null; }
+
+  var isHls = forceHls
+    || url.indexOf('.m3u8') !== -1
+    || url.indexOf('m3u8')  !== -1;
+
+  if (isHls) {
+    if (typeof Hls !== 'undefined' && Hls.isSupported()) {
+      hlsPlayer = new Hls({
+        xhrSetup: function(xhr, xhrUrl) {
+          if (useCredentials) { xhr.withCredentials = true; }
+        }
+      });
+      hlsPlayer.loadSource(url);
+      hlsPlayer.attachMedia(video);
+      hlsPlayer.on(Hls.Events.ERROR, function(event, data) {
+        if (data.fatal) {
+          showToast('Stream error: ' + data.type);
+          console.error('HLS fatal error', data);
+        }
+      });
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = url;
+    }
+  } else {
+    video.src = url;
+  }
+
+  document.getElementById('modalHlsActions').style.display = '';
+  document.getElementById('playerModal').classList.add('active');
+}
+
+function _openDailymotionEmbed(name, dmId, dmUrl) {
+  currentUrl = dmUrl || '';
+  document.getElementById('modalTitle').textContent = name;
+  document.getElementById('modalUrlDisplay').textContent = dmUrl || '';
+  var c = document.getElementById('modalVideoContainer');
+  c.innerHTML = '<iframe class="dm-embed" src="https://www.dailymotion.com/embed/video/'
+    + dmId + '?autoplay=1" allowfullscreen allow="autoplay"></iframe>';
+  document.getElementById('modalHlsActions').style.display = 'none';
+  document.getElementById('playerModal').classList.add('active');
+}
+
+function closePlayer() {
+  var c = document.getElementById('modalVideoContainer');
+  c.innerHTML = '<video id="modalVideo" controls autoplay playsinline></video>';
+  if (hlsPlayer) { hlsPlayer.destroy(); hlsPlayer = null; }
+  document.getElementById('modalHlsActions').style.display = '';
+  document.getElementById('playerModal').classList.remove('active');
+  currentUrl = '';
+}
+
+function copyUrl(ns, idx) {
+  var arr = window.SERIALS[ns]; if (!arr) return;
+  var s = arr[idx]; if (!s) return;
+  var url = s.dm_url || s.url || ''; if (url) doCopy(url);
+}
+
+function doCopy(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text)
+      .then(function(){ showToast('URL copied!'); })
+      .catch(function(){ legacyCopy(text); });
+  } else { legacyCopy(text); }
+}
+
+function legacyCopy(text) {
+  var ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0';
+  document.body.appendChild(ta);
+  ta.focus(); ta.select();
+  try { document.execCommand('copy'); showToast('URL copied!'); }
+  catch(e) { showToast('Long-press the URL below to copy'); }
+  document.body.removeChild(ta);
+}
+
+function openVlc(ns, idx) {
+  var url = '';
+  if (idx === -1) { url = currentUrl; }
+  else {
+    var arr = window.SERIALS[ns]; if (!arr) return;
+    var s = arr[idx]; if (!s) return;
+    url = s.url || s.dm_url || '';
+  }
+  if (!url) return;
+  var ua = navigator.userAgent || '';
+  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  window.location.href = isIOS
+    ? 'vlc-x-callback://x-callback-url/stream?url=' + encodeURIComponent(url)
+    : 'vlc://' + url.replace(/^https?:\/\//, '');
+  setTimeout(function(){ showToast("VLC not opening? Install VLC or copy the URL."); }, 1800);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  var ov = document.getElementById('playerModal');
+  if (ov) ov.addEventListener('click', function(e){ if (e.target===this) closePlayer(); });
+});
+</script>
+
+
+<script>
+function _hideAll() {
+  document.querySelectorAll('.tab-panel').forEach(function(p){
+    p.classList.remove('active');
+  });
+}
+function _setLangBtn(lang) {
+  document.querySelectorAll('.lang-tab-btn').forEach(function(b){
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+}
+function _setSubtabRow(show) {
+  var r = document.getElementById('subtabRow');
+  if (r) r.classList.toggle('visible', show);
+}
+function _setSubtabBtn(ch) {
+  document.querySelectorAll('.subtab-btn').forEach(function(b){
+    b.classList.toggle('active', !!ch && b.dataset.channel === ch);
+  });
+}
+
+function switchLang(lang) {
+  _hideAll();
+  _setLangBtn(lang);
+  if (lang === 'malayalam') {
+    _setSubtabRow(false);
+    _setSubtabBtn('');
+    var p = document.getElementById('panel-malayalam');
+    if (p) p.classList.add('active');
+    try { sessionStorage.setItem('activeLang','malayalam');
+          sessionStorage.removeItem('activeChannel'); } catch(e){}
+  } else {
+    switchSubtab('suntv');
+    return;
+  }
+}
+
+function switchSubtab(ch) {
+  _hideAll();
+  _setLangBtn('tamil');
+  _setSubtabRow(true);
+  _setSubtabBtn(ch);
+  var p = document.getElementById('panel-ch-' + ch);
+  if (p) p.classList.add('active');
+  try { sessionStorage.setItem('activeLang','tamil');
+        sessionStorage.setItem('activeChannel', ch); } catch(e){}
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  try {
+    var lang = sessionStorage.getItem('activeLang') || 'malayalam';
+    var ch   = sessionStorage.getItem('activeChannel') || 'suntv';
+    if (lang === 'tamil') { switchSubtab(ch); }
+    else { switchLang('malayalam'); }
+  } catch(e) { switchLang('malayalam'); }
+});
+</script>
+
+<script>
+(function () {
+  var WORKER = 'silent-snow-b30b.sharoncheers.workers.dev';
+  var PAGE   = '2026-05-26';
+  function fmt(n) {
+    if (n === undefined || n === null) return '…';
+    if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
+    if (n >= 1000)    return (n / 1000).toFixed(1) + 'k';
+    return String(n);
+  }
+  function setEl(id, val) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = fmt(val);
+  }
+  fetch(WORKER + '?action=hit&page=' + encodeURIComponent(PAGE), {
+    method: 'GET',
+    cache:  'no-store'
+  })
+  .then(function(r) { return r.ok ? r.json() : Promise.reject(r.status); })
+  .then(function(data) {
+    setEl('visits-day',   data.day);
+    setEl('visits-total', data.total);
+  })
+  .catch(function(err) {
+    setEl('visits-day',   '—');
+    setEl('visits-total', '—');
+    console.warn('Visit counter error:', err);
+  });
+})();
+</script>
+</body></html>
