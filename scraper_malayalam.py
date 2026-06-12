@@ -260,13 +260,16 @@ def save_json(results: list[Serial], output_dir: str = "data") -> str:
 
 
 def cleanup_old_files(output_dir: str = "data", keep_days: int = 30):
-    """Delete JSON files older than keep_days days."""
-    cutoff = date.today() - timedelta(days=keep_days)
+    cutoff  = date.today() - timedelta(days=keep_days)
     deleted = 0
-    for jf in glob.glob(os.path.join(output_dir, "serials_*.json")):
-        fname = os.path.basename(jf)  # serials_2026-01-01.json
+    pattern = os.path.join(output_dir, "serials_malayalam_*.json")
+    for jf in glob.glob(pattern):
+        fname = os.path.basename(jf)
+        m = re.search(r"(\d{4}-\d{2}-\d{2})\.json$", fname)
+        if not m:
+            continue
         try:
-            file_date = date.fromisoformat(fname.replace("serials_", "").replace(".json", ""))
+            file_date = date.fromisoformat(m.group(1))
             if file_date < cutoff:
                 os.remove(jf)
                 log.info(f"Deleted old file: {fname}")
@@ -274,7 +277,6 @@ def cleanup_old_files(output_dir: str = "data", keep_days: int = 30):
         except ValueError:
             pass
     log.info(f"Cleanup done — {deleted} files deleted")
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

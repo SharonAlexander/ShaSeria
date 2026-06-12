@@ -52,7 +52,7 @@ PROXY_BASE = "https://empty-thunder-a07a.sharoncheers.workers.dev"
 # Deploy visit_counter_worker.js to Cloudflare Workers and paste the URL here.
 # The worker needs a KV namespace bound as VISITS.
 # Example: "https://visit-counter.YOUR-NAME.workers.dev"
-COUNTER_WORKER = "silent-snow-b30b.sharoncheers.workers.dev"
+COUNTER_WORKER = "https://silent-snow-b30b.sharoncheers.workers.dev"
 
 # ── Visit counter JS ──────────────────────────────────────────────────────────
 def counter_js(page_id: str, hit: bool = True) -> str:
