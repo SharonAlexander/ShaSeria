@@ -55,21 +55,17 @@ PROXY_BASE = "https://empty-thunder-a07a.sharoncheers.workers.dev"
 COUNTER_WORKER = "https://silent-snow-b30b.sharoncheers.workers.dev"
 
 # ── Visit counter JS ──────────────────────────────────────────────────────────
-def counter_js(page_id: str, hit: bool = True) -> str:
+def counter_js(page_id: str = "unknown", hit: bool = True) -> str:
     """
-    Returns a <script> block that calls the Cloudflare Worker visit counter.
-    page_id : stable identifier for this page, e.g. "index" or "2025-05-10"
-    hit     : True  → increment counters on load (normal visit)
-              False → read-only (for a future stats page)
-    Fills:
-      #visits-day   → today's visit count  (day pages only)
-      #visits-total → all-time visit count (all pages)
+    Site-wide visit counter (single 'global' total + daily counter).
+    Increments once per browser tab via sessionStorage; subsequent
+    page loads in the same tab only read (don't increment).
     """
-    action = "hit" if hit else "get"
     return f"""<script>
 (function () {{
   var WORKER = {repr(COUNTER_WORKER)};
-  var PAGE   = {repr(page_id)};
+  var PAGE = 'global';
+  var SESSION_KEY = 'sv_global_hit';
   function fmt(n) {{
     if (n === undefined || n === null) return '\u2026';
     if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
@@ -80,7 +76,10 @@ def counter_js(page_id: str, hit: bool = True) -> str:
     var el = document.getElementById(id);
     if (el) el.textContent = fmt(val);
   }}
-  fetch(WORKER + '?action={action}&page=' + encodeURIComponent(PAGE), {{
+  var alreadyHit = false;
+  try {{ alreadyHit = sessionStorage.getItem(SESSION_KEY) === '1'; }} catch(e) {{}}
+  var action = alreadyHit ? 'get' : 'hit';
+  fetch(WORKER + '?action=' + action + '&page=' + PAGE, {{
     method: 'GET',
     cache:  'no-store'
   }})
@@ -88,6 +87,9 @@ def counter_js(page_id: str, hit: bool = True) -> str:
   .then(function(data) {{
     setEl('visits-day',   data.day);
     setEl('visits-total', data.total);
+    if (!alreadyHit) {{
+      try {{ sessionStorage.setItem(SESSION_KEY, '1'); }} catch(e) {{}}
+    }}
   }})
   .catch(function(err) {{
     setEl('visits-day',   '\u2014');
