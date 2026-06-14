@@ -1202,7 +1202,8 @@ document.addEventListener('DOMContentLoaded', function() {
 <script>
 (function () {
   var WORKER = 'https://silent-snow-b30b.sharoncheers.workers.dev';
-  var PAGE   = '2026-05-29';
+  var PAGE = 'global';
+  var SESSION_KEY = 'sv_global_hit';
   function fmt(n) {
     if (n === undefined || n === null) return '…';
     if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
@@ -1213,7 +1214,10 @@ document.addEventListener('DOMContentLoaded', function() {
     var el = document.getElementById(id);
     if (el) el.textContent = fmt(val);
   }
-  fetch(WORKER + '?action=hit&page=' + encodeURIComponent(PAGE), {
+  var alreadyHit = false;
+  try { alreadyHit = sessionStorage.getItem(SESSION_KEY) === '1'; } catch(e) {}
+  var action = alreadyHit ? 'get' : 'hit';
+  fetch(WORKER + '?action=' + action + '&page=' + PAGE, {
     method: 'GET',
     cache:  'no-store'
   })
@@ -1221,6 +1225,9 @@ document.addEventListener('DOMContentLoaded', function() {
   .then(function(data) {
     setEl('visits-day',   data.day);
     setEl('visits-total', data.total);
+    if (!alreadyHit) {
+      try { sessionStorage.setItem(SESSION_KEY, '1'); } catch(e) {}
+    }
   })
   .catch(function(err) {
     setEl('visits-day',   '—');
