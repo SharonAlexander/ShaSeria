@@ -541,6 +541,16 @@ function _openHlsPlayer(name, url, useCredentials, forceHls) {
   document.getElementById('modalTitle').textContent = name;
   document.getElementById('modalUrlDisplay').textContent = url;
   var c = document.getElementById('modalVideoContainer');
+
+  var isRumble = url.indexOf('rumble.com/embed') !== -1;
+    if (isRumble) {
+      c.innerHTML = '<iframe class="dm-embed" src="' + url + '" allowfullscreen allow="autoplay"></iframe>';
+      if (hlsPlayer) { hlsPlayer.destroy(); hlsPlayer = null; }
+      document.getElementById('modalHlsActions').style.display = 'none';
+      document.getElementById('playerModal').classList.add('active');
+      return;
+    }
+
   c.innerHTML = '<video id="modalVideo" controls autoplay playsinline></video>';
   var video = document.getElementById('modalVideo');
 

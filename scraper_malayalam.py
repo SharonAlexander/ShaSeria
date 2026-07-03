@@ -42,14 +42,13 @@ BASE_URL = "https://www.ddmalar.online/"
 DELAY    = 1.0
 TIMEOUT  = 15
 
-
 @dataclass
 class Serial:
-    name:        str
-    serial_page: str
-    watch_page:  Optional[str] = None
-    video_url:   Optional[str] = None
-    error:       Optional[str] = None
+    name:          str
+    serial_page:   str
+    watch_page:    Optional[str] = None
+    video_url: Optional[str] = None
+    error:         Optional[str] = None
 
 
 session = requests.Session()
@@ -171,7 +170,6 @@ def fetch_video_url_browser(serial: Serial) -> None:
         serial.error = f"browser error: {e}"
         log.error(f"  [{serial.name}] Browser fallback error: {e}")
 
-
 def fetch_video_url(serial: Serial) -> None:
     if not serial.watch_page:
         return
@@ -184,7 +182,15 @@ def fetch_video_url(serial: Serial) -> None:
 
     text = r.text
 
-    patterns = [
+    patterns_jwplayer = [
+        r'jwplayer\([^)]*\)\s*;[^;]*\.setup\(\s*\{\s*file\s*:\s*["\'](https?://[^"\']+)["\']',
+    ]
+
+    patterns_rumble = [
+        r'<iframe[^>]+src=["\'](https?://rumble\.com/embed/[^"\']+)["\']',
+    ]
+    
+    patterns_generic = [
         r'["\']file["\']\s*:\s*["\'](https?://[^"\']+\.(?:m3u8|mp4|ts)[^"\']*)["\']',
         r'sources\s*:\s*\[\s*\{[^}]*["\']file["\']\s*:\s*["\'](https?://[^"\']+)["\']',
         r'jwplayer\([^)]+\)\.setup\([^)]*["\']file["\']\s*:\s*["\'](https?://[^"\']+)["\']',
@@ -193,11 +199,11 @@ def fetch_video_url(serial: Serial) -> None:
         r'(https?://[^\s"\'<>]+\.mp4[^\s"\'<>]*)',
     ]
 
-    for pat in patterns:
+    for pat in patterns_jwplayer + patterns_rumble + patterns_generic:
         m = re.search(pat, text, re.IGNORECASE)
         if m:
             serial.video_url = m.group(1)
-            log.info(f"  [{serial.name}] Video URL → {serial.video_url}")
+            log.info(f"  [{serial.name}] JW Player URL → {serial.video_url}")
             return
 
     soup = BeautifulSoup(text, "html.parser")
@@ -206,13 +212,12 @@ def fetch_video_url(serial: Serial) -> None:
         m = re.search(r'["\'](https?://[^"\']+\.(?:m3u8|mp4))["\']', src)
         if m:
             serial.video_url = m.group(1)
-            log.info(f"  [{serial.name}] Video URL (script) → {serial.video_url}")
+            log.info(f"  [{serial.name}] JW Player URL (script) → {serial.video_url}")
             return
 
-    serial.error = (serial.error or "") + "; video URL not found"
-    log.warning(f"  [{serial.name}] No video URL extracted")
-    fetch_video_url_browser(serial) 
-
+    serial.error = (serial.error or "") + "; jw_player URL not found"
+    log.warning(f"  [{serial.name}] No jw_player URL extracted")
+    # fetch_video_url_browser(serial)
 
 def process_serial(serial: Serial) -> Serial:
     fetch_watch_page_url(serial)
