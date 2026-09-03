@@ -1,0 +1,238 @@
+{
+  "date": "2026-09-03",
+  "total": 33,
+  "found": 0,
+  "serials": [
+    {
+      "name": "https://gmpg.org/xfn/11",
+      "serial_page": "https://gmpg.org/xfn/11",
+      "watch_page": null,
+      "video_url": null,
+      "error": "watch link not found"
+    },
+    {
+      "name": "DesiSerials » Feed",
+      "serial_page": "https://www.desiserials.us/feed/",
+      "watch_page": null,
+      "video_url": null,
+      "error": "watch link not found"
+    },
+    {
+      "name": "DesiSerials » Comments Feed",
+      "serial_page": "https://www.desiserials.us/comments/feed/",
+      "watch_page": null,
+      "video_url": null,
+      "error": "watch link not found"
+    },
+    {
+      "name": "https://www.ddmalar.buzz/",
+      "serial_page": "https://www.ddmalar.buzz/",
+      "watch_page": "https://www.ddmaler.site/",
+      "video_url": null,
+      "error": "; jw_player URL not found"
+    },
+    {
+      "name": "oEmbed (XML)",
+      "serial_page": "https://www.desiserials.us/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.desiserials.us%2F&format=xml",
+      "watch_page": null,
+      "video_url": null,
+      "error": "watch link not found"
+    },
+    {
+      "name": "https://www.desiserials.us/xmlrpc.php",
+      "serial_page": "https://www.desiserials.us/xmlrpc.php",
+      "watch_page": null,
+      "video_url": null,
+      "error": "serial page unreachable"
+    },
+    {
+      "name": "oEmbed (JSON)",
+      "serial_page": "https://www.desiserials.us/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.desiserials.us%2F",
+      "watch_page": "\\\"https:\\/\\/www.desiserials.us\\/\\\"",
+      "video_url": null,
+      "error": "player page unreachable"
+    },
+    {
+      "name": "//www.desi-serials.to/wp-content/uploads/2019/09/fav.png",
+      "serial_page": "//www.desi-serials.to/wp-content/uploads/2019/09/fav.png",
+      "watch_page": null,
+      "video_url": null,
+      "error": "serial page unreachable"
+    },
+    {
+      "name": "//www.desi-serials.to/wp-content/uploads/2020/09/60.png",
+      "serial_page": "//www.desi-serials.to/wp-content/uploads/2020/09/60.png",
+      "watch_page": null,
+      "video_url": null,
+      "error": "serial page unreachable"
+    },
+    {
+      "name": "//www.desi-serials.to/wp-content/uploads/2020/09/120.png",
+      "serial_page": "//www.desi-serials.to/wp-content/uploads/2020/09/120.png",
+      "watch_page": null,
+      "video_url": null,
+      "error": "serial page unreachable"
+    },
+    {
+      "name": "//www.desi-serials.to/wp-content/uploads/2020/09/76.png",
+      "serial_page": "//www.desi-serials.to/wp-content/uploads/2020/09/76.png",
+      "watch_page": null,
+      "video_url": null,
+      "error": "serial page unreachable"
+    },
+    {
+      "name": "//www.desi-serials.to/wp-content/uploads/2020/09/152.png",
+      "serial_page": "//www.desi-serials.to/wp-content/uploads/2020/09/152.png",
+      "watch_page": null,
+      "video_url": null,
+      "error": "serial page unreachable"
+    },
+    {
+      "name": "//www.desiserials.us/wp-content/cache/wpfc-minified/lx50343l/o0aj.css",
+      "serial_page": "//www.desiserials.us/wp-content/cache/wpfc-minified/lx50343l/o0aj.css",
+      "watch_page": null,
+      "video_url": null,
+      "error": "serial page unreachable"
+    },
+    {
+      "name": "https://www.desiserials.us/wp-json/",
+      "serial_page": "https://www.desiserials.us/wp-json/",
+      "watch_page": null,
+      "video_url": null,
+      "error": "watch link not found"
+    },
+    {
+      "name": "//www.desiserials.us/wp-content/cache/wpfc-minified/11tg3pk8/o0aj.css",
+      "serial_page": "//www.desiserials.us/wp-content/cache/wpfc-minified/11tg3pk8/o0aj.css",
+      "watch_page": null,
+      "video_url": null,
+      "error": "serial page unreachable"
+    },
+    {
+      "name": "RSD",
+      "serial_page": "https://www.desiserials.us/xmlrpc.php?rsd",
+      "watch_page": null,
+      "video_url": null,
+      "error": "watch link not found"
+    },
+    {
+      "name": "//www.desiserials.us/wp-content/cache/wpfc-minified/9hnfb4ah/o0aj.css",
+      "serial_page": "//www.desiserials.us/wp-content/cache/wpfc-minified/9hnfb4ah/o0aj.css",
+      "watch_page": null,
+      "video_url": null,
+      "error": "serial page unreachable"
+    },
+    {
+      "name": "JSON",
+      "serial_page": "https://www.desiserials.us/wp-json/wp/v2/pages/6",
+      "watch_page": "\\\"https:\\/\\/www.desi-serials.to\\/\\\"",
+      "video_url": null,
+      "error": "player page unreachable"
+    },
+    {
+      "name": "https://www.desiserials.us/",
+      "serial_page": "https://www.desiserials.us/",
+      "watch_page": "https://www.desi-serials.to/",
+      "video_url": null,
+      "error": "player page unreachable"
+    },
+    {
+      "name": "admin",
+      "serial_page": "https://www.desiserials.us/author/admin/",
+      "watch_page": "https://www.desiserials.us/watch-yeh-rishta-kya-kehlata-hai-on-desi-serials/",
+      "video_url": null,
+      "error": "; jw_player URL not found"
+    },
+    {
+      "name": "DesiSerials - Just another WordPress site",
+      "serial_page": "https://www.desiserials.us/",
+      "watch_page": "https://www.desi-serials.to/",
+      "video_url": null,
+      "error": "player page unreachable"
+    },
+    {
+      "name": "Visit ddmalar Click Here 👈",
+      "serial_page": "https://www.ddmaler.site/",
+      "watch_page": "https://filmytoli.xyz/download.php",
+      "video_url": null,
+      "error": "; jw_player URL not found"
+    },
+    {
+      "name": "DesiSerials - Just another WordPress site",
+      "serial_page": "https://www.desiserials.us/",
+      "watch_page": "https://www.desi-serials.to/",
+      "video_url": null,
+      "error": "player page unreachable"
+    },
+    {
+      "name": "Star Plus",
+      "serial_page": "https://www.desiserials.us/star-plus/",
+      "watch_page": "https://www.desi-serials.to/watch-online/star-plus/star-plus-awards-concerts/",
+      "video_url": null,
+      "error": "player page unreachable"
+    },
+    {
+      "name": "Zee Tv",
+      "serial_page": "https://www.desiserials.us/zee-tv/",
+      "watch_page": "https://www.desi-serials.to/watch-online/zee-tv/awards-concerts-zeetv/",
+      "video_url": null,
+      "error": "player page unreachable"
+    },
+    {
+      "name": "Colors Tv",
+      "serial_page": "https://www.desiserials.us/colors-tv/",
+      "watch_page": "https://www.desi-serials.to/watch-online/colors/awards-concerts-colors-tv/",
+      "video_url": null,
+      "error": "player page unreachable"
+    },
+    {
+      "name": "Sony Tv",
+      "serial_page": "https://www.desiserials.us/sony-tv/",
+      "watch_page": "https://www.desi-serials.to/watch-online/sony-tv/awards-concerts-sony-tv/",
+      "video_url": null,
+      "error": "player page unreachable"
+    },
+    {
+      "name": "X",
+      "serial_page": "https://twitter.com/desiserials1",
+      "watch_page": null,
+      "video_url": null,
+      "error": "watch link not found"
+    },
+    {
+      "name": "Sab Tv",
+      "serial_page": "https://www.desiserials.us/sab-tv/",
+      "watch_page": "https://www.desi-serials.to/watch-online/sab-tv/sab-tv-awards/",
+      "video_url": null,
+      "error": "player page unreachable"
+    },
+    {
+      "name": "Pinterest",
+      "serial_page": "https://www.pinterest.com/desiserials/",
+      "watch_page": "https://ct.pinterest.com/ct.html",
+      "video_url": null,
+      "error": "; jw_player URL not found"
+    },
+    {
+      "name": "LinkedIn",
+      "serial_page": "https://www.linkedin.com/in/desiserials",
+      "watch_page": null,
+      "video_url": null,
+      "error": "watch link not found"
+    },
+    {
+      "name": "Youtube",
+      "serial_page": "https://www.youtube.com/channel/UC9xzTT2PEeO-t81z2cBtPdQ",
+      "watch_page": "https://accounts.google.com/ServiceLogin?service=youtube&uilel=3&passive=true&continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26hl%3Den%26next%3D%252Fsignin_passive%26feature%3Dpassive&hl=en",
+      "video_url": null,
+      "error": "; jw_player URL not found"
+    },
+    {
+      "name": "And Tv",
+      "serial_page": "https://www.desiserials.us/and-tv/",
+      "watch_page": "https://www.desi-serials.to/watch-online/and-tv/and-tv-awards-concerts/",
+      "video_url": null,
+      "error": "player page unreachable"
+    }
+  ]
+}
