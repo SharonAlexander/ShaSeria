@@ -1,0 +1,44 @@
+{
+  "date": "2026-09-28",
+  "channel": "Vijay TV",
+  "total": 3,
+  "found": 3,
+  "serials": [
+    {
+      "title": "Ayyanar Thunai | 27-09-2026 | Vijay Tv Serial",
+      "href": "https://www.tamildhool.tech/vijay-tv/vijay-tv-serial/ayyanar-thunai/ayyanar-thunai-27-09-2026-vijay-tv-serial/",
+      "srcset": [
+        "https://www.tamildhool.tech/wp-content/uploads/2025/07/ayy.jpg.webp",
+        "https://www.tamildhool.tech/wp-content/uploads/2025/07/ayy.jpg"
+      ],
+      "dailymotion_id": "k6FYz3xXeKaWaYKxnga",
+      "dailymotion_url": "https://www.dailymotion.com/embed/video/k6FYz3xXeKaWaYKxnga",
+      "jwplayer_url": null,
+      "error": null
+    },
+    {
+      "title": "Siragadikka Aasai | 27-09-2026 | Vijay Tv Serial",
+      "href": "https://www.tamildhool.tech/vijay-tv/vijay-tv-serial/siragadikka-aasai/siragadikka-aasai-27-09-2026-vijay-tv-serial/",
+      "srcset": [
+        "https://www.tamildhool.tech/wp-content/uploads/2025/07/sirshu.jpg.webp",
+        "https://www.tamildhool.tech/wp-content/uploads/2025/07/sirshu.jpg"
+      ],
+      "dailymotion_id": "k48SX7WLYt0DuCKxnge",
+      "dailymotion_url": "https://www.dailymotion.com/embed/video/k48SX7WLYt0DuCKxnge",
+      "jwplayer_url": null,
+      "error": null
+    },
+    {
+      "title": "Pandian Stores 2 | 27-09-2026 | Vijay Tv Serial",
+      "href": "https://www.tamildhool.tech/vijay-tv/vijay-tv-serial/pandian-stores-2/pandian-stores-2-27-09-2026-vijay-tv-serial/",
+      "srcset": [
+        "https://www.tamildhool.tech/wp-content/uploads/2025/07/pandian.jpg.webp",
+        "https://www.tamildhool.tech/wp-content/uploads/2025/07/pandian.jpg"
+      ],
+      "dailymotion_id": "k2QeOrNfESPZ6VKxng6",
+      "dailymotion_url": "https://www.dailymotion.com/embed/video/k2QeOrNfESPZ6VKxng6",
+      "jwplayer_url": null,
+      "error": null
+    }
+  ]
+}
