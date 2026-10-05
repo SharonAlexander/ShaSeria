@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-05",
+  "channel": "Vijay TV",
+  "total": 3,
+  "found": 0,
+  "serials": [
+    {
+      "title": "Ayyanar Thunai | 04-10-2026 | Vijay Tv Serial",
+      "href": "https://www.tamildhool.tech/vijay-tv/vijay-tv-serial/ayyanar-thunai/ayyanar-thunai-04-10-2026-vijay-tv-serial/",
+      "srcset": [
+        "https://www.tamildhool.tech/wp-content/uploads/2025/07/ayy.jpg.webp",
+        "https://www.tamildhool.tech/wp-content/uploads/2025/07/ayy.jpg"
+      ],
+      "dailymotion_id": null,
+      "dailymotion_url": null,
+      "jwplayer_url": null,
+      "error": "no video links found"
+    },
+    {
+      "title": "Siragadikka Aasai | 04-10-2026 | Vijay Tv Serial",
+      "href": "https://www.tamildhool.tech/vijay-tv/vijay-tv-serial/siragadikka-aasai/siragadikka-aasai-04-10-2026-vijay-tv-serial/",
+      "srcset": [
+        "https://www.tamildhool.tech/wp-content/uploads/2025/07/sirshu.jpg.webp",
+        "https://www.tamildhool.tech/wp-content/uploads/2025/07/sirshu.jpg"
+      ],
+      "dailymotion_id": null,
+      "dailymotion_url": null,
+      "jwplayer_url": null,
+      "error": "no video links found"
+    },
+    {
+      "title": "Pandian Stores 2 | 04-10-2026 | Vijay Tv Serial",
+      "href": "https://www.tamildhool.tech/vijay-tv/vijay-tv-serial/pandian-stores-2/pandian-stores-2-04-10-2026-vijay-tv-serial/",
+      "srcset": [
+        "https://www.tamildhool.tech/wp-content/uploads/2025/07/pandian.jpg.webp",
+        "https://www.tamildhool.tech/wp-content/uploads/2025/07/pandian.jpg"
+      ],
+      "dailymotion_id": null,
+      "dailymotion_url": null,
+      "jwplayer_url": null,
+      "error": "no video links found"
+    }
+  ]
+}
