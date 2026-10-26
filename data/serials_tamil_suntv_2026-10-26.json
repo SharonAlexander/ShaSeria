@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-26",
+  "channel": "Sun TV",
+  "total": 2,
+  "found": 0,
+  "serials": [
+    {
+      "title": "Malli | 25-10-2026 | Sun Tv Serial",
+      "href": "https://www.tamildhool.tech/sun-tv/sun-tv-serial/malli/malli-25-10-2026-sun-tv-serial/",
+      "srcset": [
+        "https://www.tamildhool.tech/wp-content/uploads/2025/07/Malli.jpg.webp",
+        "https://www.tamildhool.tech/wp-content/uploads/2025/07/Malli.jpg"
+      ],
+      "dailymotion_id": null,
+      "dailymotion_url": null,
+      "jwplayer_url": null,
+      "error": "no video links found"
+    },
+    {
+      "title": "Ethir Neechal Thodargirathu | 25-10-2026 | Sun Tv Serial",
+      "href": "https://www.tamildhool.tech/sun-tv/sun-tv-serial/ethir-neechal-thodargirathu/ethir-neechal-thodargirathu-25-10-2026-sun-tv-serial/",
+      "srcset": [
+        "https://www.tamildhool.tech/wp-content/uploads/2025/07/Ethir.jpg.webp",
+        "https://www.tamildhool.tech/wp-content/uploads/2025/07/Ethir.jpg"
+      ],
+      "dailymotion_id": null,
+      "dailymotion_url": null,
+      "jwplayer_url": null,
+      "error": "no video links found"
+    }
+  ]
+}
